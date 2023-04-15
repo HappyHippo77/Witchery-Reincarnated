@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class WolfsbaneCrop extends CropBlock {
 
-    private Random r = new Random();
+    private final Random r = new Random();
 
     public static final IntProperty AGE = IntProperty.of("age", 0, 7);
     public WolfsbaneCrop(Settings settings) {

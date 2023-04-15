@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class GarlicCrop extends CropBlock {
 
-    private Random r = new Random();
+    private final Random r = new Random();
 
     public static final IntProperty AGE = IntProperty.of("age", 0, 5);
     public GarlicCrop(Settings settings) {

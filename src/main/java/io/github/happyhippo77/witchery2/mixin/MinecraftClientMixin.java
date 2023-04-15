@@ -17,12 +17,7 @@ public class MinecraftClientMixin implements MinecraftClientVariables {
     private boolean wearingEarmuffs = false;
     @Inject(method = "tick", at = @At("HEAD"))
     private void inject1(CallbackInfo ci) {
-        if (this.player != null && this.player.getInventory().getArmorStack(3).getItem() instanceof Earmuffs) {
-            this.setWearingEarmuffs(true);
-        }
-        else {
-            this.setWearingEarmuffs(false);
-        }
+        this.setWearingEarmuffs(this.player != null && this.player.getInventory().getArmorStack(3).getItem() instanceof Earmuffs);
     }
 
     @Override
