@@ -1,0 +1,49 @@
+package io.github.happyhippo77.witchery2;
+
+import io.github.happyhippo77.witchery2.block.ModBlocks;
+import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
+import io.github.happyhippo77.witchery2.entity.ModEntities;
+import io.github.happyhippo77.witchery2.networking.ClientPackets;
+import io.github.happyhippo77.witchery2.particle.ModParticles;
+import io.github.happyhippo77.witchery2.particle.particles.BubbleParticle;
+import io.github.happyhippo77.witchery2.particle.particles.PowerParticle;
+import io.github.happyhippo77.witchery2.render.blockentity.renderers.WitchsCauldronEntityRenderer;
+import io.github.happyhippo77.witchery2.render.entity.models.MandrakeModel;
+import io.github.happyhippo77.witchery2.render.entity.renderers.MandrakeRenderer;
+import io.github.happyhippo77.witchery2.screen.ModScreenHandlers;
+import io.github.happyhippo77.witchery2.screen.WitchsOvenScreen;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
+
+public class Client implements ClientModInitializer {
+//    public static final EntityModelLayer CAULDRON_LAYER = new EntityModelLayer(new Identifier(Witchery2.MOD_ID, "witchs_cauldron"), "main");
+
+    public static final EntityModelLayer MANDRAKE_LAYER = new EntityModelLayer(new Identifier(Witchery2.MOD_ID, "mandrake"), "main");
+
+    @Override
+    public void onInitializeClient() {
+        //EntityModelLayerRegistry.registerModelLayer(CAULDRON_LAYER, ModelCauldron::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.MANDRAKE, MandrakeRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MANDRAKE_LAYER, MandrakeModel::getTexturedModelData);
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MANDRAKE, RenderLayer.getCutout());
+
+        BlockEntityRendererRegistry.register(ModBlockEntities.WITCHS_CAULDRON_ENTITY, WitchsCauldronEntityRenderer::new);
+
+        ParticleFactoryRegistry.getInstance().register(ModParticles.BUBBLE_PARTICLE, BubbleParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.POWER_PARTICLE, PowerParticle.Factory::new);
+
+        HandledScreens.register(ModScreenHandlers.WITCHS_OVEN_SCREEN_HANDLER, WitchsOvenScreen::new);
+
+        ClientPackets.initialize();
+    }
+}

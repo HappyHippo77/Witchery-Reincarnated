@@ -1,0 +1,12 @@
+{
+	"random.blop": {
+		"sounds": [
+			"witchery2:random/blop"
+		]
+	},
+	"random.splash": {
+		"sounds": [
+			"witchery2:random/splash"
+		]
+	}
+}

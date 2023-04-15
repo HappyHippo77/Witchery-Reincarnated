@@ -1,0 +1,2 @@
+v1	named	intermediary
+FIELD	io/github/happyhippo77/witchery2/mixin/MinecraftClientMixin	Lnet/minecraft/client/network/ClientPlayerEntity;	player	field_1724

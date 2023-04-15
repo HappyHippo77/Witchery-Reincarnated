@@ -1,0 +1,4 @@
+{
+  "parent": "witchery2:block/witchs_oven",
+  "gui_light": "side"
+}

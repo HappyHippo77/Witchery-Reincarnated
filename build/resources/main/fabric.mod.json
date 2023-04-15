@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "witchery2",
+  "version": "1.0",
+  "name": "Witchery2",
+  "description": "The Witchery mod by Emoniph revived in modern versions!",
+  "authors": [
+    "HappyHippo77",
+    "Emoniph"
+  ],
+  "contact": {
+    "website": "happyhippo77.github.io",
+    "repo": "https://github.com/HappyHippo77/Witchery2"
+  },
+  "license": "MIT",
+  "icon": "assets/witchery2/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "io.github.happyhippo77.witchery2.Client"
+    ],
+    "main": [
+      "io.github.happyhippo77.witchery2.Witchery2"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.18",
+    "fabric": "*",
+    "minecraft": "1.19.4"
+  },
+  "mixins": [
+    "witchery2.mixins.json"
+  ]
+}

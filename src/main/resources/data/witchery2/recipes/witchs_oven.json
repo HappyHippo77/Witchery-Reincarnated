@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "---",
+    "-#-"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_bars"
+    },
+    "-": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "witchery2:witchs_oven",
+    "count": 1
+  }
+}
