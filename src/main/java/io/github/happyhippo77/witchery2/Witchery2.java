@@ -2,7 +2,7 @@ package io.github.happyhippo77.witchery2;
 
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
-import io.github.happyhippo77.witchery2.block.item.BlockItems;
+import io.github.happyhippo77.witchery2.block.item.ModBlockItems;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.entity.entities.MandrakeEntity;
 import io.github.happyhippo77.witchery2.item.ModItems;
@@ -64,6 +64,10 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModItems.ICY_NEEDLE));
 			content.add(new ItemStack(ModItems.WOLFSBANE));
 
+			content.add(new ItemStack(ModBlocks.EMBER_MOSS));
+			content.add(new ItemStack(ModBlocks.GLINT_WEED));
+			content.add(new ItemStack(ModBlocks.SPANISH_MOSS));
+
 			content.add(new ItemStack(ModItems.EXHALE_OF_THE_HORNED_ONE));
 			content.add(new ItemStack(ModItems.MUTANDIS));
 			content.add(new ItemStack(ModItems.CLAY_JAR));
@@ -79,7 +83,7 @@ public class Witchery2 implements ModInitializer {
 		ModSounds.registerAllSounds();
 		ModBlocks.registerAllBlocks();
 		ModBlockEntities.registerAllBlockEntities();
-		BlockItems.registerAllBlocks();
+		ModBlockItems.registerAllBlocks();
 		ModItems.registerAllItems();
 		ModParticles.registerAllParticles();
 

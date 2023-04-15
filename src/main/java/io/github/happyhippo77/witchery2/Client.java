@@ -41,6 +41,9 @@ public class Client implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SNOWBELL, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WOLFSBANE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GARLIC, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.EMBER_MOSS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GLINT_WEED, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SPANISH_MOSS, RenderLayer.getCutout());
 
         BlockEntityRendererRegistry.register(ModBlockEntities.WITCHS_CAULDRON_ENTITY, WitchsCauldronEntityRenderer::new);
 

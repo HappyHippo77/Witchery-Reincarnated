@@ -3,6 +3,7 @@ package io.github.happyhippo77.witchery2.block.blocks;
 import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.block.entity.entities.WitchsCauldronEntity;
+import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.networking.ServerPackets;
 import io.github.happyhippo77.witchery2.particle.ModParticles;
 import io.github.happyhippo77.witchery2.sounds.ModSounds;
@@ -24,11 +25,13 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.apache.http.util.EntityUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -106,28 +109,30 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        WitchsCauldronEntity blockEntity = (WitchsCauldronEntity) world.getBlockEntity(pos);
-        if (entity instanceof ItemEntity) {
-            ItemStack itemStack = ((ItemEntity) entity).getStack();
+        if (!world.isClient) {
+            WitchsCauldronEntity blockEntity = (WitchsCauldronEntity) world.getBlockEntity(pos);
+            if (entity instanceof ItemEntity) {
+                ItemStack itemStack = ((ItemEntity) entity).getStack();
 
-            if (blockEntity.isBoiling()) {
-                if (IngredientRegistry.isIngredient(itemStack.getItem())) {
-                    List<Item> recipe = new ArrayList<>();
-                    for (ItemStack item : blockEntity.getIngredients()) {
-                        recipe.add(item.getItem());
-                    }
+                if (blockEntity.isBoiling()) {
+                    if (IngredientRegistry.isIngredient(itemStack.getItem())) {
+                        List<Item> recipe = new ArrayList<>();
+                        for (ItemStack item : blockEntity.getIngredients()) {
+                            recipe.add(item.getItem());
+                        }
 
-                    recipe.add(itemStack.getItem());
+                        recipe.add(itemStack.getItem());
 
-                    if (CauldronRecipeRegistry.checkPrecursor(recipe)) {
-                        blockEntity.addIngredient(itemStack);
-                        entity.kill();
+                        if (CauldronRecipeRegistry.checkPrecursor(recipe)) {
+                            blockEntity.addIngredient(itemStack);
+                            entity.kill();
 
-                        world.playSound(null, pos, ModSounds.RANDOM_SPLASH, SoundCategory.BLOCKS, 0.5F, 0.5f);
-                        if (!world.isClient()) {
-                            for (PlayerEntity player : world.getPlayers()) {
-                                for (int i = 0; i < 8; i++) {
-                                    ServerPackets.sendRenderParticle(player, ParticleTypes.SPLASH, pos.getX() + r.nextFloat(), (float) (pos.getY() + 0.5 + r.nextFloat()), pos.getZ() + r.nextFloat(), 0.0f, 0.0f, 0.0f);
+                            world.playSound(null, pos, ModSounds.RANDOM_SPLASH, SoundCategory.BLOCKS, 0.5F, 0.5f);
+                            if (!world.isClient()) {
+                                for (PlayerEntity player : world.getPlayers()) {
+                                    for (int i = 0; i < 8; i++) {
+                                        ServerPackets.sendRenderParticle(player, ParticleTypes.SPLASH, pos.getX() + r.nextFloat(), (float) (pos.getY() + 0.5 + r.nextFloat()), pos.getZ() + r.nextFloat(), 0.0f, 0.0f, 0.0f);
+                                    }
                                 }
                             }
                         }

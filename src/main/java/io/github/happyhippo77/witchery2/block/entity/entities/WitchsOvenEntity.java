@@ -5,6 +5,7 @@ import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.recipe.WitchsOvenRecipe;
 import io.github.happyhippo77.witchery2.screen.WitchsOvenScreenHandler;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
@@ -134,6 +135,7 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
 
         if (hasRecipe(entity)) {
             if (entity.fuelTime <= 0) {
+                entity.maxFuelTime = FuelRegistry.INSTANCE.get(entity.getStack(0).getItem()) != null ? FuelRegistry.INSTANCE.get(entity.getStack(0).getItem()) : 0;
                 entity.removeStack(0, 1);
                 entity.fuelTime = entity.maxFuelTime;
             }
@@ -195,13 +197,7 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
         }
 
         Optional<WitchsOvenRecipe> match = entity.getWorld().getRecipeManager().getFirstMatch(WitchsOvenRecipe.Type.INSTANCE, inventory, entity.getWorld());
-        boolean hasFuelInSlot = false;
-        for (Map.Entry<Item, Integer> entry : fuels.entrySet()) {
-            if (entry.getKey().equals(entity.getStack(0).getItem())) {
-                hasFuelInSlot = true;
-                entity.maxFuelTime = entry.getValue();
-            }
-        }
+        boolean hasFuelInSlot = FuelRegistry.INSTANCE.get(entity.getStack(0).getItem()) != null;
 
         boolean hasFuel = entity.fuelTime > 0 || hasFuelInSlot;
 
