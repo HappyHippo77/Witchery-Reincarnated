@@ -24,7 +24,7 @@ public class AnointingPaste extends Item {
         min *= 100;
         max *= 100;
         Random r = new Random();
-        return (float)(r.nextInt((max - min) + 1) + min) / 1000;
+        return (float) (r.nextInt((max - min) + 1) + min) / 1000;
     }
 
     @Override
@@ -44,8 +44,7 @@ public class AnointingPaste extends Item {
             if (!context.getPlayer().isCreative()) {
                 context.getPlayer().getStackInHand(context.getHand()).decrement(1);
                 return ActionResult.CONSUME;
-            }
-            else{
+            } else {
                 return ActionResult.SUCCESS;
             }
         } else {

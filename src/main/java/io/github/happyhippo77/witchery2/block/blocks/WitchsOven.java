@@ -25,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+
     public WitchsOven(Settings settings) {
         super(settings);
     }
@@ -47,18 +48,18 @@ public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
             float z = pos.getZ() + 0.5F;
             float f3 = 0.52F;
             float f4 = random.nextFloat() * 0.6F - 0.3F;
-            if(facing == Direction.WEST) {
+            if (facing == Direction.WEST) {
                 world.addParticle(ParticleTypes.SMOKE, (x - f3), y, (z + f4), 0.0D, 0.0D, 0.0D);
                 world.addParticle(ParticleTypes.FLAME, (x - f3), y, (z + f4), 0.0D, 0.0D, 0.0D);
-            } else if(facing == Direction.EAST) {
+            } else if (facing == Direction.EAST) {
                 world.addParticle(ParticleTypes.SMOKE, (x + f3), y, (z + f4), 0.0D, 0.0D, 0.0D);
                 world.addParticle(ParticleTypes.FLAME, (x + f3), y, (z + f4), 0.0D, 0.0D, 0.0D);
-            } else if(facing == Direction.NORTH) {
+            } else if (facing == Direction.NORTH) {
                 world.addParticle(ParticleTypes.SMOKE, (x + f4), y, (z - f3), 0.0D, 0.0D, 0.0D);
                 world.addParticle(ParticleTypes.FLAME, (x + f4), y, (z - f3), 0.0D, 0.0D, 0.0D);
-            } else if(facing == Direction.SOUTH) {
+            } else if (facing == Direction.SOUTH) {
                 world.addParticle(ParticleTypes.SMOKE, (x + f4), y, (z + f3), 0.0D, 0.0D, 0.0D);
-                world.addParticle(ParticleTypes.FLAME, ( x+ f4), y, (z + f3), 0.0D, 0.0D, 0.0D);
+                world.addParticle(ParticleTypes.FLAME, (x + f4), y, (z + f3), 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -87,12 +88,13 @@ public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof WitchsOvenEntity) {
-                ItemScatterer.spawn(world, pos, (WitchsOvenEntity)blockEntity);
-                world.updateComparators(pos,this);
+                ItemScatterer.spawn(world, pos, (WitchsOvenEntity) blockEntity);
+                world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {

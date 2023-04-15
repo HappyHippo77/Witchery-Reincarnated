@@ -2,7 +2,6 @@ package io.github.happyhippo77.witchery2.block.blocks;
 
 import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
-import io.github.happyhippo77.witchery2.networking.ServerPackets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
@@ -11,7 +10,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
@@ -30,6 +28,7 @@ public class MandrakeCrop extends CropBlock {
     private final Random r = new Random();
 
     public static final IntProperty AGE = IntProperty.of("age", 0, 4);
+
     public MandrakeCrop(Settings settings) {
         super(settings);
     }
@@ -38,18 +37,18 @@ public class MandrakeCrop extends CropBlock {
         ModEntities.MANDRAKE.spawn((ServerWorld) world, pos, SpawnReason.TRIGGERED);
         ((ServerWorld) world).spawnParticles(ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 16, 0.35, 0.35, 0.35, 0);
     }
+
     public void spawnDrops(World world, BlockPos pos, boolean maxAge) {
         double x = pos.getX() + 0.5;
         double y = pos.getY();
         double z = pos.getZ() + 0.5;
         ItemStack seeds;
         if (maxAge) {
-            seeds = new ItemStack(ModItems.MANDRAKE_SEEDS, r.nextFloat() <= 0.25 ? 2:1);
+            seeds = new ItemStack(ModItems.MANDRAKE_SEEDS, r.nextFloat() <= 0.25 ? 2 : 1);
             ItemStack root = new ItemStack(ModItems.MANDRAKE_ROOT, 1);
             ItemEntity rootEntity = new ItemEntity(world, x, y, z, root);
             world.spawnEntity(rootEntity);
-        }
-        else {
+        } else {
             seeds = new ItemStack(ModItems.MANDRAKE_SEEDS, 1);
         }
         ItemEntity seedsEntity = new ItemEntity(world, x, y, z, seeds);

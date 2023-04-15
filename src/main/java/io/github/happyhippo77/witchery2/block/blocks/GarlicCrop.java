@@ -7,7 +7,6 @@ import net.minecraft.block.CropBlock;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -16,6 +15,7 @@ public class GarlicCrop extends CropBlock {
     private final Random r = new Random();
 
     public static final IntProperty AGE = IntProperty.of("age", 0, 5);
+
     public GarlicCrop(Settings settings) {
         super(settings);
     }

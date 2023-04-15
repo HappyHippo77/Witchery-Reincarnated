@@ -4,14 +4,9 @@ import io.github.happyhippo77.witchery2.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -20,6 +15,7 @@ public class BelladonnaCrop extends CropBlock {
     private final Random r = new Random();
 
     public static final IntProperty AGE = IntProperty.of("age", 0, 4);
+
     public BelladonnaCrop(Settings settings) {
         super(settings);
     }

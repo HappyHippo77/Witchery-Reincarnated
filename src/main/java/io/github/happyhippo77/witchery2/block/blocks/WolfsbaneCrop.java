@@ -7,9 +7,7 @@ import net.minecraft.block.CropBlock;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 
 import java.util.Random;
 
@@ -18,6 +16,7 @@ public class WolfsbaneCrop extends CropBlock {
     private final Random r = new Random();
 
     public static final IntProperty AGE = IntProperty.of("age", 0, 7);
+
     public WolfsbaneCrop(Settings settings) {
         super(settings);
     }

@@ -13,7 +13,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,7 +30,6 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -150,6 +148,7 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
         // With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
         return BlockRenderType.MODEL;
     }
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
@@ -158,8 +157,7 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.getBlockEntity(pos) instanceof WitchsCauldronEntity entity)
-        {
+        if (world.getBlockEntity(pos) instanceof WitchsCauldronEntity entity) {
             return entity.onUse(state, world, pos, player, hand, hit);
         }
         return ActionResult.PASS;
@@ -168,11 +166,11 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.union(
-                VoxelShapes.cuboid(3.0/16f, 2.0/16, 3.0/16, 13.0/16, 3.0/16, 13.0/16),
-                VoxelShapes.cuboid(2.0/16f, 3.0/16, 2.0/16, 14.0/16, 4.0/16, 14.0/16),
-                VoxelShapes.cuboid(1.0/16f, 4.0/16, 1.0/16, 15.0/16, 10.0/16, 15.0/16),
-                VoxelShapes.cuboid(2.0/16f, 10.0/16, 2.0/16, 14.0/16, 12.0/16, 14.0/16),
-                VoxelShapes.cuboid(1.0/16f, 12.0/16, 1.0/16, 15.0/16, 13.0/16, 15.0/16)
-                );
+                VoxelShapes.cuboid(3.0 / 16f, 2.0 / 16, 3.0 / 16, 13.0 / 16, 3.0 / 16, 13.0 / 16),
+                VoxelShapes.cuboid(2.0 / 16f, 3.0 / 16, 2.0 / 16, 14.0 / 16, 4.0 / 16, 14.0 / 16),
+                VoxelShapes.cuboid(1.0 / 16f, 4.0 / 16, 1.0 / 16, 15.0 / 16, 10.0 / 16, 15.0 / 16),
+                VoxelShapes.cuboid(2.0 / 16f, 10.0 / 16, 2.0 / 16, 14.0 / 16, 12.0 / 16, 14.0 / 16),
+                VoxelShapes.cuboid(1.0 / 16f, 12.0 / 16, 1.0 / 16, 15.0 / 16, 13.0 / 16, 15.0 / 16)
+        );
     }
 }

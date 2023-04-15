@@ -1,23 +1,16 @@
 package io.github.happyhippo77.witchery2.block.blocks;
 
-import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
-import net.minecraft.block.*;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CropBlock;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 
 import java.util.Random;
 
@@ -26,6 +19,7 @@ public class WaterArtichokeCrop extends CropBlock {
     private final Random r = new Random();
 
     public static final IntProperty AGE = IntProperty.of("age", 0, 4);
+
     public WaterArtichokeCrop(Settings settings) {
         super(settings);
     }

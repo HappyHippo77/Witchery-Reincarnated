@@ -5,12 +5,13 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterials;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.example.client.renderer.armor.GeckoArmorRenderer;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
 import software.bernie.geckolib.constant.DefaultAnimations;
@@ -19,7 +20,8 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -38,10 +40,10 @@ public class Earmuffs extends ArmorItem implements GeoItem {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if(stack != null) {
+        if (stack != null) {
             Text localText = Text.translatable((this.getTranslationKey() + ".tip"));
             List<Text> arr = new ArrayList<>();
-        for (String s : localText.getString().split("\n")) {
+            for (String s : localText.getString().split("\n")) {
                 arr.add(Text.literal(s));
             }
 
@@ -57,7 +59,7 @@ public class Earmuffs extends ArmorItem implements GeoItem {
 
             @Override
             public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
-                if(this.renderer == null)
+                if (this.renderer == null)
                     this.renderer = new EarmuffsRenderer();
 
                 // This prepares our GeoArmorRenderer for the current render frame.
