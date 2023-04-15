@@ -1,5 +1,0 @@
-{
-  "parent": "minecraft:block/block",
-  "model": "witchery2:block/witchs_cauldron.obj",
-  "gui_light": "side"
-}
