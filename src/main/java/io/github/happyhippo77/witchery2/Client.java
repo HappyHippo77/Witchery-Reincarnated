@@ -23,6 +23,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class Client implements ClientModInitializer {
 //    public static final EntityModelLayer CAULDRON_LAYER = new EntityModelLayer(new Identifier(Witchery2.MOD_ID, "witchs_cauldron"), "main");
@@ -36,6 +37,11 @@ public class Client implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(MANDRAKE_LAYER, MandrakeModel::getTexturedModelData);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MANDRAKE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WATER_ARTICHOKE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BELLADONNA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SNOWBELL, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WOLFSBANE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GARLIC, RenderLayer.getCutout());
 
         BlockEntityRendererRegistry.register(ModBlockEntities.WITCHS_CAULDRON_ENTITY, WitchsCauldronEntityRenderer::new);
 

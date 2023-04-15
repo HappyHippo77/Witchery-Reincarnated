@@ -51,19 +51,28 @@ public class Witchery2 implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(WITCHERY2_GROUP).register(content -> {
 			content.add(new ItemStack(ModBlocks.WITCHS_CAULDRON));
 			content.add(new ItemStack(ModBlocks.WITCHS_OVEN));
+
 			content.add(new ItemStack(ModItems.ANOINTING_PASTE));
+
 			content.add(new ItemStack(ModItems.BELLADONNA_SEEDS));
 			content.add(new ItemStack(ModItems.MANDRAKE_SEEDS));
-			content.add(new ItemStack(ModItems.MANDRAKE_ROOT));
 			content.add(new ItemStack(ModItems.WATER_ARTICHOKE_SEEDS));
 			content.add(new ItemStack(ModItems.SNOWBELL_SEEDS));
 			content.add(new ItemStack(ModItems.WOLFSBANE_SEEDS));
 			content.add(new ItemStack(ModItems.GARLIC));
+
+			content.add(new ItemStack(ModItems.BELLADONNA_FLOWER));
+			content.add(new ItemStack(ModItems.MANDRAKE_ROOT));
+			content.add(new ItemStack(ModItems.WATER_ARTICHOKE_GLOBE));
+			content.add(new ItemStack(ModItems.ICY_NEEDLE));
+			content.add(new ItemStack(ModItems.WOLFSBANE));
+
 			content.add(new ItemStack(ModItems.EXHALE_OF_THE_HORNED_ONE));
 			content.add(new ItemStack(ModItems.MUTANDIS));
 			content.add(new ItemStack(ModItems.CLAY_JAR));
 			content.add(new ItemStack(ModItems.SOFT_CLAY_JAR));
 			content.add(new ItemStack(ModItems.WOOD_ASH));
+			content.add(new ItemStack(ModItems.QUICKLIME));
 			content.add(new ItemStack(ModItems.EARMUFFS));
 		});
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {

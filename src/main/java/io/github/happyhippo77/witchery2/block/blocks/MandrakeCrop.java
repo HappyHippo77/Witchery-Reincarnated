@@ -1,19 +1,18 @@
 package io.github.happyhippo77.witchery2.block.blocks;
 
 import io.github.happyhippo77.witchery2.entity.ModEntities;
-import io.github.happyhippo77.witchery2.entity.entities.MandrakeEntity;
 import io.github.happyhippo77.witchery2.item.ModItems;
-import io.github.happyhippo77.witchery2.item.items.MandrakeSeeds;
+import io.github.happyhippo77.witchery2.networking.ServerPackets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
@@ -25,8 +24,8 @@ import java.util.Random;
 
 public class MandrakeCrop extends CropBlock {
 
-    private static final double NIGHT_MANDRAKE_SPAWN_CHANCE = 0.1D;
-    private static final double DAY_MANDRAKE_SPAWN_CHANCE = 0.9D;
+    private static final float NIGHT_MANDRAKE_SPAWN_CHANCE = 0.1f;
+    private static final float DAY_MANDRAKE_SPAWN_CHANCE = 0.9f;
 
     private Random r = new Random();
 
@@ -36,9 +35,8 @@ public class MandrakeCrop extends CropBlock {
     }
 
     public void spawnMandrake(World world, BlockPos pos) {
-        if (!world.isClient) {
-            ModEntities.MANDRAKE.spawn((ServerWorld) world, pos, SpawnReason.TRIGGERED);
-        }
+        ModEntities.MANDRAKE.spawn((ServerWorld) world, pos, SpawnReason.TRIGGERED);
+        ((ServerWorld) world).spawnParticles(ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 16, 0.35, 0.35, 0.35, 0);
     }
     public void spawnDrops(World world, BlockPos pos, boolean maxAge) {
         double x = pos.getX() + 0.5;
@@ -61,20 +59,22 @@ public class MandrakeCrop extends CropBlock {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
-        if (!player.isCreative()) {
-            if (state.get(AGE) == 4) {
-                if (!(world.getDifficulty() == Difficulty.PEACEFUL)) {
-                    float chance = world.isDay() ? 0.9f : 0.1f;
-                    if (r.nextFloat() <= chance) {
-                        spawnMandrake(world, pos);
+        if (!world.isClient) {
+            if (!player.isCreative()) {
+                if (state.get(AGE) == 4) {
+                    if (!(world.getDifficulty() == Difficulty.PEACEFUL)) {
+                        float chance = world.isDay() ? DAY_MANDRAKE_SPAWN_CHANCE : NIGHT_MANDRAKE_SPAWN_CHANCE;
+                        if (r.nextFloat() <= chance) {
+                            spawnMandrake(world, pos);
+                        } else {
+                            spawnDrops(world, pos, true);
+                        }
                     } else {
                         spawnDrops(world, pos, true);
                     }
                 } else {
-                    spawnDrops(world, pos, true);
+                    spawnDrops(world, pos, false);
                 }
-            } else {
-                spawnDrops(world, pos, false);
             }
         }
     }

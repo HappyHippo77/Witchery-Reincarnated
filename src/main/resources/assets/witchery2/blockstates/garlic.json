@@ -1,0 +1,11 @@
+
+{
+  "variants": {
+    "age=0": { "model": "witchery2:block/garlic_0" },
+    "age=1": { "model": "witchery2:block/garlic_1" },
+    "age=2": { "model": "witchery2:block/garlic_2" },
+    "age=3": { "model": "witchery2:block/garlic_3" },
+    "age=4": { "model": "witchery2:block/garlic_4" },
+    "age=5": { "model": "witchery2:block/garlic_5" }
+  }
+}
