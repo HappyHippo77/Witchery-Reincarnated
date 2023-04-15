@@ -15,9 +15,6 @@ import net.minecraft.world.BlockView;
 import java.util.Random;
 
 public class WaterArtichokeCrop extends CropBlock {
-
-    private final Random r = new Random();
-
     public static final IntProperty AGE = IntProperty.of("age", 0, 4);
 
     public WaterArtichokeCrop(Settings settings) {

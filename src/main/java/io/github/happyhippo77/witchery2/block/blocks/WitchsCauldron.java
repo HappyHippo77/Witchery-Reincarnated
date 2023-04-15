@@ -152,10 +152,11 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.WITCHS_CAULDRON_ENTITY, (world1, pos, state1, be) -> WitchsCauldronEntity.tick(world1, pos, state1, be));
+        return checkType(type, ModBlockEntities.WITCHS_CAULDRON_ENTITY, WitchsCauldronEntity::tick);
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.getBlockEntity(pos) instanceof WitchsCauldronEntity entity) {
             return entity.onUse(state, world, pos, player, hand, hit);
@@ -164,6 +165,7 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.union(
                 VoxelShapes.cuboid(3.0 / 16f, 2.0 / 16, 3.0 / 16, 13.0 / 16, 3.0 / 16, 13.0 / 16),

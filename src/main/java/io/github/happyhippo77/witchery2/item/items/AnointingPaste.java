@@ -17,9 +17,6 @@ public class AnointingPaste extends Item {
         super(settings);
     }
 
-
-    private final Random random = new Random();
-
     private static float getRandomFloat(int min, int max) {
         min *= 100;
         max *= 100;

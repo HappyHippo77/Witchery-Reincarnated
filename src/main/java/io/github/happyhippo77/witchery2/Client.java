@@ -22,8 +22,6 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
-import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class Client implements ClientModInitializer {
 //    public static final EntityModelLayer CAULDRON_LAYER = new EntityModelLayer(new Identifier(Witchery2.MOD_ID, "witchs_cauldron"), "main");
@@ -31,6 +29,7 @@ public class Client implements ClientModInitializer {
     public static final EntityModelLayer MANDRAKE_LAYER = new EntityModelLayer(new Identifier(Witchery2.MOD_ID, "mandrake"), "main");
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onInitializeClient() {
         //EntityModelLayerRegistry.registerModelLayer(CAULDRON_LAYER, ModelCauldron::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MANDRAKE, MandrakeRenderer::new);

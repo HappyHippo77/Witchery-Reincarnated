@@ -11,9 +11,6 @@ import net.minecraft.state.property.IntProperty;
 import java.util.Random;
 
 public class SnowbellCrop extends CropBlock {
-
-    private final Random r = new Random();
-
     public static final IntProperty AGE = IntProperty.of("age", 0, 4);
 
     public SnowbellCrop(Settings settings) {
