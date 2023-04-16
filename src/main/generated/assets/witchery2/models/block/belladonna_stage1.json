@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "witchery2:block/belladonna_stage1"
+  }
+}

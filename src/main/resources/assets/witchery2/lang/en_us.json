@@ -14,6 +14,14 @@
   "block.witchery2.glint_weed": "Glint Weed",
   "block.witchery2.spanish_moss": "Spanish Moss",
 
+  "block.witchery2.rowan_log": "Rowan Log",
+  "block.witchery2.rowan_wood": "Rowan Wood",
+  "block.witchery2.stripped_rowan_log": "Stripped Rowan Log",
+  "block.witchery2.stripped_rowan_wood": "Stripped Rowan Wood",
+  "block.witchery2.rowan_planks": "Rowan Planks",
+  "block.witchery2.rowan_leaves": "Rowan Leaves",
+  "block.witchery2.rowan_sapling": "Rowan Sapling",
+
 
   "entity.witchery2.mandrake": "Mandrake",
 
@@ -39,6 +47,8 @@
   "item.witchery2.wood_ash": "Wood Ash",
   "item.witchery2.quicklime": "Quicklime",
   "item.witchery2.earmuffs": "Earmuffs",
+
+  "item.witchery2.rowan_berries": "Rowan Berries",
 
   "item.witchery2.mandrake_spawn_egg": "Mandrake Spawn Egg",
 

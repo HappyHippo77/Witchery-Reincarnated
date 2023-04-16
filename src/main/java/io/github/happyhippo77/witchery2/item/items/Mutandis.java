@@ -56,7 +56,7 @@ public class Mutandis extends Item {
             Blocks.JUNGLE_SAPLING,
             Blocks.ACACIA_SAPLING,
             Blocks.DARK_OAK_SAPLING,
-            // Rowan Sapling
+            ModBlocks.ROWAN_SAPLING,
             // Hawthorn Sapling
             // Alder Sapling
             ModBlocks.EMBER_MOSS,

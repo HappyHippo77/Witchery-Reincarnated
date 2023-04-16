@@ -75,6 +75,16 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModItems.WOOD_ASH));
 			content.add(new ItemStack(ModItems.QUICKLIME));
 			content.add(new ItemStack(ModItems.EARMUFFS));
+
+			content.add(new ItemStack(ModBlocks.ROWAN_LOG));
+			content.add(new ItemStack(ModBlocks.ROWAN_WOOD));
+			content.add(new ItemStack(ModBlocks.STRIPPED_ROWAN_LOG));
+			content.add(new ItemStack(ModBlocks.STRIPPED_ROWAN_WOOD));
+			content.add(new ItemStack(ModBlocks.ROWAN_PLANKS));
+			content.add(new ItemStack(ModBlocks.ROWAN_LEAVES));
+			content.add(new ItemStack(ModBlocks.ROWAN_SAPLING));
+
+			content.add(new ItemStack(ModItems.ROWAN_BERRIES));
 		});
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
 			content.add(new ItemStack(ModItems.MANDRAKE_SPAWN_EGG));

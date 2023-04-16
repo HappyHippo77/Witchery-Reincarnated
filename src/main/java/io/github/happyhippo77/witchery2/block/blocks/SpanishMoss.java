@@ -10,6 +10,7 @@ import net.minecraft.util.math.random.Random;
 public class SpanishMoss extends VineBlock {
     public SpanishMoss(Settings settings) {
         super(settings);
+        this.setDefaultState(getDefaultState().with(NORTH, true));
     }
 
     @Override

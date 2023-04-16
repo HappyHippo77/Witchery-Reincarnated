@@ -7,10 +7,7 @@ import io.github.happyhippo77.witchery2.item.items.AnointingPaste;
 import io.github.happyhippo77.witchery2.item.items.Earmuffs;
 import io.github.happyhippo77.witchery2.item.items.Mutandis;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.PlaceableOnWaterItem;
-import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -38,6 +35,8 @@ public class ModItems {
     public static final Item QUICKLIME = new Item(new FabricItemSettings());
     public static final Earmuffs EARMUFFS = new Earmuffs(new FabricItemSettings());
 
+    public static final Item ROWAN_BERRIES = new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0.3f).build()));
+
     public static final Item MANDRAKE_SPAWN_EGG = new SpawnEggItem(ModEntities.MANDRAKE, 0x7A54300, 0x4C070, new FabricItemSettings());
 
     public static void registerAllItems() {
@@ -63,6 +62,8 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "wood_ash"), WOOD_ASH);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "quicklime"), QUICKLIME);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "earmuffs"), EARMUFFS);
+
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_berries"), ROWAN_BERRIES);
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "mandrake_spawn_egg"), MANDRAKE_SPAWN_EGG);
     }

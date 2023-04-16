@@ -12,8 +12,17 @@ public class ModBlockItems {
     public static void registerAllBlocks() {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "witchs_cauldron"), new BlockItem(ModBlocks.WITCHS_CAULDRON, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "witchs_oven"), new BlockItem(ModBlocks.WITCHS_OVEN, new FabricItemSettings()));
+
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "ember_moss"), new BlockItem(ModBlocks.EMBER_MOSS, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "glint_weed"), new BlockItem(ModBlocks.GLINT_WEED, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "spanish_moss"), new BlockItem(ModBlocks.SPANISH_MOSS, new FabricItemSettings()));
+
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_log"), new BlockItem(ModBlocks.ROWAN_LOG, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_wood"), new BlockItem(ModBlocks.ROWAN_WOOD, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "stripped_rowan_log"), new BlockItem(ModBlocks.STRIPPED_ROWAN_LOG, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "stripped_rowan_wood"), new BlockItem(ModBlocks.STRIPPED_ROWAN_WOOD, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_planks"), new BlockItem(ModBlocks.ROWAN_PLANKS, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_leaves"), new BlockItem(ModBlocks.ROWAN_LEAVES, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_sapling"), new BlockItem(ModBlocks.ROWAN_SAPLING, new FabricItemSettings()));
     }
 }
