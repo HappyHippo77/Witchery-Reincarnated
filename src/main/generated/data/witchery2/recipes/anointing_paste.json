@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "witchery2:belladonna_seeds"
+    },
+    {
+      "item": "witchery2:mandrake_seeds"
+    },
+    {
+      "item": "witchery2:water_artichoke_seeds"
+    },
+    {
+      "item": "witchery2:snowbell_seeds"
+    }
+  ],
+  "result": {
+    "item": "witchery2:anointing_paste"
+  }
+}

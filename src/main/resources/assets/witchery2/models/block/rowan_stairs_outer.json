@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "witchery2:block/rowan_planks",
+    "side": "witchery2:block/rowan_planks",
+    "top": "witchery2:block/rowan_planks"
+  }
+}

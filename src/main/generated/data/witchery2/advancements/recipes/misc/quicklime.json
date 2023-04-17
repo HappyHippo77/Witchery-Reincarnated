@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "witchery2:quicklime"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wood_ash": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "witchery2:wood_ash"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wood_ash",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "witchery2:quicklime"
+    ]
+  }
+}

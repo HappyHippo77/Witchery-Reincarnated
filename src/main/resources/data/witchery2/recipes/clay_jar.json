@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "witchery2:soft_clay_jar"
-  },
-  "result": "witchery2:clay_jar",
-  "experience": 0,
-  "cookingtime": 200
-}

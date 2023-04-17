@@ -1,8 +1,18 @@
-// 1.19.4	2023-04-15T22:19:16.159406508	Witchery2/Block Loot Tables
-c0a8015eec29ac801091365f355dc34ca15b1ff8 data/witchery2/loot_tables/blocks/rowan_wood.json
-ea9ebc027f73d47c4b1238078e9a35b1a2a53c8d data/witchery2/loot_tables/blocks/rowan_log.json
+// 1.19.4	2023-04-16T20:36:00.430631404	Witchery2/Block Loot Tables
 6398591e1802f4c9b138c7a0fe4f89ef79fa5af6 data/witchery2/loot_tables/blocks/rowan_sapling.json
-094e5bc48facc7b0f90ee5a4742e9c66bea338d1 data/witchery2/loot_tables/blocks/stripped_rowan_log.json
+b07386711473f64af307d8c1cbc26e0e305a3b12 data/witchery2/loot_tables/blocks/water_artichoke.json
 ef6e286e6961ffd8b067a77c0a5f4703fb938198 data/witchery2/loot_tables/blocks/rowan_planks.json
+5f03caa48817b0ce9b66a5ecc84dc8f4ee31c5a5 data/witchery2/loot_tables/blocks/witchs_cauldron.json
+293a3a483b97725e89bc9e2c513a73c130ab8818 data/witchery2/loot_tables/blocks/garlic.json
 460df9283d98d3cc965dbbf96f7e4a58651871d0 data/witchery2/loot_tables/blocks/stripped_rowan_wood.json
 23d7ee5f902278e191e9fbae96e9f29ecf4b10bc data/witchery2/loot_tables/blocks/rowan_leaves.json
+d8eb913fa503442332badd270bb591d356f42f0a data/witchery2/loot_tables/blocks/ember_moss.json
+80f05f8e83e68f73c94ca271ad9825bc537474bc data/witchery2/loot_tables/blocks/wolfsbane.json
+ee4eec6e341ac03805407aa9995fa549a55e1290 data/witchery2/loot_tables/blocks/glint_weed.json
+c0a8015eec29ac801091365f355dc34ca15b1ff8 data/witchery2/loot_tables/blocks/rowan_wood.json
+ea9ebc027f73d47c4b1238078e9a35b1a2a53c8d data/witchery2/loot_tables/blocks/rowan_log.json
+094e5bc48facc7b0f90ee5a4742e9c66bea338d1 data/witchery2/loot_tables/blocks/stripped_rowan_log.json
+5645c9b51197befe50d51a1fcdcb8c85789063bf data/witchery2/loot_tables/blocks/belladonna.json
+ecde53485d0eb2e4a756fc1639e70d4e77551b52 data/witchery2/loot_tables/blocks/witchs_oven.json
+eff06d02e4c6840dd09db310a48c6142c3a42374 data/witchery2/loot_tables/blocks/spanish_moss.json
+55db454ebdf3bc277c662762fbd06defc33223f5 data/witchery2/loot_tables/blocks/snowbell.json

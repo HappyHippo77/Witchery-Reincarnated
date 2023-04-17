@@ -59,7 +59,9 @@ public class Client implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ROWAN_SAPLING, RenderLayer.getCutout());
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> BiomeColors.getFoliageColor(world, pos), ModBlocks.ROWAN_LEAVES);
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> 4764952, ModBlocks.ROWAN_LEAVES);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(), ModBlocks.ROWAN_LEAVES);
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> BiomeColors.getFoliageColor(world, pos), ModBlocks.SPANISH_MOSS);
+        //ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(), ModBlocks.SPANISH_MOSS);
 
 
         BlockEntityRendererRegistry.register(ModBlockEntities.WITCHS_CAULDRON_ENTITY, WitchsCauldronEntityRenderer::new);

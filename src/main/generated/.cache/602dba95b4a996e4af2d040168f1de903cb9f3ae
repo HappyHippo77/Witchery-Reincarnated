@@ -1,7 +1,19 @@
-// 1.19.4	2023-04-15T22:19:16.160643808	Witchery2/Recipes
+// 1.19.4	2023-04-16T20:36:00.431972206	Witchery2/Recipes
 f7cb09d0d75c30dd81f21a091a192b54290982cc data/witchery2/advancements/recipes/building_blocks/rowan_planks.json
+f20f1a697726d32ee9e3ab490bfaaa1aca6bb37c data/witchery2/recipes/soft_clay_jar.json
+4754b1922f2c5f8e29c4a993cb8bd9c43b0e573d data/witchery2/advancements/recipes/misc/earmuffs.json
 0e46be56cbd78449b9119f071b88eb0190e307ee data/witchery2/recipes/stripped_rowan_wood.json
+854eec90609950fb582fa70769f51ea517633ccd data/witchery2/advancements/recipes/misc/quicklime.json
+e688a0a18a20f8975cfe90da0d1caaecbbde2d69 data/witchery2/recipes/anointing_paste.json
+792c8721b96d21683435bdada3e8c48a687396b4 data/witchery2/recipes/rowan_wood.json
+955aebf1ce3440c5fb806aaf0208741e369947f9 data/witchery2/advancements/recipes/misc/witchs_oven.json
+5c6fd8264c2fa1f1ce0213d23afc8d85cae91cdb data/witchery2/advancements/recipes/building_blocks/stripped_rowan_wood.json
+6c2e0f79cdc93392f128567e8b5557a37c9ce876 data/witchery2/recipes/quicklime.json
+c1458d4e96e03bdf3ba44cb1fdbcdd4080b53467 data/witchery2/recipes/earmuffs.json
+dec50d3e9582218992a6f99cd855bcae71cd964c data/witchery2/advancements/recipes/misc/soft_clay_jar.json
+af0c13fbf7d495559627d7948dd5b18b7a6a76d3 data/witchery2/advancements/recipes/misc/anointing_paste.json
+b2f186582ed0a3dc98b78325687a0998079454ce data/witchery2/advancements/recipes/misc/clay_jar.json
+c3b893f49e15d56ecaff1e46c853e453911382c4 data/witchery2/recipes/clay_jar.json
 65bb1b6a94d78af0ace68b7dcfb00b591170ca93 data/witchery2/advancements/recipes/building_blocks/rowan_wood.json
 2ecf4daf791a4e8f363fb2f39c2ba0bc7bcd80f5 data/witchery2/recipes/rowan_planks.json
-792c8721b96d21683435bdada3e8c48a687396b4 data/witchery2/recipes/rowan_wood.json
-5c6fd8264c2fa1f1ce0213d23afc8d85cae91cdb data/witchery2/advancements/recipes/building_blocks/stripped_rowan_wood.json
+0b503eb333331459fe2ceb77ef2e2d16e0cf575a data/witchery2/recipes/witchs_oven.json

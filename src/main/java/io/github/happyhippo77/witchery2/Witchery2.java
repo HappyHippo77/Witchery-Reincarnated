@@ -83,6 +83,7 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModBlocks.ROWAN_PLANKS));
 			content.add(new ItemStack(ModBlocks.ROWAN_LEAVES));
 			content.add(new ItemStack(ModBlocks.ROWAN_SAPLING));
+			content.add(new ItemStack(ModBlocks.ROWAN_STAIRS));
 
 			content.add(new ItemStack(ModItems.ROWAN_BERRIES));
 		});
