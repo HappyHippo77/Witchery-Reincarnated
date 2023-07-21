@@ -44,10 +44,7 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
     private int maxProgress = 180;
     public int fuelTime = 0;
     private int maxFuelTime = 0;
-    private final double baseFumeChance = 0.3;
-    private final double funnelChanceBonus = 0.25;
-    private final double filteredFunnelChanceBonus = 0.3;
-    private final double doubleFilteredFunnelChanceBonus = 0.8;
+    private double fumeChance = 0.3;
 
     private static final Map<Item, Integer> fuels = AbstractFurnaceBlockEntity.createFuelTimeMap();
 
@@ -80,6 +77,14 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
         };
     }
 
+    public void setFumeChance(double fumeChance) {
+        this.fumeChance = fumeChance;
+    }
+
+    public void setMaxProgress(int maxProgress) {
+        this.maxProgress = maxProgress;
+    }
+
     @Override
     public DefaultedList<ItemStack> getItems() {
         return this.inventory;
@@ -103,6 +108,8 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
         nbt.putInt("progress", progress);
         nbt.putInt("fuelTime", fuelTime);
         nbt.putInt("maxFuelTime", maxFuelTime);
+        nbt.putInt("maxProgress", maxProgress);
+        nbt.putDouble("fumeChance", fumeChance);
     }
 
     @Override
@@ -112,6 +119,8 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
         progress = nbt.getInt("progress");
         fuelTime = nbt.getInt("fuelTime");
         maxFuelTime = nbt.getInt("maxFuelTime");
+        maxProgress = nbt.getInt("maxProgress");
+        fumeChance = nbt.getDouble("fumeChance");
     }
 
     @Nullable
@@ -126,6 +135,7 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, WitchsOvenEntity entity) {
+
         if (world.isClient()) {
             return;
         }
@@ -179,7 +189,7 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
             entity.setStack(2, new ItemStack(recipe.get().getOutput().getItem(), entity.getStack(2).getCount() + 1));
 
 
-            if (r.nextFloat() <= entity.baseFumeChance) {
+            if (r.nextFloat() <= entity.fumeChance) {
                     if (canInsertIntoFume(inventory)) {
                         if (canInsertItemIntoFume(inventory, recipe.get().getFume().getItem())) {
                             if (inventory.getStack(3).getItem().equals(ModItems.CLAY_JAR)) {

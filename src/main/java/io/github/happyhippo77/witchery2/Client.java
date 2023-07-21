@@ -41,6 +41,7 @@ public class Client implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.MANDRAKE, MandrakeRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MANDRAKE_LAYER, MandrakeModel::getTexturedModelData);
 
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FILTERED_FUME_FUNNEL, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MANDRAKE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WATER_ARTICHOKE, RenderLayer.getCutout());

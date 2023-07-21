@@ -2,7 +2,9 @@ package io.github.happyhippo77.witchery2.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
@@ -16,10 +18,10 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack output;
     private final ItemStack fume;
-    private final ItemStack input;
+    private final Ingredient input;
 
 
-    public WitchsOvenRecipe(Identifier id, ItemStack output, ItemStack fume, ItemStack input) {
+    public WitchsOvenRecipe(Identifier id, ItemStack output, ItemStack fume, Ingredient input) {
         this.id = id;
         this.output = output;
         this.fume = fume;
@@ -32,7 +34,7 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
             return false;
         }
 
-        return input.getItem().equals(inventory.getStack(1).getItem());
+        return input.test(inventory.getStack(1));
     }
 
     @Override
@@ -45,7 +47,7 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
         return true;
     }
 
-    public ItemStack getInput() {
+    public Ingredient getInput() {
         return input;
     }
 
@@ -92,14 +94,15 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
         public WitchsOvenRecipe read(Identifier id, JsonObject json) {
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
             ItemStack fume = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "fume"));
-            ItemStack input = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "input"));
+            Ingredient input = Ingredient.fromJson(JsonHelper.getObject(json, "input"));
+            //ItemStack input = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "input"));
 
             return new WitchsOvenRecipe(id, output, fume, input);
         }
 
         @Override
         public WitchsOvenRecipe read(Identifier id, PacketByteBuf buf) {
-            ItemStack input = buf.readItemStack();
+            Ingredient input = Ingredient.fromPacket(buf);
             ItemStack output = buf.readItemStack();
             ItemStack fume = buf.readItemStack();
             return new WitchsOvenRecipe(id, output, fume, input);
@@ -107,7 +110,7 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public void write(PacketByteBuf buf, WitchsOvenRecipe recipe) {
-            buf.writeItemStack(recipe.getInput());
+            recipe.getInput().write(buf);
             buf.writeItemStack(recipe.getOutput());
             buf.writeItemStack(recipe.getFume());
         }

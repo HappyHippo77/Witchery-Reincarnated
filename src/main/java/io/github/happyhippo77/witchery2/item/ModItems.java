@@ -14,6 +14,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
+    public static final Item FUME_FILTER = new Item(new FabricItemSettings());
+
     public static final AnointingPaste ANOINTING_PASTE = new AnointingPaste(new FabricItemSettings());
     public static final AliasedBlockItem BELLADONNA_SEEDS = new AliasedBlockItem(ModBlocks.BELLADONNA, new FabricItemSettings());
     public static final AliasedBlockItem MANDRAKE_SEEDS = new AliasedBlockItem(ModBlocks.MANDRAKE, new FabricItemSettings());
@@ -48,9 +50,13 @@ public class ModItems {
     public static final SignItem ALDER_SIGN = new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.ALDER_SIGN, ModBlocks.ALDER_WALL_SIGN);
     public static final SignItem HAWTHORN_SIGN = new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.HAWTHORN_SIGN, ModBlocks.HAWTHORN_WALL_SIGN);
 
+    public static final Item ATTUNED_STONE = new Item(new FabricItemSettings());
+
     public static final SpawnEggItem MANDRAKE_SPAWN_EGG = new SpawnEggItem(ModEntities.MANDRAKE, 0x7A54300, 0x4C070, new FabricItemSettings());
 
     public static void registerAllItems() {
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "fume_filter"), FUME_FILTER);
+
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "anointing_paste"), ANOINTING_PASTE);
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "belladonna_seeds"), BELLADONNA_SEEDS);
@@ -86,6 +92,8 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_sign"), ROWAN_SIGN);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "alder_sign"), ALDER_SIGN);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "hawthorn_sign"), HAWTHORN_SIGN);
+
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "attuned_stone"), ATTUNED_STONE);
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "mandrake_spawn_egg"), MANDRAKE_SPAWN_EGG);
     }

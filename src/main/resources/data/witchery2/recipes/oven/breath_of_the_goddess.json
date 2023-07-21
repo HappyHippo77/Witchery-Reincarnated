@@ -1,0 +1,12 @@
+{
+  "type": "witchery2:witchs_oven",
+  "input": {
+      "item": "minecraft:birch_sapling"
+  },
+  "output": {
+    "item": "witchery2:wood_ash"
+  },
+  "fume": {
+    "item": "witchery2:breath_of_the_goddess"
+  }
+}

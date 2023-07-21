@@ -1,24 +1,24 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_bars": {
+    "has_fume_filter": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:iron_bars"
+              "witchery2:fume_filter"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_iron_ingot": {
+    "has_fume_funnel": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:iron_ingot"
+              "witchery2:fume_funnel"
             ]
           }
         ]
@@ -27,21 +27,21 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "witchery2:witchs_oven"
+        "recipe": "witchery2:filtered_fume_funnel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_iron_ingot",
-      "has_iron_bars",
+      "has_fume_funnel",
+      "has_fume_filter",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "witchery2:witchs_oven"
+      "witchery2:filtered_fume_funnel"
     ]
   }
 }

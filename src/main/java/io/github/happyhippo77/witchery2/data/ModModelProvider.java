@@ -83,6 +83,8 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        itemModelGenerator.register(ModItems.FUME_FILTER, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.ANOINTING_PASTE, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.BELLADONNA_FLOWER, Models.GENERATED);
@@ -107,6 +109,8 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.ROWAN_BERRIES, Models.GENERATED);
         itemModelGenerator.register(ModItems.ROWAN_DOOR_KEY, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.ATTUNED_STONE, Models.GENERATED);
     }
 
     private void registerStairs(BlockStateModelGenerator blockStateModelGenerator, Block block, Identifier texture) {

@@ -1,12 +1,24 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_bars": {
+    "has_attuned_stone": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:iron_bars"
+              "witchery2:attuned_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:glass"
             ]
           }
         ]
@@ -27,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "witchery2:witchs_oven"
+        "recipe": "witchery2:fume_filter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -35,13 +47,14 @@
   "requirements": [
     [
       "has_iron_ingot",
-      "has_iron_bars",
+      "has_attuned_stone",
+      "has_glass",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "witchery2:witchs_oven"
+      "witchery2:fume_filter"
     ]
   }
 }

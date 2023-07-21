@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_bars"
+    },
+    "b": {
+      "item": "minecraft:bucket"
+    },
+    "g": {
+      "item": "minecraft:glowstone"
+    },
+    "i": {
+      "item": "minecraft:iron_block"
+    },
+    "l": {
+      "item": "minecraft:lava_bucket"
+    }
+  },
+  "pattern": [
+    "blb",
+    "bgb",
+    "i#i"
+  ],
+  "result": {
+    "item": "witchery2:fume_funnel"
+  },
+  "show_notification": true
+}

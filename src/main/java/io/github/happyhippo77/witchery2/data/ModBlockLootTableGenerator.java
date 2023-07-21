@@ -34,6 +34,8 @@ public class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
     public void generate() {
         addDrop(ModBlocks.WITCHS_CAULDRON, basicDrop(ModBlocks.WITCHS_CAULDRON));
         addDrop(ModBlocks.WITCHS_OVEN, basicDrop(ModBlocks.WITCHS_OVEN));
+        addDrop(ModBlocks.FUME_FUNNEL, basicDrop(ModBlocks.FUME_FUNNEL));
+        addDrop(ModBlocks.FILTERED_FUME_FUNNEL, basicDrop(ModBlocks.FILTERED_FUME_FUNNEL));
 
         addTreeDrops();
 

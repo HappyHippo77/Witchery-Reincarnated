@@ -1,13 +1,16 @@
 package io.github.happyhippo77.witchery2.block.blocks;
 
+import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.block.entity.entities.WitchsOvenEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
@@ -20,8 +23,16 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
@@ -62,6 +73,42 @@ public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
                 world.addParticle(ParticleTypes.FLAME, (x + f4), y, (z + f3), 0.0D, 0.0D, 0.0D);
             }
         }
+    }
+
+    private void calculateFunnelsAndUpdateEntity(BlockState state, World world, BlockPos pos) {
+        Direction facing = state.get(FACING);
+        int maxProgress = 180;
+        double fumeChance = 0.3;
+
+        if (world.getBlockState(pos.down()).getBlock() instanceof FumeFunnel) {
+            maxProgress -= 20;
+            fumeChance += ((FumeFunnel) world.getBlockState(pos.down()).getBlock()).fumeChanceBonus();
+        }
+        if (world.getBlockState(pos.offset(facing.rotateYCounterclockwise())).getBlock() instanceof FumeFunnel) {
+            maxProgress -= 20;
+            fumeChance += ((FumeFunnel) world.getBlockState(pos.offset(facing.rotateYCounterclockwise())).getBlock()).fumeChanceBonus();
+        }
+        if (world.getBlockState(pos.offset(facing.rotateYClockwise())).getBlock() instanceof FumeFunnel) {
+            maxProgress -= 20;
+            fumeChance += ((FumeFunnel) world.getBlockState(pos.offset(facing.rotateYClockwise())).getBlock()).fumeChanceBonus();
+        }
+
+        WitchsOvenEntity ovenEntity = (WitchsOvenEntity) world.getBlockEntity(pos);
+        ovenEntity.setMaxProgress(maxProgress);
+        ovenEntity.setFumeChance(fumeChance);
+        ovenEntity.markDirty();
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
+        calculateFunnelsAndUpdateEntity(state, world, pos);
+    }
+
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
+        calculateFunnelsAndUpdateEntity(state, world, pos);
     }
 
     // Block Entity Stuff
@@ -115,4 +162,39 @@ public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
         return checkType(type, ModBlockEntities.WITCHS_OVEN_ENTITY, WitchsOvenEntity::tick);
     }
 
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        VoxelShape main = VoxelShapes.union(
+                VoxelShapes.cuboid(2 / 16f, 1 / 16f, 2 / 16f, 14 / 16f, 9 / 16f, 14 / 16f),
+                VoxelShapes.cuboid(1 / 16f, 9 / 16f, 1 / 16f, 15 / 16f, 10 / 16f, 15 / 16f),
+                VoxelShapes.cuboid(3 / 16f, 10 / 16f, 3 / 16f, 13 / 16f, 11 / 16f, 13 / 16f)
+        );
+
+        Direction facing = state.get(FACING);
+        if (facing == Direction.NORTH) {
+            return VoxelShapes.union(
+                    main,
+                    VoxelShapes.cuboid(6 / 16f, 3 / 16f, 11 / 16f, 10 / 16f, 16 / 16f, 15 / 16f),
+                    VoxelShapes.cuboid(6 / 16f, 12 / 16f, 15 / 16f, 10 / 16f, 14 / 16f, 16 / 16f)
+            );
+        } else if (facing == Direction.EAST) {
+            return VoxelShapes.union(
+                    main,
+                    VoxelShapes.cuboid(1 / 16f, 3 / 16f, 6 / 16f, 5 / 16f, 16 / 16f, 10 / 16f),
+                    VoxelShapes.cuboid(0 / 16f, 12 / 16f, 6 / 16f, 1 / 16f, 16 / 16f, 10 / 16f)
+            );
+        } else if (facing == Direction.SOUTH) {
+            return VoxelShapes.union(
+                    main,
+                    VoxelShapes.cuboid(6 / 16f, 3 / 16f, 1 / 16f, 10 / 16f, 16 / 16f, 5 / 16f),
+                    VoxelShapes.cuboid(6 / 16f, 12 / 16f, 0 / 16f, 10 / 16f, 16 / 16f, 1 / 16f)
+            );
+        } else {
+            return VoxelShapes.union(
+                    main,
+                    VoxelShapes.cuboid(11 / 16f, 3 / 16f, 6 / 16f, 15 / 16f, 16 / 16f, 10 / 16f),
+                    VoxelShapes.cuboid(15 / 16f, 12 / 16f, 6 / 16f, 16 / 16f, 16 / 16f, 10 / 16f)
+            );
+        }
+    }
 }

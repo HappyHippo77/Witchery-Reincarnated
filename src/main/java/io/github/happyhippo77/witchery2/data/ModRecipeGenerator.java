@@ -5,6 +5,7 @@ import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.*;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -60,6 +61,42 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 Map.of(
                         '-', Items.IRON_INGOT,
                         '#', Items.IRON_BARS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModItems.FUME_FILTER, 1,
+                """
+                       ###
+                       -o-
+                       ###
+                       """,
+                Map.of(
+                        '#', Items.GLASS,
+                        '-', Items.IRON_INGOT,
+                        'o', ModItems.ATTUNED_STONE
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.FUME_FUNNEL, 1,
+                """
+                       blb
+                       bgb
+                       i#i
+                       """,
+                Map.of(
+                        'b', Items.BUCKET,
+                        'l', Items.LAVA_BUCKET,
+                        'g', Items.GLOWSTONE,
+                        'i', Items.IRON_BLOCK,
+                        '#', Items.IRON_BARS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.FILTERED_FUME_FUNNEL, 1,
+                """
+                       I
+                       -
+                       """,
+                Map.of(
+                        'I', ModBlocks.FUME_FUNNEL,
+                        '-', ModItems.FUME_FILTER
                 )
         );
         offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_STAIRS, 4,
@@ -307,6 +344,19 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
         offerPlanksRecipe(exporter, ModBlocks.HAWTHORN_PLANKS, ModItemTags.HAWTHORN_LOGS, 4);
         offerBarkBlockRecipe(exporter, ModBlocks.HAWTHORN_WOOD, ModBlocks.HAWTHORN_LOG);
         offerBarkBlockRecipe(exporter, ModBlocks.STRIPPED_HAWTHORN_WOOD, ModBlocks.STRIPPED_HAWTHORN_LOG);
+
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModItems.ATTUNED_STONE, 1,
+                """
+                       +
+                       o
+                       u
+                       """,
+                Map.of(
+                        '+', ModItems.WHIFF_OF_MAGIC,
+                        'o', Items.DIAMOND,
+                        'u', Items.LAVA_BUCKET
+                )
+        );
     }
 
     private void offerCorrectedSmeltingRecipe(Consumer<RecipeJsonProvider> exporter, RecipeCategory category, @NotNull ItemConvertible output, float experience, int cookingTime, @NotNull ItemConvertible... inputs) {

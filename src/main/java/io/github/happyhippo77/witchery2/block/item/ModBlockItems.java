@@ -12,6 +12,8 @@ public class ModBlockItems {
     public static void registerAllBlocks() {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "witchs_cauldron"), new BlockItem(ModBlocks.WITCHS_CAULDRON, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "witchs_oven"), new BlockItem(ModBlocks.WITCHS_OVEN, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "fume_funnel"), new BlockItem(ModBlocks.FUME_FUNNEL, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "filtered_fume_funnel"), new BlockItem(ModBlocks.FILTERED_FUME_FUNNEL, new FabricItemSettings()));
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "ember_moss"), new BlockItem(ModBlocks.EMBER_MOSS, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "glint_weed"), new BlockItem(ModBlocks.GLINT_WEED, new FabricItemSettings()));

@@ -1,0 +1,36 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "witchery2:block/fume_funnel",
+		"particle": "witchery2:block/fume_funnel"
+	},
+	"elements": [
+		{
+			"name": "chimney",
+			"from": [6, 0, 11],
+			"to": [10, 10, 15],
+			"faces": {
+				"north": {"uv": [7.75, 4.25, 8.75, 6.75], "texture": "#0"},
+				"east": {"uv": [6.75, 4.25, 7.75, 6.75], "texture": "#0"},
+				"south": {"uv": [9.75, 4.25, 10.75, 6.75], "texture": "#0"},
+				"west": {"uv": [8.75, 4.25, 9.75, 6.75], "texture": "#0"},
+				"up": {"uv": [8.75, 4.25, 7.75, 3.25], "texture": "#0"},
+				"down": {"uv": [9.75, 3.25, 8.75, 4.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "chimneyTop",
+			"from": [5, 10, 10],
+			"to": [11, 13, 16],
+			"faces": {
+				"north": {"uv": [11.5, 3.25, 13, 4], "texture": "#0"},
+				"east": {"uv": [10, 3.25, 11.5, 4], "texture": "#0"},
+				"south": {"uv": [14.5, 3.25, 16, 4], "texture": "#0"},
+				"west": {"uv": [13, 3.25, 14.5, 4], "texture": "#0"},
+				"up": {"uv": [13, 3.25, 11.5, 1.75], "texture": "#0"},
+				"down": {"uv": [14.5, 1.75, 13, 3.25], "texture": "#0"}
+			}
+		}
+	]
+}

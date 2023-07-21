@@ -1,8 +1,9 @@
-// 1.19.4	2023-07-21T11:25:08.6698235	Witchery2/Block Loot Tables
+// 1.19.4	2023-07-21T14:32:24.181025182	Witchery2/Block Loot Tables
 80f05f8e83e68f73c94ca271ad9825bc537474bc data/witchery2/loot_tables/blocks/wolfsbane.json
 da4125cdc60ea9e29f4e69ac1ca499ff9353ab66 data/witchery2/loot_tables/blocks/hawthorn_leaves.json
 92f4e56b9cc07129eaca30defc23da8cd32d3325 data/witchery2/loot_tables/blocks/hawthorn_planks.json
 880cb582e5a769d51a20206176608b99bbe64358 data/witchery2/loot_tables/blocks/rowan_slab.json
+1d178da77bbdc0457c840a09e60c83184356b153 data/witchery2/loot_tables/blocks/filtered_fume_funnel.json
 4f47909a9ec4a57a185e39b22e5c406aff479dac data/witchery2/loot_tables/blocks/hawthorn_sapling.json
 4407cfb0808414ddce386345e88309b41da8f4f2 data/witchery2/loot_tables/blocks/alder_pressure_plate.json
 094e5bc48facc7b0f90ee5a4742e9c66bea338d1 data/witchery2/loot_tables/blocks/stripped_rowan_log.json
@@ -11,6 +12,7 @@ da4125cdc60ea9e29f4e69ac1ca499ff9353ab66 data/witchery2/loot_tables/blocks/hawth
 e8362fccefc6f4d621017225129f5edfc9185f4e data/witchery2/loot_tables/blocks/hawthorn_fence_gate.json
 a1b22a39f2e9a0bd08ef7e21e7c9058ccb5acb79 data/witchery2/loot_tables/blocks/stripped_hawthorn_wood.json
 74d58b9aa7c92a3ae0281dc463bbe46eee904ea2 data/witchery2/loot_tables/blocks/alder_planks.json
+8fa9e4390afdf04fce47660f71da20256c3d419e data/witchery2/loot_tables/blocks/fume_funnel.json
 bbcad663788c79aa952a154a829ef1307d3c1b47 data/witchery2/loot_tables/blocks/alder_fence_gate.json
 ef6e286e6961ffd8b067a77c0a5f4703fb938198 data/witchery2/loot_tables/blocks/rowan_planks.json
 5645c9b51197befe50d51a1fcdcb8c85789063bf data/witchery2/loot_tables/blocks/belladonna.json

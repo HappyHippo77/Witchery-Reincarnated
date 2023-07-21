@@ -54,6 +54,9 @@ public class Witchery2 implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(WITCHERY2_GROUP).register(content -> {
 			content.add(new ItemStack(ModBlocks.WITCHS_CAULDRON));
 			content.add(new ItemStack(ModBlocks.WITCHS_OVEN));
+			content.add(new ItemStack(ModItems.FUME_FILTER));
+			content.add(new ItemStack(ModBlocks.FUME_FUNNEL));
+			content.add(new ItemStack(ModBlocks.FILTERED_FUME_FUNNEL));
 
 			content.add(new ItemStack(ModItems.ANOINTING_PASTE));
 
@@ -74,11 +77,17 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModBlocks.GLINT_WEED));
 			content.add(new ItemStack(ModBlocks.SPANISH_MOSS));
 
-			content.add(new ItemStack(ModItems.EXHALE_OF_THE_HORNED_ONE));
 			content.add(new ItemStack(ModItems.MUTANDIS));
 			content.add(new ItemStack(ModItems.CLAY_JAR));
 			content.add(new ItemStack(ModItems.SOFT_CLAY_JAR));
 			content.add(new ItemStack(ModItems.WOOD_ASH));
+			content.add(new ItemStack(ModItems.FOUL_FUME));
+			content.add(new ItemStack(ModItems.EXHALE_OF_THE_HORNED_ONE));
+			content.add(new ItemStack(ModItems.BREATH_OF_THE_GODDESS));
+			content.add(new ItemStack(ModItems.HINT_OF_REBIRTH));
+			content.add(new ItemStack(ModItems.WHIFF_OF_MAGIC));
+			content.add(new ItemStack(ModItems.ODOUR_OF_PURITY));
+			content.add(new ItemStack(ModItems.REEK_OF_MISFORTUNE));
 			content.add(new ItemStack(ModItems.QUICKLIME));
 			content.add(new ItemStack(ModItems.EARMUFFS));
 
@@ -133,6 +142,8 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModBlocks.HAWTHORN_PRESSURE_PLATE));
 			content.add(new ItemStack(ModBlocks.HAWTHORN_BUTTON));
 			content.add(new ItemStack(ModItems.HAWTHORN_SIGN));
+
+			content.add(new ItemStack(ModItems.ATTUNED_STONE));
 
 			content.add(new ItemStack(ModItems.ROWAN_BERRIES));
 		});

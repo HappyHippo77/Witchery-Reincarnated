@@ -1,10 +1,10 @@
 {
   "type": "witchery2:witchs_oven",
   "input": {
-      "item": "minecraft:pork"
+      "tag": "minecraft:logs"
   },
   "output": {
-    "item": "minecraft:cooked_pork"
+    "item": "minecraft:charcoal"
   },
   "fume": {
     "item": "witchery2:foul_fume"
