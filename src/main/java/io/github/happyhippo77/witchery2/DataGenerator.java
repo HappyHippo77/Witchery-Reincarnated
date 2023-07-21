@@ -1,9 +1,6 @@
 package io.github.happyhippo77.witchery2;
 
-import io.github.happyhippo77.witchery2.data.ModLootTableGenerator;
-import io.github.happyhippo77.witchery2.data.ModModelProvider;
-import io.github.happyhippo77.witchery2.data.ModRecipeGenerator;
-import io.github.happyhippo77.witchery2.data.ModWorldGenerator;
+import io.github.happyhippo77.witchery2.data.*;
 import io.github.happyhippo77.witchery2.world.ModConfiguredFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -15,7 +12,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
-        pack.addProvider(ModLootTableGenerator::new);
+        pack.addProvider(ModBlockLootTableGenerator::new);
         pack.addProvider(ModRecipeGenerator::new);
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModWorldGenerator::new);

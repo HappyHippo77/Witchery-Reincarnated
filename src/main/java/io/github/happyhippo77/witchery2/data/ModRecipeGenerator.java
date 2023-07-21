@@ -3,7 +3,6 @@ package io.github.happyhippo77.witchery2.data;
 import io.github.happyhippo77.witchery2.item.ModItemTags;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.item.ModItems;
-import io.github.happyhippo77.witchery2.util.ShapedPattern;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.*;
@@ -11,13 +10,10 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -35,27 +31,282 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 ModItems.SNOWBELL_SEEDS);
         offerCorrectedSmeltingRecipe(exporter, RecipeCategory.MISC, ModItems.CLAY_JAR, 0, 200, ModItems.SOFT_CLAY_JAR);
         offerCorrectedShapelessRecipe(exporter, RecipeCategory.MISC, ModItems.QUICKLIME, 1, ModItems.WOOD_ASH);
-        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModItems.EARMUFFS, new ShapedPattern(
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModItems.EARMUFFS, 1,
+                """
+                       xxx
+                       x x
+                       # #
+                       """,
                 Map.of(
-                        Items.LEATHER, Arrays.asList(0, 1, 2, 3, 5),
-                        Items.WHITE_WOOL, Arrays.asList(6, 8)
+                        'x', Items.LEATHER,
+                        '#', Items.WHITE_WOOL
                 )
-        ));
-        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModItems.SOFT_CLAY_JAR, new ShapedPattern(
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModItems.SOFT_CLAY_JAR, 4,
+                """
+                        o\s
+                       ooo
+                       """,
                 Map.of(
-                        Items.CLAY_BALL, Arrays.asList(1, 3, 4, 5)
+                        'o', Items.CLAY_BALL
                 )
-        ));
-        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.WITCHS_OVEN, new ShapedPattern(
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.WITCHS_OVEN, 1,
+                """
+                        #\s
+                       ---
+                       -#-
+                       """,
                 Map.of(
-                        Items.IRON_INGOT, Arrays.asList(3, 4, 5, 6, 8),
-                        Items.IRON_BARS, Arrays.asList(1, 7)
+                        '-', Items.IRON_INGOT,
+                        '#', Items.IRON_BARS
                 )
-        ));
-
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_STAIRS, 4,
+                """
+                         #
+                        ##
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.ROWAN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_SLAB, 6,
+                """
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.ROWAN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_FENCE, 3,
+                """
+                       #/#
+                       #/#
+                       """,
+                Map.of(
+                        '#', ModBlocks.ROWAN_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_FENCE_GATE, 1,
+                """
+                       /#/
+                       /#/
+                       """,
+                Map.of(
+                        '#', ModBlocks.ROWAN_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_DOOR, 3,
+                """
+                       ##
+                       ##
+                       ##
+                       """,
+                Map.of(
+                        '#', ModBlocks.ROWAN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_TRAPDOOR, 2,
+                """
+                       ###
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.ROWAN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.ROWAN_PRESSURE_PLATE, 1,
+                """
+                       ##
+                       """,
+                Map.of(
+                        '#', ModBlocks.ROWAN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.ROWAN_SIGN, 3,
+                """
+                       ###
+                       ###
+                        /\s
+                       """,
+                Map.of(
+                        '#', ModBlocks.ROWAN_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+        offerCorrectedShapelessRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.ROWAN_BUTTON, 1, ModBlocks.ROWAN_PLANKS);
         offerPlanksRecipe(exporter, ModBlocks.ROWAN_PLANKS, ModItemTags.ROWAN_LOGS, 4);
         offerBarkBlockRecipe(exporter, ModBlocks.ROWAN_WOOD, ModBlocks.ROWAN_LOG);
         offerBarkBlockRecipe(exporter, ModBlocks.STRIPPED_ROWAN_WOOD, ModBlocks.STRIPPED_ROWAN_LOG);
+
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ALDER_STAIRS, 4,
+                """
+                         #
+                        ##
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.ALDER_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ALDER_SLAB, 6,
+                """
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.ALDER_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ALDER_FENCE, 3,
+                """
+                       #/#
+                       #/#
+                       """,
+                Map.of(
+                        '#', ModBlocks.ALDER_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ALDER_FENCE_GATE, 1,
+                """
+                       /#/
+                       /#/
+                       """,
+                Map.of(
+                        '#', ModBlocks.ALDER_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ALDER_DOOR, 3,
+                """
+                       ##
+                       ##
+                       ##
+                       """,
+                Map.of(
+                        '#', ModBlocks.ALDER_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ALDER_TRAPDOOR, 2,
+                """
+                       ###
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.ALDER_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.ALDER_PRESSURE_PLATE, 1,
+                """
+                       ##
+                       """,
+                Map.of(
+                        '#', ModBlocks.ALDER_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.ALDER_SIGN, 3,
+                """
+                       ###
+                       ###
+                        /\s
+                       """,
+                Map.of(
+                        '#', ModBlocks.ALDER_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+        offerCorrectedShapelessRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.ALDER_BUTTON, 1, ModBlocks.ALDER_PLANKS);
+        offerPlanksRecipe(exporter, ModBlocks.ALDER_PLANKS, ModItemTags.ALDER_LOGS, 4);
+        offerBarkBlockRecipe(exporter, ModBlocks.ALDER_WOOD, ModBlocks.ALDER_LOG);
+        offerBarkBlockRecipe(exporter, ModBlocks.STRIPPED_ALDER_WOOD, ModBlocks.STRIPPED_ALDER_LOG);
+
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.HAWTHORN_STAIRS, 4,
+                """
+                         #
+                        ##
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.HAWTHORN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.HAWTHORN_SLAB, 6,
+                """
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.HAWTHORN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.HAWTHORN_FENCE, 3,
+                """
+                       #/#
+                       #/#
+                       """,
+                Map.of(
+                        '#', ModBlocks.HAWTHORN_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.HAWTHORN_FENCE_GATE, 1,
+                """
+                       /#/
+                       /#/
+                       """,
+                Map.of(
+                        '#', ModBlocks.HAWTHORN_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.HAWTHORN_DOOR, 3,
+                """
+                       ##
+                       ##
+                       ##
+                       """,
+                Map.of(
+                        '#', ModBlocks.HAWTHORN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.HAWTHORN_TRAPDOOR, 2,
+                """
+                       ###
+                       ###
+                       """,
+                Map.of(
+                        '#', ModBlocks.HAWTHORN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.HAWTHORN_PRESSURE_PLATE, 1,
+                """
+                       ##
+                       """,
+                Map.of(
+                        '#', ModBlocks.HAWTHORN_PLANKS
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.HAWTHORN_SIGN, 3,
+                """
+                       ###
+                       ###
+                        /\s
+                       """,
+                Map.of(
+                        '#', ModBlocks.HAWTHORN_PLANKS,
+                        '/', Items.STICK
+                )
+        );
+
+        offerCorrectedShapelessRecipe(exporter, RecipeCategory.REDSTONE, ModBlocks.HAWTHORN_BUTTON, 1, ModBlocks.HAWTHORN_PLANKS);
+
+
+        offerPlanksRecipe(exporter, ModBlocks.HAWTHORN_PLANKS, ModItemTags.HAWTHORN_LOGS, 4);
+        offerBarkBlockRecipe(exporter, ModBlocks.HAWTHORN_WOOD, ModBlocks.HAWTHORN_LOG);
+        offerBarkBlockRecipe(exporter, ModBlocks.STRIPPED_HAWTHORN_WOOD, ModBlocks.STRIPPED_HAWTHORN_LOG);
     }
 
     private void offerCorrectedSmeltingRecipe(Consumer<RecipeJsonProvider> exporter, RecipeCategory category, @NotNull ItemConvertible output, float experience, int cookingTime, @NotNull ItemConvertible... inputs) {
@@ -75,14 +326,15 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
         builder.offerTo(exporter);
     }
 
-    private void offerCraftingRecipe(Consumer<RecipeJsonProvider> exporter, RecipeCategory category, @NotNull ItemConvertible output, ShapedPattern pattern) {
-        ShapedRecipeJsonBuilder builder = ShapedRecipeJsonBuilder.create(category, output)
-                .pattern(pattern.getRow1())
-                .pattern(pattern.getRow2())
-                .pattern(pattern.getRow3());
-        for (Character label : pattern.getIngredients().keySet()) {
-            builder.input(label, pattern.getIngredients().get(label));
-            builder.criterion(RecipeProvider.hasItem(pattern.getIngredients().get(label)), RecipeProvider.conditionsFromItem(pattern.getIngredients().get(label)));
+    private void offerCraftingRecipe(Consumer<RecipeJsonProvider> exporter, RecipeCategory category, @NotNull ItemConvertible output, int count, String pattern, Map<Character, ItemConvertible> ingredients) {
+        ShapedRecipeJsonBuilder builder = ShapedRecipeJsonBuilder.create(category, output, count);
+        for (String row : pattern.split("\n")) {
+            builder.pattern(row);
+        }
+
+        for (Character label : ingredients.keySet()) {
+            builder.input(label, ingredients.get(label));
+            builder.criterion(RecipeProvider.hasItem(ingredients.get(label)), RecipeProvider.conditionsFromItem(ingredients.get(label)));
         }
         builder.offerTo(exporter);
     }

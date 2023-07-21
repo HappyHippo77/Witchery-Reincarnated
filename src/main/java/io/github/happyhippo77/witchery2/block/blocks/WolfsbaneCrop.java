@@ -9,8 +9,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class WolfsbaneCrop extends CropBlock {
     public static final IntProperty AGE = IntProperty.of("age", 0, 7);
 

@@ -16,15 +16,14 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack output;
     private final ItemStack fume;
-    private final float fumeChance;
-    private final DefaultedList<Ingredient> recipeItems;
+    private final ItemStack input;
 
-    public WitchsOvenRecipe(Identifier id, ItemStack output, ItemStack fume, float fumeChance, DefaultedList<Ingredient> recipeItems) {
+
+    public WitchsOvenRecipe(Identifier id, ItemStack output, ItemStack fume, ItemStack input) {
         this.id = id;
         this.output = output;
         this.fume = fume;
-        this.fumeChance = fumeChance;
-        this.recipeItems = recipeItems;
+        this.input = input;
     }
 
     @Override
@@ -33,7 +32,7 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
             return false;
         }
 
-        return recipeItems.get(0).test(inventory.getStack(1));
+        return input.getItem().equals(inventory.getStack(1).getItem());
     }
 
     @Override
@@ -44,6 +43,10 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
     @Override
     public boolean fits(int width, int height) {
         return true;
+    }
+
+    public ItemStack getInput() {
+        return input;
     }
 
     public ItemStack getOutput() {
@@ -57,10 +60,6 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
 
     public ItemStack getFume() {
         return fume;
-    }
-
-    public float getFumeChance() {
-        return fumeChance;
     }
 
     @Override
@@ -93,41 +92,24 @@ public class WitchsOvenRecipe implements Recipe<SimpleInventory> {
         public WitchsOvenRecipe read(Identifier id, JsonObject json) {
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
             ItemStack fume = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "fume"));
-            float fumeChance = JsonHelper.getFloat(json, "fumeChance");
+            ItemStack input = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "input"));
 
-            JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(1, Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
-            }
-
-            return new WitchsOvenRecipe(id, output, fume, fumeChance, inputs);
+            return new WitchsOvenRecipe(id, output, fume, input);
         }
 
         @Override
         public WitchsOvenRecipe read(Identifier id, PacketByteBuf buf) {
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromPacket(buf));
-            }
-
+            ItemStack input = buf.readItemStack();
             ItemStack output = buf.readItemStack();
             ItemStack fume = buf.readItemStack();
-            float fumeChance = buf.readFloat();
-            return new WitchsOvenRecipe(id, output, fume, fumeChance, inputs);
+            return new WitchsOvenRecipe(id, output, fume, input);
         }
 
         @Override
         public void write(PacketByteBuf buf, WitchsOvenRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.write(buf);
-            }
+            buf.writeItemStack(recipe.getInput());
             buf.writeItemStack(recipe.getOutput());
             buf.writeItemStack(recipe.getFume());
-            buf.writeFloat(recipe.getFumeChance());
         }
     }
 }

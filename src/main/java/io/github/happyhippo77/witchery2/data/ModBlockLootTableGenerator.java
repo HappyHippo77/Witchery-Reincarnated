@@ -5,15 +5,17 @@ import io.github.happyhippo77.witchery2.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.*;
 import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.ExplosionDecayLootFunction;
+import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.StatePredicate;
@@ -23,8 +25,8 @@ import net.minecraft.state.property.Property;
 
 import javax.annotation.Nullable;
 
-public class ModLootTableGenerator extends FabricBlockLootTableProvider {
-    public ModLootTableGenerator(FabricDataOutput dataOutput) {
+public class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
+    public ModBlockLootTableGenerator(FabricDataOutput dataOutput) {
         super(dataOutput);
     }
 
@@ -43,15 +45,6 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.EMBER_MOSS, dropsWithShears(ModBlocks.EMBER_MOSS));
         addDrop(ModBlocks.GLINT_WEED, basicDrop(ModBlocks.GLINT_WEED));
         addDrop(ModBlocks.SPANISH_MOSS, dropsWithShears(ModBlocks.SPANISH_MOSS));
-
-    }
-
-    private LootTable.Builder basicDrop(ItemConvertible item) {
-        return new LootTable.Builder().pool(new LootPool.Builder()
-                .rolls(ConstantLootNumberProvider.create(1))
-                .with(ItemEntry.builder(item))
-                .conditionally(SurvivesExplosionLootCondition.builder())
-        );
     }
 
     private void addTreeDrops() {
@@ -61,7 +54,59 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.STRIPPED_ROWAN_WOOD, basicDrop(ModBlocks.STRIPPED_ROWAN_WOOD));
         addDrop(ModBlocks.ROWAN_PLANKS, basicDrop(ModBlocks.ROWAN_PLANKS));
         addDrop(ModBlocks.ROWAN_SAPLING, basicDrop(ModBlocks.ROWAN_SAPLING));
+        addDrop(ModBlocks.POTTED_ROWAN_SAPLING, pottedPlantDrop(ModBlocks.ROWAN_SAPLING));
         addDrop(ModBlocks.ROWAN_LEAVES, leafDrop(ModBlocks.ROWAN_LEAVES, ModBlocks.ROWAN_SAPLING, ModItems.ROWAN_BERRIES));
+        addDrop(ModBlocks.ROWAN_STAIRS, basicDrop(ModBlocks.ROWAN_STAIRS));
+        addDrop(ModBlocks.ROWAN_SLAB, slabDrop(ModBlocks.ROWAN_SLAB, ModBlocks.ROWAN_SLAB));
+        addDrop(ModBlocks.ROWAN_FENCE, basicDrop(ModBlocks.ROWAN_FENCE));
+        addDrop(ModBlocks.ROWAN_FENCE_GATE, basicDrop(ModBlocks.ROWAN_FENCE_GATE));
+        addDrop(ModBlocks.ROWAN_PRESSURE_PLATE, basicDrop(ModBlocks.ROWAN_PRESSURE_PLATE));
+        addDrop(ModBlocks.ROWAN_BUTTON, basicDrop(ModBlocks.ROWAN_BUTTON));
+        addDrop(ModBlocks.ROWAN_SIGN, basicDrop(ModItems.ROWAN_SIGN));
+
+        addDrop(ModBlocks.ALDER_LOG, basicDrop(ModBlocks.ALDER_LOG));
+        addDrop(ModBlocks.ALDER_WOOD, basicDrop(ModBlocks.ALDER_WOOD));
+        addDrop(ModBlocks.STRIPPED_ALDER_LOG, basicDrop(ModBlocks.STRIPPED_ALDER_LOG));
+        addDrop(ModBlocks.STRIPPED_ALDER_WOOD, basicDrop(ModBlocks.STRIPPED_ALDER_WOOD));
+        addDrop(ModBlocks.ALDER_PLANKS, basicDrop(ModBlocks.ALDER_PLANKS));
+        addDrop(ModBlocks.ALDER_SAPLING, basicDrop(ModBlocks.ALDER_SAPLING));
+        addDrop(ModBlocks.POTTED_ALDER_SAPLING, pottedPlantDrop(ModBlocks.ALDER_SAPLING));
+        addDrop(ModBlocks.ALDER_LEAVES, leafDrop(ModBlocks.ALDER_LEAVES, ModBlocks.ALDER_SAPLING, null));
+        addDrop(ModBlocks.ALDER_STAIRS, basicDrop(ModBlocks.ALDER_STAIRS));
+        addDrop(ModBlocks.ALDER_SLAB, slabDrop(ModBlocks.ALDER_SLAB, ModBlocks.ALDER_SLAB));
+        addDrop(ModBlocks.ALDER_FENCE, basicDrop(ModBlocks.ALDER_FENCE));
+        addDrop(ModBlocks.ALDER_FENCE_GATE, basicDrop(ModBlocks.ALDER_FENCE_GATE));
+        addDrop(ModBlocks.ALDER_DOOR, doorDrop(ModBlocks.ALDER_DOOR));
+        addDrop(ModBlocks.ALDER_TRAPDOOR, basicDrop(ModBlocks.ALDER_TRAPDOOR));
+        addDrop(ModBlocks.ALDER_PRESSURE_PLATE, basicDrop(ModBlocks.ALDER_PRESSURE_PLATE));
+        addDrop(ModBlocks.ALDER_BUTTON, basicDrop(ModBlocks.ALDER_BUTTON));
+        addDrop(ModBlocks.ALDER_SIGN, basicDrop(ModItems.ALDER_SIGN));
+
+        addDrop(ModBlocks.HAWTHORN_LOG, basicDrop(ModBlocks.HAWTHORN_LOG));
+        addDrop(ModBlocks.HAWTHORN_WOOD, basicDrop(ModBlocks.HAWTHORN_WOOD));
+        addDrop(ModBlocks.STRIPPED_HAWTHORN_LOG, basicDrop(ModBlocks.STRIPPED_HAWTHORN_LOG));
+        addDrop(ModBlocks.STRIPPED_HAWTHORN_WOOD, basicDrop(ModBlocks.STRIPPED_HAWTHORN_WOOD));
+        addDrop(ModBlocks.HAWTHORN_PLANKS, basicDrop(ModBlocks.HAWTHORN_PLANKS));
+        addDrop(ModBlocks.HAWTHORN_SAPLING, basicDrop(ModBlocks.HAWTHORN_SAPLING));
+        addDrop(ModBlocks.POTTED_HAWTHORN_SAPLING, pottedPlantDrop(ModBlocks.HAWTHORN_SAPLING));
+        addDrop(ModBlocks.HAWTHORN_LEAVES, leafDrop(ModBlocks.HAWTHORN_LEAVES, ModBlocks.HAWTHORN_SAPLING, null));
+        addDrop(ModBlocks.HAWTHORN_STAIRS, basicDrop(ModBlocks.HAWTHORN_STAIRS));
+        addDrop(ModBlocks.HAWTHORN_SLAB, slabDrop(ModBlocks.HAWTHORN_SLAB, ModBlocks.HAWTHORN_SLAB));
+        addDrop(ModBlocks.HAWTHORN_FENCE, basicDrop(ModBlocks.HAWTHORN_FENCE));
+        addDrop(ModBlocks.HAWTHORN_FENCE_GATE, basicDrop(ModBlocks.HAWTHORN_FENCE_GATE));
+        addDrop(ModBlocks.HAWTHORN_DOOR, doorDrop(ModBlocks.HAWTHORN_DOOR));
+        addDrop(ModBlocks.HAWTHORN_TRAPDOOR, basicDrop(ModBlocks.HAWTHORN_TRAPDOOR));
+        addDrop(ModBlocks.HAWTHORN_PRESSURE_PLATE, basicDrop(ModBlocks.HAWTHORN_PRESSURE_PLATE));
+        addDrop(ModBlocks.HAWTHORN_BUTTON, basicDrop(ModBlocks.HAWTHORN_BUTTON));
+        addDrop(ModBlocks.HAWTHORN_SIGN, basicDrop(ModItems.HAWTHORN_SIGN));
+    }
+
+    private LootTable.Builder basicDrop(ItemConvertible item) {
+        return new LootTable.Builder().pool(new LootPool.Builder()
+                .rolls(ConstantLootNumberProvider.create(1))
+                .with(ItemEntry.builder(item))
+                .conditionally(SurvivesExplosionLootCondition.builder())
+        );
     }
 
     private LootTable.Builder leafDrop(ItemConvertible leaf, ItemConvertible sapling, @Nullable ItemConvertible fruit) {
@@ -138,5 +183,51 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
             );
         }
         return builder;
+    }
+
+    private LootTable.Builder slabDrop(Block block, ItemConvertible drop) {
+        return new LootTable.Builder().pool(
+                LootPool.builder().with(
+                        ItemEntry.builder(drop).apply(
+                                SetCountLootFunction.builder(ConstantLootNumberProvider.create(2f)).conditionally(
+                                        BlockStatePropertyLootCondition.builder(block).properties(
+                                                StatePredicate.Builder.create().exactMatch(block.getStateManager().getProperty("type"), "double")
+                                        )
+                                )
+                        ).apply(
+                                ExplosionDecayLootFunction.builder()
+                        )
+                )
+        );
+    }
+
+    private LootTable.Builder doorDrop(Block block) {
+        return new LootTable.Builder().pool(
+                LootPool.builder().with(
+                        ItemEntry.builder(block).conditionally(
+                                BlockStatePropertyLootCondition.builder(block).properties(
+                                        StatePredicate.Builder.create().exactMatch(block.getStateManager().getProperty("half"), "lower")
+                                )
+                        )
+                ).conditionally(
+                        SurvivesExplosionLootCondition.builder()
+                )
+        );
+    }
+
+    private LootTable.Builder pottedPlantDrop(ItemConvertible plant) {
+        return new LootTable.Builder().pool(
+                new LootPool.Builder().with(
+                        ItemEntry.builder(Items.FLOWER_POT)
+                ).conditionally(
+                        SurvivesExplosionLootCondition.builder()
+                )
+        ).pool(
+                new LootPool.Builder().with(
+                        ItemEntry.builder(plant)
+                ).conditionally(
+                        SurvivesExplosionLootCondition.builder()
+                )
+        );
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "special-model-loader:builtin/obj",
+  "model": "witchery2:models/block/witchs_cauldron.obj",
+  "flip_v": true,
+  "particle": "witchery2:block/witchs_cauldron"
+}

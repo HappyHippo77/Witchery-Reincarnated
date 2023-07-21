@@ -8,7 +8,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +47,7 @@ public class Earmuffs extends ArmorItem implements GeoItem {
             Text localText = Text.translatable((this.getTranslationKey() + ".tip"));
             List<Text> arr = new ArrayList<>();
             for (String s : localText.getString().split("\n")) {
-                arr.add(Text.literal(s));
+                arr.add(Text.literal(s).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
             }
 
             tooltip.addAll(arr);

@@ -34,8 +34,8 @@
   },
   "requirements": [
     [
-      "has_leather",
       "has_white_wool",
+      "has_leather",
       "has_the_recipe"
     ]
   ],

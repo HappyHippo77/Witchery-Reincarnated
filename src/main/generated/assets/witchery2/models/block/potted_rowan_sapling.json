@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/flower_pot_cross",
+  "textures": {
+    "plant": "witchery2:block/rowan_sapling"
+  }
+}

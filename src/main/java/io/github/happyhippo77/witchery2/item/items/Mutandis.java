@@ -3,7 +3,6 @@ package io.github.happyhippo77.witchery2.item.items;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.particle.ParticleTypes;
@@ -22,7 +21,6 @@ public class Mutandis extends Item {
     }
 
     public static final List<Block> flowerPots = Arrays.asList(
-            //Blocks.POTTED_TORCHFLOWER,
             Blocks.POTTED_OAK_SAPLING,
             Blocks.POTTED_SPRUCE_SAPLING,
             Blocks.POTTED_BIRCH_SAPLING,
@@ -57,8 +55,8 @@ public class Mutandis extends Item {
             Blocks.ACACIA_SAPLING,
             Blocks.DARK_OAK_SAPLING,
             ModBlocks.ROWAN_SAPLING,
-            // Hawthorn Sapling
-            // Alder Sapling
+            ModBlocks.ALDER_SAPLING,
+            ModBlocks.HAWTHORN_SAPLING,
             ModBlocks.EMBER_MOSS,
             ModBlocks.GLINT_WEED,
             ModBlocks.SPANISH_MOSS,

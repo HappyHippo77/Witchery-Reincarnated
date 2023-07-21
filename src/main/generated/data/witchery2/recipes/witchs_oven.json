@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "0": {
-      "item": "minecraft:iron_ingot"
-    },
-    "1": {
+    "#": {
       "item": "minecraft:iron_bars"
+    },
+    "-": {
+      "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [
-    " 1 ",
-    "000",
-    "010"
+    " # ",
+    "---",
+    "-#-"
   ],
   "result": {
     "item": "witchery2:witchs_oven"

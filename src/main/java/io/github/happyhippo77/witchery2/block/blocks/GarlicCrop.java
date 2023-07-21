@@ -8,8 +8,6 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 
-import java.util.Random;
-
 public class GarlicCrop extends CropBlock {
     public static final IntProperty AGE = IntProperty.of("age", 0, 5);
 

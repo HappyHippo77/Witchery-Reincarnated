@@ -2,13 +2,16 @@ package io.github.happyhippo77.witchery2.item.items;
 
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -28,11 +31,12 @@ public class AnointingPaste extends Item {
     public ActionResult useOnBlock(ItemUsageContext context) {
         Block block = context.getWorld().getBlockState(context.getBlockPos()).getBlock();
         if (block == Blocks.CAULDRON) {
-            context.getWorld().setBlockState(context.getBlockPos(), ModBlocks.WITCHS_CAULDRON.getDefaultState(), 0);
+            BlockState oldState = context.getWorld().getBlockState(context.getBlockPos());
+            context.getWorld().setBlockState(context.getBlockPos(), ModBlocks.WITCHS_CAULDRON.getDefaultState(), 3);
 
-            for (int i = 0; i <= 16; i++) {
-                context.getWorld().addParticle(ParticleTypes.INSTANT_EFFECT, context.getBlockPos().getX() + 0.5 + getRandomFloat(-5, 5), context.getBlockPos().getY() + 0.5 + getRandomFloat(-5, 5), context.getBlockPos().getZ() + 0.5 + getRandomFloat(-5, 5), 0.05, 0.05, 0.05);
-                context.getWorld().addParticle(ParticleTypes.EXPLOSION, context.getBlockPos().getX() + 0.5 + getRandomFloat(-10, 10), context.getBlockPos().getY() + 0.5 + getRandomFloat(-10, 10), context.getBlockPos().getZ() + 0.5 + getRandomFloat(-10, 10), 0.1, 0.1, 0.1);
+            if (!context.getWorld().isClient) {
+                ((ServerWorld)context.getWorld()).spawnParticles(ParticleTypes.INSTANT_EFFECT, context.getBlockPos().getX() + 0.5, context.getBlockPos().getY() + 0.5, context.getBlockPos().getZ() + 0.5, 16, 0.5, 0.5, 0.5, 0.05);
+                ((ServerWorld)context.getWorld()).spawnParticles(ParticleTypes.EXPLOSION, context.getBlockPos().getX() + 0.5, context.getBlockPos().getY() + 0.5, context.getBlockPos().getZ() + 0.5, 16, 1, 1, 1, 0.1);
             }
 
             context.getWorld().playSound(null, context.getBlockPos().getX(), context.getBlockPos().getY(), context.getBlockPos().getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.75f, 0);

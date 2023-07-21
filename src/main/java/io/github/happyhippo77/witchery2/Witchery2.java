@@ -13,13 +13,19 @@ import io.github.happyhippo77.witchery2.sounds.ModSounds;
 import io.github.happyhippo77.witchery2.util.BubbleParticleDataSetter;
 import io.github.happyhippo77.witchery2.util.PowerParticleDataSetter;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.IngredientRegistry;
+import io.github.happyhippo77.witchery2.world.trees.ModPlacers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.block.BlockSetType;
+import net.minecraft.block.WoodType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,6 +90,49 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModBlocks.ROWAN_LEAVES));
 			content.add(new ItemStack(ModBlocks.ROWAN_SAPLING));
 			content.add(new ItemStack(ModBlocks.ROWAN_STAIRS));
+			content.add(new ItemStack(ModBlocks.ROWAN_SLAB));
+			content.add(new ItemStack(ModBlocks.ROWAN_FENCE));
+			content.add(new ItemStack(ModBlocks.ROWAN_FENCE_GATE));
+			content.add(new ItemStack(ModBlocks.ROWAN_DOOR));
+			content.add(new ItemStack(ModItems.ROWAN_DOOR_KEY));
+			content.add(new ItemStack(ModBlocks.ROWAN_TRAPDOOR));
+			content.add(new ItemStack(ModBlocks.ROWAN_PRESSURE_PLATE));
+			content.add(new ItemStack(ModBlocks.ROWAN_BUTTON));
+			content.add(new ItemStack(ModItems.ROWAN_SIGN));
+
+			content.add(new ItemStack(ModBlocks.ALDER_LOG));
+			content.add(new ItemStack(ModBlocks.ALDER_WOOD));
+			content.add(new ItemStack(ModBlocks.STRIPPED_ALDER_LOG));
+			content.add(new ItemStack(ModBlocks.STRIPPED_ALDER_WOOD));
+			content.add(new ItemStack(ModBlocks.ALDER_PLANKS));
+			content.add(new ItemStack(ModBlocks.ALDER_LEAVES));
+			content.add(new ItemStack(ModBlocks.ALDER_SAPLING));
+			content.add(new ItemStack(ModBlocks.ALDER_STAIRS));
+			content.add(new ItemStack(ModBlocks.ALDER_SLAB));
+			content.add(new ItemStack(ModBlocks.ALDER_FENCE));
+			content.add(new ItemStack(ModBlocks.ALDER_FENCE_GATE));
+			content.add(new ItemStack(ModBlocks.ALDER_DOOR));
+			content.add(new ItemStack(ModBlocks.ALDER_TRAPDOOR));
+			content.add(new ItemStack(ModBlocks.ALDER_PRESSURE_PLATE));
+			content.add(new ItemStack(ModBlocks.ALDER_BUTTON));
+			content.add(new ItemStack(ModItems.ALDER_SIGN));
+
+			content.add(new ItemStack(ModBlocks.HAWTHORN_LOG));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_WOOD));
+			content.add(new ItemStack(ModBlocks.STRIPPED_HAWTHORN_LOG));
+			content.add(new ItemStack(ModBlocks.STRIPPED_HAWTHORN_WOOD));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_PLANKS));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_LEAVES));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_SAPLING));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_STAIRS));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_SLAB));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_FENCE));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_FENCE_GATE));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_DOOR));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_TRAPDOOR));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_PRESSURE_PLATE));
+			content.add(new ItemStack(ModBlocks.HAWTHORN_BUTTON));
+			content.add(new ItemStack(ModItems.HAWTHORN_SIGN));
 
 			content.add(new ItemStack(ModItems.ROWAN_BERRIES));
 		});
@@ -97,6 +146,7 @@ public class Witchery2 implements ModInitializer {
 		ModBlockItems.registerAllBlocks();
 		ModItems.registerAllItems();
 		ModParticles.registerAllParticles();
+		ModPlacers.registerAllPlacers();
 
 		ModScreenHandlers.registerAllScreenHandlers();
 

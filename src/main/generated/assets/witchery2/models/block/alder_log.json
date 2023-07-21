@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "witchery2:block/alder_log_top",
+    "side": "witchery2:block/alder_log"
+  }
+}

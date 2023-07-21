@@ -40,9 +40,14 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
 
     private final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private int maxProgress = 200;
+    // 180 - 20 * fume funnels
+    private int maxProgress = 180;
     public int fuelTime = 0;
     private int maxFuelTime = 0;
+    private final double baseFumeChance = 0.3;
+    private final double funnelChanceBonus = 0.25;
+    private final double filteredFunnelChanceBonus = 0.3;
+    private final double doubleFilteredFunnelChanceBonus = 0.8;
 
     private static final Map<Item, Integer> fuels = AbstractFurnaceBlockEntity.createFuelTimeMap();
 
@@ -174,7 +179,7 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
             entity.setStack(2, new ItemStack(recipe.get().getOutput().getItem(), entity.getStack(2).getCount() + 1));
 
 
-            if (r.nextFloat() <= recipe.get().getFumeChance()) {
+            if (r.nextFloat() <= entity.baseFumeChance) {
                     if (canInsertIntoFume(inventory)) {
                         if (canInsertItemIntoFume(inventory, recipe.get().getFume().getItem())) {
                             if (inventory.getStack(3).getItem().equals(ModItems.CLAY_JAR)) {

@@ -3,7 +3,6 @@ package io.github.happyhippo77.witchery2.block.blocks;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Shearable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;

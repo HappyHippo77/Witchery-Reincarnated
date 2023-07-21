@@ -1,9 +1,8 @@
 {
   "replace": false,
   "values": [
-    "witchery2:rowan_log",
-    "witchery2:rowan_wood",
-    "witchery2:stripped_rowan_log",
-    "witchery2:stripped_rowan_wood"
+    "#witchery2:rowan_logs",
+    "#witchery2:alder_logs",
+    "#witchery2:hawthorn_logs"
   ]
 }

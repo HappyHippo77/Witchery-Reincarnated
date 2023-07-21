@@ -1,6 +1,6 @@
 package io.github.happyhippo77.witchery2;
 
-import com.mojang.datafixers.util.Either;
+import dev.felnull.specialmodelloader.api.event.SpecialModelLoaderEvents;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
@@ -20,17 +20,12 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 
 public class Client implements ClientModInitializer {
 //    public static final EntityModelLayer CAULDRON_LAYER = new EntityModelLayer(new Identifier(Witchery2.MOD_ID, "witchs_cauldron"), "main");
@@ -40,6 +35,8 @@ public class Client implements ClientModInitializer {
     @Override
     @SuppressWarnings("deprecation")
     public void onInitializeClient() {
+        SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> Witchery2.MOD_ID.equals(location.getNamespace()));
+
         //EntityModelLayerRegistry.registerModelLayer(CAULDRON_LAYER, ModelCauldron::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MANDRAKE, MandrakeRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MANDRAKE_LAYER, MandrakeModel::getTexturedModelData);
@@ -55,11 +52,33 @@ public class Client implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GLINT_WEED, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SPANISH_MOSS, RenderLayer.getCutout());
 
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ROWAN_DOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ROWAN_TRAPDOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ROWAN_LEAVES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ROWAN_SAPLING, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_ROWAN_SAPLING, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ALDER_DOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ALDER_TRAPDOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ALDER_LEAVES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ALDER_SAPLING, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_ALDER_SAPLING, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.HAWTHORN_DOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.HAWTHORN_TRAPDOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.HAWTHORN_LEAVES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.HAWTHORN_SAPLING, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_HAWTHORN_SAPLING, RenderLayer.getCutout());
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> BiomeColors.getFoliageColor(world, pos), ModBlocks.ROWAN_LEAVES);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(), ModBlocks.ROWAN_LEAVES);
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> 3774771, ModBlocks.ALDER_LEAVES);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> 3774771, ModBlocks.ALDER_LEAVES);
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> 6728294, ModBlocks.HAWTHORN_LEAVES);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> 6728294, ModBlocks.HAWTHORN_LEAVES);
+
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> BiomeColors.getFoliageColor(world, pos), ModBlocks.SPANISH_MOSS);
         //ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(), ModBlocks.SPANISH_MOSS);
 

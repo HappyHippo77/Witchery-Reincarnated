@@ -12,8 +12,6 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
-import java.util.Random;
-
 public class WaterArtichokeCrop extends CropBlock {
     public static final IntProperty AGE = IntProperty.of("age", 0, 4);
 

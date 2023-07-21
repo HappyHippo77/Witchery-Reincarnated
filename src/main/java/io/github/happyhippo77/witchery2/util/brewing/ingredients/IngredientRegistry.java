@@ -43,7 +43,7 @@ public class IngredientRegistry {
     );
     private static final List<DispersalIngredient> dispersalIngredients = Arrays.asList(
             new DispersalIngredient(Items.GUNPOWDER, 0, DispersalType.INSTANT),
-            // Water Artichoke, 0, DispersalType.INSTANT
+            new DispersalIngredient(ModItems.WATER_ARTICHOKE_GLOBE, 0, DispersalType.INSTANT),
             // Wool of Bat, 0, DispersalType.GAS
             // Wormwood, 0, DispersalType.LIQUID
             new DispersalIngredient(Items.ZOMBIE_HEAD, 0, DispersalType.TRIGGER)

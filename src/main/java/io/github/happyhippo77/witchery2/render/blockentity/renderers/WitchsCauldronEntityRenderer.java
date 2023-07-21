@@ -1,6 +1,8 @@
 package io.github.happyhippo77.witchery2.render.blockentity.renderers;
 
+import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.entity.entities.WitchsCauldronEntity;
+import io.github.happyhippo77.witchery2.render.block.models.ModelCauldron;
 import io.github.happyhippo77.witchery2.util.brewing.CauldronLevel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,6 +19,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.util.Identifier;
 
 import java.awt.*;
 import java.util.ArrayList;

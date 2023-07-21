@@ -1,7 +1,6 @@
 package io.github.happyhippo77.witchery2.block.blocks;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
 import net.minecraft.block.VineBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
