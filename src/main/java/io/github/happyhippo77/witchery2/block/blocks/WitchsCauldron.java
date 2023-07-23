@@ -8,7 +8,9 @@ import io.github.happyhippo77.witchery2.particle.ModParticles;
 import io.github.happyhippo77.witchery2.sounds.ModSounds;
 import io.github.happyhippo77.witchery2.util.MathUtil;
 import io.github.happyhippo77.witchery2.util.brewing.crafting.CauldronRecipeRegistry;
+import io.github.happyhippo77.witchery2.util.brewing.ingredients.CapacityIngredient;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.IngredientRegistry;
+import io.github.happyhippo77.witchery2.util.brewing.ingredients.IngredientUse;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -52,15 +54,15 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
             int i;
             double xPos;
             double zPos;
+            double yPos = 0;
+            switch (entity.getLevel()) {
+                case LOW -> yPos = 0.375d;
+                case MEDIUM -> yPos = 0.53125d;
+                case FULL -> yPos = 0.6875d;
+            }
             for (i = 0; i < 2; ++i) {
                 xPos = 0.2D + random.nextDouble() * 0.6D;
                 zPos = 0.2D + random.nextDouble() * 0.6D;
-                double yPos = 0;
-                switch (entity.getLevel()) {
-                    case LOW -> yPos = 0.375d;
-                    case MEDIUM -> yPos = 0.53125d;
-                    case FULL -> yPos = 0.6875d;
-                }
                 Witchery2.bubbleParticleDataSetter.setData(entity.getColor());
                 world.addParticle(ModParticles.BUBBLE_PARTICLE, pos.getX() + xPos, pos.getY() + yPos, pos.getZ() + zPos, 0, 0, 0);
             }
@@ -70,13 +72,7 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
                 }
             }
 
-            double yPos = 0;
-            switch (entity.getLevel()) {
-                case LOW -> yPos = 0.375d;
-                case MEDIUM -> yPos = 0.53125d;
-                case FULL -> yPos = 0.6875d;
-            }
-            if (entity.isPowered() || entity.isCrafting()) {
+            if (entity.isPowered()) {
                 for (i = 0; i < 1 + Math.min(entity.getRitualSeconds(), 5); ++i) {
                     xPos = 0.3D + random.nextDouble() * 0.4D;
                     zPos = 0.3D + random.nextDouble() * 0.4D;
@@ -92,7 +88,7 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
                                     MathUtil.clamp((int) (entity.getColor().getRed() + (255 * shiftR)), 0, 255),
                                     MathUtil.clamp((int) (entity.getColor().getGreen() + (255 * shiftG)), 0, 255),
                                     MathUtil.clamp((int) (entity.getColor().getBlue() + (255 * shiftB)), 0, 255)
-                            ), entity.isCrafting() || entity.isRitualInProgress(), entity.isCrafting() || entity.isRitualInProgress());
+                            ), entity.isRitualInProgress(), entity.isRitualInProgress());
                     world.addParticle(ModParticles.POWER_PARTICLE, pos.getX() + xPos, pos.getY() + yPos, pos.getZ() + zPos, random.nextDouble() * 0.08D - 0.04D, random.nextDouble() * 0.05D + 0.08D, random.nextDouble() * 0.08D - 0.04D);
                 }
             }
@@ -104,21 +100,33 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
         if (!world.isClient) {
-            WitchsCauldronEntity blockEntity = (WitchsCauldronEntity) world.getBlockEntity(pos);
             if (entity instanceof ItemEntity) {
+                WitchsCauldronEntity blockEntity = (WitchsCauldronEntity) world.getBlockEntity(pos);
                 ItemStack itemStack = ((ItemEntity) entity).getStack();
+                boolean accept = false;
 
                 if (blockEntity.isBoiling()) {
                     if (IngredientRegistry.isIngredient(itemStack.getItem())) {
-                        List<Item> recipe = new ArrayList<>();
-                        for (ItemStack item : blockEntity.getIngredients()) {
-                            recipe.add(item.getItem());
+                        if (IngredientRegistry.fromItem(itemStack.getItem()).getUse() == IngredientUse.EFFECT) {
+                            // if sufficient capacity, accept
+                        }
+                        else if (IngredientRegistry.fromItem(itemStack.getItem()).getUse() != IngredientUse.GENERIC) {
+                            accept = true;
+                        }
+                        else {
+                            List<Item> recipe = new ArrayList<>();
+                            for (Item item : blockEntity.getIngredients()) {
+                                recipe.add(item);
+                            }
+                            recipe.add(itemStack.getItem());
+
+                            if (CauldronRecipeRegistry.checkPrecursor(recipe)) {
+                                accept = true;
+                            }
                         }
 
-                        recipe.add(itemStack.getItem());
-
-                        if (CauldronRecipeRegistry.checkPrecursor(recipe)) {
-                            blockEntity.addIngredient(itemStack);
+                        if (accept) {
+                            blockEntity.addIngredient(itemStack.getItem());
                             entity.kill();
 
                             world.playSound(null, pos, ModSounds.RANDOM_SPLASH, SoundCategory.BLOCKS, 0.5F, 0.5f);

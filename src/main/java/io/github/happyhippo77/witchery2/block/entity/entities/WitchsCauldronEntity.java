@@ -14,9 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.*;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
@@ -49,13 +47,11 @@ public class WitchsCauldronEntity extends BlockEntity {
     private int ticksHeated;
     private int ritualTicks;
     private boolean powered;
-    private final ArrayList<ItemStack> ingredients = new ArrayList<>();
+    private final ArrayList<Item> ingredients = new ArrayList<>();
     private boolean ritualInProgress;
 
     private boolean boiling;
     private boolean ingredientsChanged;
-    private boolean crafting;
-    private int craftingTicks;
 
     public WitchsCauldronEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WITCHS_CAULDRON_ENTITY, pos, state);
@@ -141,14 +137,6 @@ public class WitchsCauldronEntity extends BlockEntity {
         return ritualInProgress;
     }
 
-    public boolean isCrafting() {
-        return crafting;
-    }
-
-    public int getCraftingTicks() {
-        return craftingTicks;
-    }
-
     public int getRitualTicks() {
         return ritualTicks;
     }
@@ -164,15 +152,15 @@ public class WitchsCauldronEntity extends BlockEntity {
         return powered;
     }
 
-    public ArrayList<ItemStack> getIngredients() {
+    public ArrayList<Item> getIngredients() {
         return ingredients;
     }
-    public void addIngredient(ItemStack ingredient) {
+    public void addIngredient(Item ingredient) {
         ingredients.add(ingredient);
         markDirty();
         Color tempColor = new Color(17);
-        for (ItemStack item : this.ingredients) {
-            tempColor = new Color(37 * tempColor.getRGB() + item.getItem().getTranslationKey().hashCode());
+        for (Item item : this.ingredients) {
+            tempColor = new Color(37 * tempColor.getRGB() + item.getTranslationKey().hashCode());
         }
         this.color = tempColor;
         this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_LISTENERS);
@@ -200,36 +188,28 @@ public class WitchsCauldronEntity extends BlockEntity {
         entity.ritualInProgress = entity.getRitualTicks() > 0;
 
         if (entity.ingredientsChanged) {
-            List<Item> recipe = new ArrayList<>();
-            for (ItemStack ingredient : entity.ingredients) {
-                recipe.add(ingredient.getItem());
-            }
+            List<Item> recipe = new ArrayList<>(entity.ingredients);
 
             RecipeCheck check = CauldronRecipeRegistry.checkRecipe(recipe);
 
-            entity.crafting = check.valid();
+            entity.ritualInProgress = check.valid();
 
-            entity.craftingTicks = 0;
+            entity.ritualTicks = 0;
 
             entity.ingredientsChanged = false;
         }
 
         // "powered" refers to having the correct amount of altar power for the ingredients inside.
-        // as this is not yet implemented, we just set it to true.
-        if (entity.ingredients.size() > 0) {
-            entity.powered = true;
-        }
+        // as this is not yet implemented, we just set it to true if there are ingredients inside.
+        entity.powered = entity.ingredients.size() > 0;
 
-        if (entity.crafting) {
-            if (entity.craftingTicks < 200) {
-                entity.craftingTicks++;
+        if (entity.ritualInProgress) {
+            if (entity.ritualTicks < 200) {
+                entity.ritualTicks++;
             }
 
-            if (entity.craftingTicks == 200) {
-                List<Item> recipe = new ArrayList<>();
-                for (ItemStack ingredient : entity.ingredients) {
-                    recipe.add(ingredient.getItem());
-                }
+            if (entity.ritualTicks == 200) {
+                List<Item> recipe = new ArrayList<>(entity.ingredients);
 
                 RecipeCheck check = CauldronRecipeRegistry.checkRecipe(recipe);
 
@@ -244,12 +224,12 @@ public class WitchsCauldronEntity extends BlockEntity {
                 }
                 world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 0.5f);
                 entity.clear();
-                entity.crafting = false;
-                entity.craftingTicks = 0;
+                entity.ritualInProgress = false;
+                entity.ritualTicks = 0;
             }
         }
         else {
-            entity.craftingTicks = 0;
+            entity.ritualTicks = 0;
         }
     }
 
@@ -257,8 +237,8 @@ public class WitchsCauldronEntity extends BlockEntity {
     @Override
     public void writeNbt(NbtCompound tag) {
         NbtList nbtIngredients = new NbtList();
-        for (ItemStack ingredient : ingredients) {
-            nbtIngredients.add(ingredient.writeNbt(new NbtCompound()));
+        for (Item ingredient : ingredients) {
+            nbtIngredients.add(NbtInt.of(Item.getRawId(ingredient)));
         }
         
         // Save the current value of the number to the tag
@@ -286,9 +266,9 @@ public class WitchsCauldronEntity extends BlockEntity {
         powered = tag.getBoolean("powered");
 
         ingredients.clear();
-        NbtList nbtIngredients = tag.getList("ingredients", NbtList.COMPOUND_TYPE);
+        NbtList nbtIngredients = tag.getList("ingredients", NbtList.INT_TYPE);
         for (NbtElement ingredient: nbtIngredients) {
-            ingredients.add(ItemStack.fromNbt((NbtCompound) ingredient));
+            ingredients.add(Item.byRawId(((NbtInt)ingredient).intValue()));
         }
         this.ingredientsChanged = true;
     }

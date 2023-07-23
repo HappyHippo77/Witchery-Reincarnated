@@ -17,6 +17,7 @@ import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
@@ -48,7 +49,7 @@ public class WitchsCauldronEntityRenderer implements BlockEntityRenderer<WitchsC
         //ModelCauldron model = new ModelCauldron(ModelCauldron.getTexturedModelData().createModel());
         //model.render(matrices, vertexConsumers.getBuffer(model.getLayer(new Identifier(Witchery2.MOD_ID, "textures/block/witchs_cauldron.png"))), light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
 
-        ArrayList<ItemStack> ingredients = entity.getIngredients();
+        ArrayList<Item> ingredients = entity.getIngredients();
 
         float waterHeight = 0;
         boolean filled = true;

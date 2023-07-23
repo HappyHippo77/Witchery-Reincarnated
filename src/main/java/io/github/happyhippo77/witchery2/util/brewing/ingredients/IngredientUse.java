@@ -7,5 +7,17 @@ public enum IngredientUse {
     MODIFIER,
     DISPERSAL,
     EFFECT,
-    GENERIC
+    GENERIC;
+
+    public int getOrder() {
+        return switch (this) {
+            case CAPACITY -> 0;
+            case POWER -> 1;
+            case DURATION -> 2;
+            case MODIFIER -> 3;
+            case DISPERSAL -> 4;
+            case EFFECT -> 5;
+            case GENERIC -> 6;
+        };
+    }
 }

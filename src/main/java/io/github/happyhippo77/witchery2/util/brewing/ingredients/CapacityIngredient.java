@@ -17,6 +17,10 @@ public class CapacityIngredient extends AbstractIngredient {
         return IngredientUse.CAPACITY;
     }
 
+    public boolean sequential(CapacityIngredient previous) {
+        return previous.getOrder() == this.getOrder() - 1;
+    }
+
     public int getSlots() {
         return slots;
     }

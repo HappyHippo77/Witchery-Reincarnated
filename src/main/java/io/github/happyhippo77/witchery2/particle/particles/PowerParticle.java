@@ -21,7 +21,7 @@ public class PowerParticle extends SpriteBillboardParticle {
         this.scale = 0.06F;
         Random random = new Random();
 
-        this.maxAge = 25 + random.nextInt(10);
+        this.maxAge = 35;
 
         this.canMove = true;
         this.gravityStrength = 0.25F;

@@ -22,13 +22,16 @@ public class IngredientRegistry {
 
     private static final List<CapacityIngredient> capacityIngredients = Arrays.asList(
             new CapacityIngredient(ModItems.MANDRAKE_ROOT, 0, 1, 0),
-            new CapacityIngredient(Items.NETHER_WART, 0, 2, 1)
-            // ...
+            new CapacityIngredient(Items.NETHER_WART, 50, 2, 1),
+            // Tear of the goddess, 2, 2
+            // Diamond vapor, 2, 3
+            new CapacityIngredient(Items.DIAMOND, 150, 2, 3)
+            // Nether star, 4, 5
     );
     private static final List<PowerIngredient> powerIngredients = Arrays.asList(
             new PowerIngredient(Items.GLOWSTONE_DUST, 50, 0),
             new PowerIngredient(Items.BLAZE_ROD, 100, 1)
-            // Attuned Stone, 150, 2
+            // Charged Attuned Stone, 150, 2
     );
     private static final List<DurationIngredient> durationIngredients = Arrays.asList(
             new DurationIngredient(Items.REDSTONE, 50, 0),
@@ -146,5 +149,13 @@ public class IngredientRegistry {
             }
         }
         return null;
+    }
+
+    public boolean ingredientIsInOrder(AbstractIngredient ingredient, AbstractIngredient previousIngredient) {
+        if (ingredient.getUse() == IngredientUse.GENERIC) {
+            return false;
+        }
+
+        return ingredient.getUse().getOrder() >= previousIngredient.getUse().getOrder();
     }
 }
