@@ -1,0 +1,12 @@
+{
+  "type": "witchery2:witchs_oven",
+  "input": {
+      "item": "minecraft:mutton"
+  },
+  "output": {
+    "item": "minecraft:cooked_mutton"
+  },
+  "fume": {
+    "item": "witchery2:foul_fume"
+  }
+}

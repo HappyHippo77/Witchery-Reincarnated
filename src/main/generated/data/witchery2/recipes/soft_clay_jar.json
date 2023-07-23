@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "o": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "pattern": [
+    " o ",
+    "ooo"
+  ],
+  "result": {
+    "count": 4,
+    "item": "witchery2:soft_clay_jar"
+  },
+  "show_notification": true
+}

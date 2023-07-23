@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "zconnect=false,xconnect=false,below=false": {"model": "witchery2:block/stockade/alder/stockade"},
+    "zconnect=true,xconnect=false,below=false": {"model": "witchery2:block/stockade/alder/stockade_pair"},
+    "zconnect=false,xconnect=true,below=false": {"model": "witchery2:block/stockade/alder/stockade_pair", "y": 90},
+    "zconnect=true,xconnect=true,below=false": {"model": "witchery2:block/stockade/alder/stockade_corner"},
+    "zconnect=false,xconnect=false,below=true": {"model": "witchery2:block/stockade/alder/stockade_below"},
+    "zconnect=true,xconnect=false,below=true": {"model": "witchery2:block/stockade/alder/stockade_pair_below"},
+    "zconnect=false,xconnect=true,below=true": {"model": "witchery2:block/stockade/alder/stockade_pair_below", "y": 90},
+    "zconnect=true,xconnect=true,below=true": {"model": "witchery2:block/stockade/alder/stockade_corner_below"}
+  }
+}

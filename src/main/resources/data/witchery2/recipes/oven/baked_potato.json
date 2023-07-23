@@ -1,0 +1,12 @@
+{
+  "type": "witchery2:witchs_oven",
+  "input": {
+      "item": "minecraft:potato"
+  },
+  "output": {
+    "item": "minecraft:baked_potato"
+  },
+  "fume": {
+    "item": "witchery2:foul_fume"
+  }
+}

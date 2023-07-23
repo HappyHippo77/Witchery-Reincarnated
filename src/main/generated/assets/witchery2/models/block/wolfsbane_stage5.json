@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "witchery2:block/wolfsbane_stage5"
+  }
+}

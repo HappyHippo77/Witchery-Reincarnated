@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:white_wool"
+    },
+    "x": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "x x",
+    "# #"
+  ],
+  "result": {
+    "item": "witchery2:earmuffs"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,282 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"chimney": false}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/filtered_fume_funnel_ground"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"chimney": false}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/filtered_fume_funnel_ground", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"chimney": false}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/filtered_fume_funnel_ground", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"chimney": false}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/filtered_fume_funnel_ground", "y": 270
+      }
+    },
+
+
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_pipe_left"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_pipe_left", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_pipe_left", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_pipe_left", "y": 270
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_pipe_right"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_pipe_right", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_pipe_right", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_pipe_right", "y": 270
+      }
+    },
+
+
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_tube_left"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_tube_left", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_tube_left", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_tube_left", "y": 270
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_tube_right"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_tube_right", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_tube_right", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_tube_right", "y": 270
+      }
+    },
+
+
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"chimney": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_chimney"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"chimney": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_chimney", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"chimney": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_chimney", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"chimney": true}
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/fume_funnel/fume_funnel_chimney", "y": 270
+      }
+    }
+  ]
+}

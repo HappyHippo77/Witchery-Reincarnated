@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_exhale_of_the_horned_one": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "witchery2:exhale_of_the_horned_one"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_hawthorn_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "witchery2:hawthorn_log"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "witchery2:hawthorn_stockade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_exhale_of_the_horned_one",
+      "has_hawthorn_log",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "witchery2:hawthorn_stockade"
+    ]
+  }
+}

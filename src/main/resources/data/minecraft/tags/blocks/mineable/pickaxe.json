@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "witchery2:witchs_cauldron",
+    "witchery2:witchs_oven",
+    "witchery2:fume_funnel",
+    "witchery2:filtered_fume_funnel"
+  ]
+}

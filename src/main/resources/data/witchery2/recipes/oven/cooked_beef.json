@@ -1,0 +1,12 @@
+{
+  "type": "witchery2:witchs_oven",
+  "input": {
+      "item": "minecraft:beef"
+  },
+  "output": {
+    "item": "minecraft:cooked_beef"
+  },
+  "fume": {
+    "item": "witchery2:foul_fume"
+  }
+}

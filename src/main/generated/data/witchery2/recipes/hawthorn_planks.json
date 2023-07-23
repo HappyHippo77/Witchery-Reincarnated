@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "witchery2:hawthorn_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "witchery2:hawthorn_planks"
+  }
+}

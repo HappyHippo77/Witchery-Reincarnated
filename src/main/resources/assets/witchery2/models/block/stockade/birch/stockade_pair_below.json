@@ -1,0 +1,38 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "block/birch_log",
+		"1": "block/birch_log_top",
+		"particle": "block/birch_log"
+	},
+	"elements": [
+		{
+			"name": "baseA",
+			"from": [4.8, 0, 0.8],
+			"to": [11.2, 16, 7.2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -0.64]},
+			"faces": {
+				"north": {"uv": [4.8, 0, 11.2, 16], "texture": "#0"},
+				"east": {"uv": [4.8, 0, 11.2, 16], "texture": "#0"},
+				"south": {"uv": [4.8, 0, 11.2, 16], "texture": "#0"},
+				"west": {"uv": [4.8, 0, 11.2, 16], "texture": "#0"},
+				"up": {"uv": [4.8, 4.8, 11.2, 11.2], "texture": "#1"},
+				"down": {"uv": [4.8, 4.8, 11.2, 11.2], "texture": "#1"}
+			}
+		},
+		{
+			"name": "baseB",
+			"from": [4.8, 0, 8.8],
+			"to": [11.2, 16, 15.2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -0.64]},
+			"faces": {
+				"north": {"uv": [4.8, 0, 11.2, 16], "texture": "#0"},
+				"east": {"uv": [4.8, 0, 11.2, 16], "texture": "#0"},
+				"south": {"uv": [4.8, 0, 11.2, 16], "texture": "#0"},
+				"west": {"uv": [4.8, 0, 11.2, 16], "texture": "#0"},
+				"up": {"uv": [4.8, 4.8, 11.2, 11.2], "texture": "#1"},
+				"down": {"uv": [4.8, 4.8, 11.2, 11.2], "texture": "#1"}
+			}
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:mangrove_log"
+    },
+    "+": {
+      "item": "witchery2:exhale_of_the_horned_one"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#+#",
+    "###"
+  ],
+  "result": {
+    "count": 9,
+    "item": "witchery2:mangrove_stockade"
+  },
+  "show_notification": true
+}

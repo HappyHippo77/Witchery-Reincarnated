@@ -1,0 +1,12 @@
+{
+  "type": "witchery2:witchs_oven",
+  "input": {
+      "tag": "minecraft:logs"
+  },
+  "output": {
+    "item": "minecraft:charcoal"
+  },
+  "fume": {
+    "item": "witchery2:foul_fume"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "witchery2:block/rowan_leaves"
+  }
+}

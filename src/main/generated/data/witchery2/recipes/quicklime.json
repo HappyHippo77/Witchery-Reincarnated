@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "witchery2:wood_ash"
+    }
+  ],
+  "result": {
+    "item": "witchery2:quicklime"
+  }
+}

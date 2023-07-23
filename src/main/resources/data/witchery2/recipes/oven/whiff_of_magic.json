@@ -1,0 +1,12 @@
+{
+  "type": "witchery2:witchs_oven",
+  "input": {
+      "item": "witchery2:rowan_sapling"
+  },
+  "output": {
+    "item": "witchery2:wood_ash"
+  },
+  "fume": {
+    "item": "witchery2:whiff_of_magic"
+  }
+}

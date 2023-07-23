@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:birch_log"
+    },
+    "+": {
+      "item": "witchery2:exhale_of_the_horned_one"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#+#",
+    "###"
+  ],
+  "result": {
+    "count": 9,
+    "item": "witchery2:birch_stockade"
+  },
+  "show_notification": true
+}
