@@ -4,6 +4,7 @@ import dev.felnull.specialmodelloader.api.event.SpecialModelLoaderEvents;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
+import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.networking.ClientPackets;
 import io.github.happyhippo77.witchery2.particle.ModParticles;
 import io.github.happyhippo77.witchery2.particle.particles.BubbleParticle;
@@ -24,6 +25,7 @@ import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
@@ -40,6 +42,8 @@ public class Client implements ClientModInitializer {
         //EntityModelLayerRegistry.registerModelLayer(CAULDRON_LAYER, ModelCauldron::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MANDRAKE, MandrakeRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MANDRAKE_LAYER, MandrakeModel::getTexturedModelData);
+
+        EntityRendererRegistry.register(ModEntities.BREW_ENTITY, FlyingItemEntityRenderer::new);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FILTERED_FUME_FUNNEL, RenderLayer.getCutout());
 
@@ -84,6 +88,16 @@ public class Client implements ClientModInitializer {
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> BiomeColors.getFoliageColor(world, pos), ModBlocks.SPANISH_MOSS);
         //ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(), ModBlocks.SPANISH_MOSS);
+
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+                tintIndex == 0?stack.getNbt() != null?stack.getNbt().contains("color")?stack.getNbt().getInt("color"):16777215:16777215:16777215,
+                ModItems.BREW);
+
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+                        tintIndex == 0?stack.getNbt() != null?stack.getNbt().contains("color")?stack.getNbt().getInt("color"):16777215:16777215:16777215,
+                ModItems.PROJECTILE_BREW);
+
+        //tintIndex == 0?stack.getNbt() != null?stack.getNbt().contains("color")?stack.getNbt().getInt("color"):16777215:16777215:16777215
 
 
         BlockEntityRendererRegistry.register(ModBlockEntities.WITCHS_CAULDRON_ENTITY, WitchsCauldronEntityRenderer::new);

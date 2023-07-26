@@ -1,5 +1,6 @@
 package io.github.happyhippo77.witchery2.util.brewing.ingredients;
 
+import io.github.happyhippo77.witchery2.util.brewing.DispersalType;
 import net.minecraft.item.Item;
 
 public class DispersalIngredient extends AbstractIngredient {

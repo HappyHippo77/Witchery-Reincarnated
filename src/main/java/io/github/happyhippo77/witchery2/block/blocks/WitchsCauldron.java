@@ -9,6 +9,7 @@ import io.github.happyhippo77.witchery2.sounds.ModSounds;
 import io.github.happyhippo77.witchery2.util.MathUtil;
 import io.github.happyhippo77.witchery2.util.brewing.crafting.CauldronRecipeRegistry;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.CapacityIngredient;
+import io.github.happyhippo77.witchery2.util.brewing.ingredients.EffectIngredient;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.IngredientRegistry;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.IngredientUse;
 import net.minecraft.block.*;
@@ -83,12 +84,14 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
                     float shiftG = random.nextFloat() * doubleColorShift - maxColorShift;
                     float shiftB = random.nextFloat() * doubleColorShift - maxColorShift;
 
+                    int maxAge = 25 + random.nextInt(10);
+
                     Witchery2.powerParticleDataSetter.setData(
                             new Color(
                                     MathUtil.clamp((int) (entity.getColor().getRed() + (255 * shiftR)), 0, 255),
                                     MathUtil.clamp((int) (entity.getColor().getGreen() + (255 * shiftG)), 0, 255),
                                     MathUtil.clamp((int) (entity.getColor().getBlue() + (255 * shiftB)), 0, 255)
-                            ), entity.isRitualInProgress(), entity.isRitualInProgress());
+                            ), entity.isRitualInProgress(), entity.isRitualInProgress(), maxAge);
                     world.addParticle(ModParticles.POWER_PARTICLE, pos.getX() + xPos, pos.getY() + yPos, pos.getZ() + zPos, random.nextDouble() * 0.08D - 0.04D, random.nextDouble() * 0.05D + 0.08D, random.nextDouble() * 0.08D - 0.04D);
                 }
             }
@@ -107,33 +110,35 @@ public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvid
 
                 if (blockEntity.isBoiling()) {
                     if (IngredientRegistry.isIngredient(itemStack.getItem())) {
-                        if (IngredientRegistry.fromItem(itemStack.getItem()).getUse() == IngredientUse.EFFECT) {
-                            // if sufficient capacity, accept
-                        }
-                        else if (IngredientRegistry.fromItem(itemStack.getItem()).getUse() != IngredientUse.GENERIC) {
-                            accept = true;
-                        }
-                        else {
-                            List<Item> recipe = new ArrayList<>();
-                            for (Item item : blockEntity.getIngredients()) {
-                                recipe.add(item);
-                            }
-                            recipe.add(itemStack.getItem());
-
-                            if (CauldronRecipeRegistry.checkPrecursor(recipe)) {
+                        if (!blockEntity.getIngredients().contains(itemStack.getItem())) {
+                            if (IngredientRegistry.fromItem(itemStack.getItem()).getUse() == IngredientUse.EFFECT) {
+                                if (((EffectIngredient) IngredientRegistry.fromItem(itemStack.getItem())).brewHasCapacity(blockEntity.getIngredients())) {
+                                    accept = true;
+                                }
+                            } else if (IngredientRegistry.fromItem(itemStack.getItem()).getUse() != IngredientUse.GENERIC) {
                                 accept = true;
+                            } else {
+                                List<Item> recipe = new ArrayList<>();
+                                for (Item item : blockEntity.getIngredients()) {
+                                    recipe.add(item);
+                                }
+                                recipe.add(itemStack.getItem());
+
+                                if (CauldronRecipeRegistry.checkPrecursor(recipe)) {
+                                    accept = true;
+                                }
                             }
-                        }
 
-                        if (accept) {
-                            blockEntity.addIngredient(itemStack.getItem());
-                            entity.kill();
+                            if (accept) {
+                                blockEntity.addIngredient(itemStack.getItem());
+                                entity.kill();
 
-                            world.playSound(null, pos, ModSounds.RANDOM_SPLASH, SoundCategory.BLOCKS, 0.5F, 0.5f);
-                            if (!world.isClient()) {
-                                for (PlayerEntity player : world.getPlayers()) {
-                                    for (int i = 0; i < 8; i++) {
-                                        ServerPackets.sendRenderParticle(player, ParticleTypes.SPLASH, pos.getX() + r.nextFloat(), (float) (pos.getY() + 0.5 + r.nextFloat()), pos.getZ() + r.nextFloat(), 0.0f, 0.0f, 0.0f);
+                                world.playSound(null, pos, ModSounds.RANDOM_SPLASH, SoundCategory.BLOCKS, 0.5F, 0.5f);
+                                if (!world.isClient()) {
+                                    for (PlayerEntity player : world.getPlayers()) {
+                                        for (int i = 0; i < 8; i++) {
+                                            ServerPackets.sendRenderParticle(player, ParticleTypes.SPLASH, pos.getX() + r.nextFloat(), (float) (pos.getY() + 0.5 + r.nextFloat()), pos.getZ() + r.nextFloat(), 0.0f, 0.0f, 0.0f);
+                                        }
                                     }
                                 }
                             }

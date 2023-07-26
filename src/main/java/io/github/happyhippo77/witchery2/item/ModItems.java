@@ -3,9 +3,7 @@ package io.github.happyhippo77.witchery2.item;
 import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
-import io.github.happyhippo77.witchery2.item.items.AnointingPaste;
-import io.github.happyhippo77.witchery2.item.items.Earmuffs;
-import io.github.happyhippo77.witchery2.item.items.Mutandis;
+import io.github.happyhippo77.witchery2.item.items.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.SignBlock;
 import net.minecraft.item.*;
@@ -43,6 +41,9 @@ public class ModItems {
     public static final Item WOOD_ASH = new Item(new FabricItemSettings());
     public static final Item QUICKLIME = new Item(new FabricItemSettings());
     public static final Earmuffs EARMUFFS = new Earmuffs(new FabricItemSettings());
+
+    public static final Brew BREW = new Brew(new FabricItemSettings().maxCount(8));
+    public static final ProjectileBrew PROJECTILE_BREW = new ProjectileBrew(new FabricItemSettings().maxCount(8));
 
     public static final Item ROWAN_BERRIES = new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0.3f).build()));
     public static final Item ROWAN_DOOR_KEY = new Item(new FabricItemSettings());
@@ -85,6 +86,9 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "wood_ash"), WOOD_ASH);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "quicklime"), QUICKLIME);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "earmuffs"), EARMUFFS);
+
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "brew"), BREW);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "projectile_brew"), PROJECTILE_BREW);
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_berries"), ROWAN_BERRIES);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "rowan_door_key"), ROWAN_DOOR_KEY);

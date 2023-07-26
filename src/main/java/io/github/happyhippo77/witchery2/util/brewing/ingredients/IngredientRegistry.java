@@ -1,7 +1,11 @@
 package io.github.happyhippo77.witchery2.util.brewing.ingredients;
 
+import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.util.Range;
+import io.github.happyhippo77.witchery2.util.brewing.DispersalType;
+import io.github.happyhippo77.witchery2.util.brewing.Effects;
+import io.github.happyhippo77.witchery2.util.brewing.Modifiers;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
@@ -15,7 +19,10 @@ public class IngredientRegistry {
     private static Range capacityIndices;
     private static Range powerIndices;
     private static Range durationIndices;
-    private static Range modifierIndices;
+    private static Range effectModifierIndices;
+    private static Range brewModifierIndices;
+    private static Range extentIndices;
+    private static Range lingerIndices;
     private static Range dispersalIndices;
     private static Range effectIndices;
     private static Range genericIndices;
@@ -38,11 +45,42 @@ public class IngredientRegistry {
             new DurationIngredient(Items.OBSIDIAN, 100, 1)
             // Mandrake Bulb, 150, 2
     );
-    private static final List<ModifierIngredient> modifierIngredients = Arrays.asList(
-            new ModifierIngredient(Items.GOLD_NUGGET, 50, "no_particles"),
-            new ModifierIngredient(Items.FERMENTED_SPIDER_EYE, 25, "invert")
-            // ...
-            // FIGURE OUT HOW TO HANDLE THIS
+    private static final List<EffectModifierIngredient> effectModifierIngredients = Arrays.asList(
+            new EffectModifierIngredient(Items.GOLD_NUGGET, 50, Modifiers.NO_PARTICLES),
+            new EffectModifierIngredient(Items.FERMENTED_SPIDER_EYE, 25, Modifiers.INVERT),
+            new EffectModifierIngredient(Items.NETHER_BRICK, 50, Modifiers.SKIP_BLOCK),
+            new EffectModifierIngredient(Items.BRICK, 50, Modifiers.SKIP_ENTITY)
+    );
+    private static final List<BrewModifierIngredient> brewModifierIngredients = Arrays.asList(
+            new BrewModifierIngredient(ModItems.ROWAN_BERRIES, 50, Modifiers.QUAFFING_MINUS_8),
+            new BrewModifierIngredient(ModItems.EXHALE_OF_THE_HORNED_ONE, 0, Modifiers.QUAFFING_MINUS_4),
+            new BrewModifierIngredient(ModBlocks.SPANISH_MOSS.asItem(), 50, Modifiers.QUAFFING_MINUS_4),
+            new BrewModifierIngredient(Items.WHITE_WOOL, 0, Modifiers.WHITE),
+            new BrewModifierIngredient(Items.LIGHT_GRAY_WOOL, 0, Modifiers.LIGHT_GRAY),
+            new BrewModifierIngredient(Items.GRAY_WOOL, 0, Modifiers.GRAY),
+            new BrewModifierIngredient(Items.BLACK_WOOL, 0, Modifiers.BLACK),
+            new BrewModifierIngredient(Items.BROWN_WOOL, 0, Modifiers.BROWN),
+            new BrewModifierIngredient(Items.RED_WOOL, 0, Modifiers.RED),
+            new BrewModifierIngredient(Items.ORANGE_WOOL, 0, Modifiers.ORANGE),
+            new BrewModifierIngredient(Items.YELLOW_WOOL, 0, Modifiers.YELLOW),
+            new BrewModifierIngredient(Items.LIME_WOOL, 0, Modifiers.LIME),
+            new BrewModifierIngredient(Items.GREEN_WOOL, 0, Modifiers.GREEN),
+            new BrewModifierIngredient(Items.CYAN_WOOL, 0, Modifiers.CYAN),
+            new BrewModifierIngredient(Items.LIGHT_BLUE_WOOL, 0, Modifiers.LIGHT_BLUE),
+            new BrewModifierIngredient(Items.BLUE_WOOL, 0, Modifiers.BLUE),
+            new BrewModifierIngredient(Items.PURPLE_WOOL, 0, Modifiers.PURPLE),
+            new BrewModifierIngredient(Items.MAGENTA_WOOL, 0, Modifiers.MAGENTA),
+            new BrewModifierIngredient(Items.PINK_WOOL, 0, Modifiers.PINK)
+    );
+    private static final List<ExtentIngredient> extentIngredients = Arrays.asList(
+            new ExtentIngredient(ModItems.WOOD_ASH, 50, 0),
+            new ExtentIngredient(Items.COCOA_BEANS, 100, 1)
+            // Wispy Cotton, 150, 2
+    );
+    private static final List<LingerIngredient> lingerIngredients = Arrays.asList(
+            new LingerIngredient(ModItems.BELLADONNA_FLOWER, 50, 0),
+            new LingerIngredient(Items.LAPIS_LAZULI, 100, 1),
+            new LingerIngredient(Items.END_STONE, 100, 1)
     );
     private static final List<DispersalIngredient> dispersalIngredients = Arrays.asList(
             new DispersalIngredient(Items.GUNPOWDER, 0, DispersalType.INSTANT),
@@ -52,8 +90,8 @@ public class IngredientRegistry {
             new DispersalIngredient(Items.ZOMBIE_HEAD, 0, DispersalType.TRIGGER)
     );
     private static final List<EffectIngredient> effectIngredients = Arrays.asList(
-            new EffectIngredient(Items.SNOWBALL, 0, 1, "snow"),
-            new EffectIngredient(Items.COD, 0, 1, "swim_speed")
+            new EffectIngredient(Items.SNOWBALL, 0, 1, Effects.SNOW),
+            new EffectIngredient(Items.COD, 0, 1, Effects.SWIM_SPEED)
             // ...
             // FIGURE OUT HOW TO HANDLE THIS
     );
@@ -82,8 +120,20 @@ public class IngredientRegistry {
         durationIndices = new Range(lastIndex, index - 1);
 
         lastIndex = index;
-        index = register(index, modifierIngredients);
-        modifierIndices = new Range(lastIndex, index - 1);
+        index = register(index, effectModifierIngredients);
+        effectModifierIndices = new Range(lastIndex, index - 1);
+
+        lastIndex = index;
+        index = register(index, brewModifierIngredients);
+        brewModifierIndices = new Range(lastIndex, index - 1);
+
+        lastIndex = index;
+        index = register(index, extentIngredients);
+        extentIndices = new Range(lastIndex, index - 1);
+
+        lastIndex = index;
+        index = register(index, lingerIngredients);
+        lingerIndices = new Range(lastIndex, index - 1);
 
         lastIndex = index;
         index = register(index, dispersalIngredients);
@@ -127,7 +177,10 @@ public class IngredientRegistry {
             case CAPACITY -> range = capacityIndices;
             case POWER -> range = powerIndices;
             case DURATION -> range = durationIndices;
-            case MODIFIER -> range = modifierIndices;
+            case EFFECT_MODIFIER -> range = effectModifierIndices;
+            case BREW_MODIFIER -> range = brewModifierIndices;
+            case EXTENT -> range = extentIndices;
+            case LINGER -> range = lingerIndices;
             case DISPERSAL -> range = dispersalIndices;
             case EFFECT -> range = effectIndices;
             case GENERIC -> range = genericIndices;
@@ -149,13 +202,5 @@ public class IngredientRegistry {
             }
         }
         return null;
-    }
-
-    public boolean ingredientIsInOrder(AbstractIngredient ingredient, AbstractIngredient previousIngredient) {
-        if (ingredient.getUse() == IngredientUse.GENERIC) {
-            return false;
-        }
-
-        return ingredient.getUse().getOrder() >= previousIngredient.getUse().getOrder();
     }
 }

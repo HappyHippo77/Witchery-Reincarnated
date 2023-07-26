@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "witchery2:item/brew_overlay",
+    "layer1": "witchery2:item/projectile_brew"
+  }
+}

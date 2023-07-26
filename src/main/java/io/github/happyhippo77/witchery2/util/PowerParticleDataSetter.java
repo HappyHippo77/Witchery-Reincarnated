@@ -6,10 +6,12 @@ public class PowerParticleDataSetter {
     private Color color;
     private boolean circling;
     private boolean ritualInProgress;
-    public void setData(Color color, boolean circling, boolean ritualInProgress) {
+    private int maxAge;
+    public void setData(Color color, boolean circling, boolean ritualInProgress, int maxAge) {
         this.color = color;
         this.circling = circling;
         this.ritualInProgress = ritualInProgress;
+        this.maxAge = maxAge;
     }
 
     public Color getColor() {
@@ -38,5 +40,9 @@ public class PowerParticleDataSetter {
 
     public boolean isRitualInProgress() {
         return ritualInProgress;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
     }
 }

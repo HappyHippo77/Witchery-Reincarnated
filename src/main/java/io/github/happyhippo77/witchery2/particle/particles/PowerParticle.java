@@ -31,6 +31,7 @@ public class PowerParticle extends SpriteBillboardParticle {
         this.blue = (float) Witchery2.powerParticleDataSetter.getBlue() / 255;
         this.alpha = (float) Witchery2.powerParticleDataSetter.getAlpha() / 255;
         this.circling = Witchery2.powerParticleDataSetter.isCircling();
+        this.maxAge = Witchery2.powerParticleDataSetter.getMaxAge();
 
         this.velocityX = xd;
         this.velocityY = yd;
@@ -44,6 +45,14 @@ public class PowerParticle extends SpriteBillboardParticle {
         this.prevPosX = this.x;
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
+        if(this.age++ < Math.min(this.maxAge, 600) && this.age >= 0) {
+            if((double)this.age < (double)this.maxAge * 0.9D) {
+                this.collidesWithWorld = false;
+            }
+            this.setSpriteForAge(this.spriteProvider);
+        } else {
+            this.markDead();
+        }
         if (this.isAlive() && this.canMove) {
             if(this.circling) {
                 Vec3d motion = new Vec3d(this.velocityX, this.velocityY, this.velocityZ);
@@ -60,11 +69,6 @@ public class PowerParticle extends SpriteBillboardParticle {
                 this.velocityX *= 0.699999988079071D;
                 this.velocityZ *= 0.699999988079071D;
             }
-        }
-        if (this.age++ >= this.maxAge) {
-            this.markDead();
-        } else {
-            this.setSpriteForAge(this.spriteProvider);
         }
     }
 
