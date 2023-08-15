@@ -28,22 +28,23 @@ public class IngredientRegistry {
     private static Range genericIndices;
 
     private static final List<CapacityIngredient> capacityIngredients = Arrays.asList(
-            new CapacityIngredient(ModItems.MANDRAKE_ROOT, 0, 1, 0),
-            new CapacityIngredient(Items.NETHER_WART, 50, 2, 1),
-            // Tear of the goddess, 2, 2
-            // Diamond vapor, 2, 3
-            new CapacityIngredient(Items.DIAMOND, 150, 2, 3)
-            // Nether star, 4, 5
+            new CapacityIngredient(ModItems.MANDRAKE_ROOT, 0, 1, 1),
+            new CapacityIngredient(Items.NETHER_WART, 50, 2, 2),
+            // Tear of the goddess, 100, 2, 4
+            // Diamond vapor, 150, 2, 6
+            new CapacityIngredient(Items.DIAMOND, 150, 2, 8),
+            // Nether star, 150, 4, 10
+            new CapacityIngredient(ModBlocks.PENTACLE.asItem(), 1000, 6, 16)
     );
     private static final List<PowerIngredient> powerIngredients = Arrays.asList(
-            new PowerIngredient(Items.GLOWSTONE_DUST, 50, 0),
-            new PowerIngredient(Items.BLAZE_ROD, 100, 1)
-            // Charged Attuned Stone, 150, 2
+            new PowerIngredient(Items.GLOWSTONE_DUST, 50, 2),
+            new PowerIngredient(Items.BLAZE_ROD, 100, 3)
+            // Charged Attuned Stone, 150, 4
     );
     private static final List<DurationIngredient> durationIngredients = Arrays.asList(
-            new DurationIngredient(Items.REDSTONE, 50, 0),
-            new DurationIngredient(Items.OBSIDIAN, 100, 1)
-            // Mandrake Bulb, 150, 2
+            new DurationIngredient(Items.REDSTONE, 50, 2),
+            new DurationIngredient(Items.OBSIDIAN, 100, 3)
+            // Minedrake Bulb, 150, 4
     );
     private static final List<EffectModifierIngredient> effectModifierIngredients = Arrays.asList(
             new EffectModifierIngredient(Items.GOLD_NUGGET, 50, Modifiers.NO_PARTICLES),
@@ -73,14 +74,14 @@ public class IngredientRegistry {
             new BrewModifierIngredient(Items.PINK_WOOL, 0, Modifiers.PINK)
     );
     private static final List<ExtentIngredient> extentIngredients = Arrays.asList(
-            new ExtentIngredient(ModItems.WOOD_ASH, 50, 0),
-            new ExtentIngredient(Items.COCOA_BEANS, 100, 1)
-            // Wispy Cotton, 150, 2
+            new ExtentIngredient(ModItems.WOOD_ASH, 50, 2),
+            new ExtentIngredient(Items.COCOA_BEANS, 100, 3)
+            // Wispy Cotton, 150, 4
     );
     private static final List<LingerIngredient> lingerIngredients = Arrays.asList(
-            new LingerIngredient(ModItems.BELLADONNA_FLOWER, 50, 0),
-            new LingerIngredient(Items.LAPIS_LAZULI, 100, 1),
-            new LingerIngredient(Items.END_STONE, 100, 1)
+            new LingerIngredient(ModItems.BELLADONNA_FLOWER, 50, 2),
+            new LingerIngredient(Items.LAPIS_LAZULI, 100, 3),
+            new LingerIngredient(Items.END_STONE, 100, 4)
     );
     private static final List<DispersalIngredient> dispersalIngredients = Arrays.asList(
             new DispersalIngredient(Items.GUNPOWDER, 0, DispersalType.INSTANT),

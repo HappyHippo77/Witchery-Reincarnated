@@ -12,6 +12,7 @@ import io.github.happyhippo77.witchery2.particle.particles.PowerParticle;
 import io.github.happyhippo77.witchery2.render.blockentity.renderers.WitchsCauldronEntityRenderer;
 import io.github.happyhippo77.witchery2.render.entity.models.MandrakeModel;
 import io.github.happyhippo77.witchery2.render.entity.renderers.MandrakeRenderer;
+import io.github.happyhippo77.witchery2.screen.AltarScreen;
 import io.github.happyhippo77.witchery2.screen.ModScreenHandlers;
 import io.github.happyhippo77.witchery2.screen.WitchsOvenScreen;
 import net.fabricmc.api.ClientModInitializer;
@@ -46,6 +47,8 @@ public class Client implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BREW_ENTITY, FlyingItemEntityRenderer::new);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FILTERED_FUME_FUNNEL, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CHALICE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FILLED_CHALICE, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MANDRAKE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WATER_ARTICHOKE, RenderLayer.getCutout());
@@ -108,6 +111,7 @@ public class Client implements ClientModInitializer {
 
 
         HandledScreens.register(ModScreenHandlers.WITCHS_OVEN_SCREEN_HANDLER, WitchsOvenScreen::new);
+        HandledScreens.register(ModScreenHandlers.ALTAR_SCREEN_HANDLER, AltarScreen::new);
 
 
         ClientPackets.initialize();

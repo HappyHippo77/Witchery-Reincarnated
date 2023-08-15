@@ -42,6 +42,11 @@ public class ModItems {
     public static final Item QUICKLIME = new Item(new FabricItemSettings());
     public static final Earmuffs EARMUFFS = new Earmuffs(new FabricItemSettings());
 
+    public static final Item KOBOLDITE_DUST = new Item(new FabricItemSettings());
+    public static final Item KOBOLDITE_NUGGET = new Item(new FabricItemSettings());
+    public static final Item KOBOLDITE_INGOT = new Item(new FabricItemSettings());
+    public static final RedstoneSoup REDSTONE_SOUP = new RedstoneSoup(new FabricItemSettings());
+
     public static final Brew BREW = new Brew(new FabricItemSettings().maxCount(8));
     public static final ProjectileBrew PROJECTILE_BREW = new ProjectileBrew(new FabricItemSettings().maxCount(8));
 
@@ -86,6 +91,11 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "wood_ash"), WOOD_ASH);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "quicklime"), QUICKLIME);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "earmuffs"), EARMUFFS);
+
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "koboldite_dust"), KOBOLDITE_DUST);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "koboldite_nugget"), KOBOLDITE_NUGGET);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "koboldite_ingot"), KOBOLDITE_INGOT);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "redstone_soup"), REDSTONE_SOUP);
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "brew"), BREW);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "projectile_brew"), PROJECTILE_BREW);

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "-": {
+      "item": "minecraft:iron_ingot"
+    },
+    "o": {
+      "item": "witchery2:attuned_stone"
+    },
+    "|": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    "|||",
+    "-o-",
+    " - "
+  ],
+  "result": {
+    "item": "witchery2:candelabra"
+  },
+  "show_notification": true
+}

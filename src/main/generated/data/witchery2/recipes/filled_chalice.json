@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "o": {
+      "item": "witchery2:redstone_soup"
+    },
+    "u": {
+      "item": "witchery2:chalice"
+    }
+  },
+  "pattern": [
+    "o",
+    "u"
+  ],
+  "result": {
+    "item": "witchery2:filled_chalice"
+  },
+  "show_notification": true
+}

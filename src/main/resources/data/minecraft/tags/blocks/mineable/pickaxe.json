@@ -4,6 +4,11 @@
     "witchery2:witchs_cauldron",
     "witchery2:witchs_oven",
     "witchery2:fume_funnel",
-    "witchery2:filtered_fume_funnel"
+    "witchery2:filtered_fume_funnel",
+    "witchery2:altar",
+    "witchery2:candelabra",
+    "witchery2:chalice",
+    "witchery2:filled_chalice"
+
   ]
 }

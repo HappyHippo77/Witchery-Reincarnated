@@ -1,0 +1,1 @@
+Capacity ingredients work by having a maximum capacity level that the cauldron can be at for the ingredient to still be applied. Search original code for capacity ingredients in file WitcheryBrewRegistry.java

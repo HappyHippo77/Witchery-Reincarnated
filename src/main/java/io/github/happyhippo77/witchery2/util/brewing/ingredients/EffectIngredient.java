@@ -30,19 +30,12 @@ public class EffectIngredient extends AbstractIngredient {
     }
 
     public boolean brewHasCapacity(ArrayList<Item> ingredients) {
-        // This variable stores the capacity ingredient most towards the end of the correct order found so far.
-        CapacityIngredient latestCapacityIngredient = null;
         int capacity = 0;
 
         for (Item item : ingredients) {
             if (IngredientRegistry.isIngredientType(item, IngredientUse.CAPACITY)) {
                 CapacityIngredient capacityIngredient = (CapacityIngredient) IngredientRegistry.fromItem(item);
-                if (latestCapacityIngredient == null) {
-                    latestCapacityIngredient = capacityIngredient;
-                    capacity += capacityIngredient.getSlots();
-                }
-                else if (capacityIngredient.getOrder() > latestCapacityIngredient.getOrder()) {
-                    latestCapacityIngredient = capacityIngredient;
+                if (capacity < capacityIngredient.getCieling()) {
                     capacity += capacityIngredient.getSlots();
                 }
             }

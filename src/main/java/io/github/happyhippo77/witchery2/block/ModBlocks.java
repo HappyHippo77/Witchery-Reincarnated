@@ -30,6 +30,11 @@ public class ModBlocks {
     public static final WitchsOven WITCHS_OVEN = new WitchsOven(FabricBlockSettings.of(Material.METAL).strength(3.5f, 2.0f).requiresTool().nonOpaque());
     public static final FumeFunnel FUME_FUNNEL = new FumeFunnel(false, FabricBlockSettings.of(Material.METAL).strength(3.5f, 2.0f).requiresTool().nonOpaque());
     public static final FumeFunnel FILTERED_FUME_FUNNEL = new FumeFunnel(true, FabricBlockSettings.of(Material.METAL).strength(3.5f, 2.0f).requiresTool().nonOpaque());
+    public static final Altar ALTAR = new Altar(FabricBlockSettings.of(Material.STONE).hardness(2.0f).requiresTool());
+    public static final Candelabra CANDELABRA = new Candelabra(FabricBlockSettings.of(Material.METAL).luminance(15).hardness(2.0f).nonOpaque().requiresTool());
+    public static final Chalice CHALICE = new Chalice(FabricBlockSettings.of(Material.METAL).hardness(3.0f).nonOpaque().requiresTool(), false);
+    public static final Chalice FILLED_CHALICE = new Chalice(FabricBlockSettings.of(Material.METAL).hardness(3.0f).nonOpaque().requiresTool(), true);
+    public static final Pentacle PENTACLE = new Pentacle(FabricBlockSettings.of(Material.METAL).hardness(0).nonOpaque());
 
     public static final MandrakeCrop MANDRAKE = new MandrakeCrop(FabricBlockSettings.copyOf(Blocks.WHEAT));
     public static final WaterArtichokeCrop WATER_ARTICHOKE = new WaterArtichokeCrop(FabricBlockSettings.copyOf(Blocks.WHEAT));
@@ -115,6 +120,11 @@ public class ModBlocks {
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "witchs_oven"), WITCHS_OVEN);
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "fume_funnel"), FUME_FUNNEL);
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "filtered_fume_funnel"), FILTERED_FUME_FUNNEL);
+        Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "altar"), ALTAR);
+        Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "candelabra"), CANDELABRA);
+        Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "chalice"), CHALICE);
+        Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "filled_chalice"), FILLED_CHALICE);
+        Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "pentacle"), PENTACLE);
 
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "mandrake"), MANDRAKE);
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "water_artichoke"), WATER_ARTICHOKE);

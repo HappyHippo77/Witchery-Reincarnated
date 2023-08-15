@@ -17,16 +17,12 @@ import io.github.happyhippo77.witchery2.world.trees.ModPlacers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.WoodType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -111,6 +107,11 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModBlocks.WITCHS_OVEN));
 			content.add(new ItemStack(ModBlocks.FUME_FUNNEL));
 			content.add(new ItemStack(ModBlocks.FILTERED_FUME_FUNNEL));
+			content.add(new ItemStack(ModBlocks.ALTAR));
+			content.add(new ItemStack(ModBlocks.CANDELABRA));
+			content.add(new ItemStack(ModBlocks.CHALICE));
+			content.add(new ItemStack(ModBlocks.FILLED_CHALICE));
+			content.add(new ItemStack(ModBlocks.PENTACLE));
 
 			content.add(new ItemStack(ModBlocks.OAK_STOCKADE));
 			content.add(new ItemStack(ModBlocks.SPRUCE_STOCKADE));
@@ -138,7 +139,6 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModItems.ROWAN_BERRIES));
 
 			content.add(new ItemStack(ModItems.ANOINTING_PASTE));
-			content.add(new ItemStack(ModItems.FUME_FILTER));
 			content.add(new ItemStack(ModItems.MUTANDIS));
 			content.add(new ItemStack(ModItems.WOOD_ASH));
 			content.add(new ItemStack(ModItems.QUICKLIME));
@@ -152,6 +152,11 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModItems.ODOUR_OF_PURITY));
 			content.add(new ItemStack(ModItems.REEK_OF_MISFORTUNE));
 
+			content.add(new ItemStack(ModItems.KOBOLDITE_DUST));
+			content.add(new ItemStack(ModItems.KOBOLDITE_NUGGET));
+			content.add(new ItemStack(ModItems.KOBOLDITE_INGOT));
+			content.add(new ItemStack(ModItems.FUME_FILTER));
+			content.add(new ItemStack(ModItems.REDSTONE_SOUP));
 			content.add(new ItemStack(ModItems.ROWAN_DOOR_KEY));
 			content.add(new ItemStack(ModItems.ATTUNED_STONE));
 

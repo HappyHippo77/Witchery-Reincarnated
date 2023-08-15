@@ -6,6 +6,12 @@
   "block.witchery2.witchs_oven": "Witch's Oven",
   "block.witchery2.fume_funnel": "Fume Funnel",
   "block.witchery2.filtered_fume_funnel": "Filtered Fume Funnel",
+  "block.witchery2.altar": "Altar",
+  "block.witchery2.candelabra": "Candelabra",
+  "block.witchery2.chalice": "Chalice",
+  "block.witchery2.filled_chalice": "Filled Chalice",
+  "block.witchery2.pentacle": "Pentacle",
+
   "block.witchery2.mandrake": "Mandrake",
   "block.witchery2.water_artichoke": "Water Artichoke",
   "block.witchery2.belladonna": "Belladonna",
@@ -117,6 +123,11 @@
   "item.witchery2.wood_ash": "Wood Ash",
   "item.witchery2.quicklime": "Quicklime",
   "item.witchery2.earmuffs": "Earmuffs",
+
+  "item.witchery2.koboldite_dust": "Koboldite Dust",
+  "item.witchery2.koboldite_nugget": "Koboldite Nugget",
+  "item.witchery2.koboldite_ingot": "Koboldite Ingot",
+  "item.witchery2.redstone_soup": "Redstone Soup",
 
   "item.witchery2.brew": "Brew",
   "item.witchery2.projectile_brew": "Projectile Brew",

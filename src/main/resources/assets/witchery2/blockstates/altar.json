@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "joined=false": {"model": "witchery2:block/altar"},
+    "joined=true": {"model": "witchery2:block/altar_joined"}
+  }
+}

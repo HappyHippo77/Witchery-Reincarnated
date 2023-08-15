@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "'": {
+      "item": "witchery2:koboldite_nugget"
+    },
+    "-": {
+      "item": "witchery2:koboldite_ingot"
+    },
+    "o": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "'-'",
+    "-o-",
+    "'-'"
+  ],
+  "result": {
+    "item": "witchery2:pentacle"
+  },
+  "show_notification": true
+}

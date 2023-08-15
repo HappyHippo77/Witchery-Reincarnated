@@ -25,7 +25,6 @@ import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -144,17 +143,13 @@ public class WitchsCauldronEntity extends BlockEntity {
         }
         ingredientsForEffects.add(this.ingredients.subList(firstIndex, this.ingredients.size()));
 
-        ExtentIngredient latestExtentIngredient = null;
         int extent = 1;
-        LingerIngredient latestLingerIngredient = null;
         int linger = 1;
         List<BrewModifier> brewModifiers = new ArrayList<>();
         DispersalType dispersalType = DispersalType.BASIC;
         List<Effect> effects = new ArrayList<>();
 
-        PowerIngredient latestPowerIngredient = null;
         int powerForEffect = 1;
-        DurationIngredient latestDurationIngredient = null;
         int durationMultiplierForEffect = 1;
         List<EffectModifier> effectModifiers = new ArrayList<>();
 
@@ -162,31 +157,19 @@ public class WitchsCauldronEntity extends BlockEntity {
             for (Item ingredient : ingredients) {
                 if (IngredientRegistry.isIngredientType(ingredient, IngredientUse.POWER)) {
                     PowerIngredient powerIngredient = (PowerIngredient) IngredientRegistry.fromItem(ingredient);
-                    if (latestPowerIngredient == null) {
-                        latestPowerIngredient = powerIngredient;
-                        powerForEffect += 1;
-                    } else if (powerIngredient.getOrder() > latestPowerIngredient.getOrder()) {
-                        latestPowerIngredient = powerIngredient;
+                    if (powerForEffect < powerIngredient.getCeiling()) {
                         powerForEffect += 1;
                     }
                 }
                 else if (IngredientRegistry.isIngredientType(ingredient, IngredientUse.EXTENT)) {
                     ExtentIngredient extentIngredient = (ExtentIngredient) IngredientRegistry.fromItem(ingredient);
-                    if (latestExtentIngredient == null) {
-                        latestExtentIngredient = extentIngredient;
-                        extent += 1;
-                    } else if (extentIngredient.getOrder() > latestExtentIngredient.getOrder()) {
-                        latestExtentIngredient = extentIngredient;
+                    if (extent < extentIngredient.getCeiling()) {
                         extent += 1;
                     }
                 }
                 else if (IngredientRegistry.isIngredientType(ingredient, IngredientUse.LINGER)) {
                     LingerIngredient lingerIngredient = (LingerIngredient) IngredientRegistry.fromItem(ingredient);
-                    if (latestLingerIngredient == null) {
-                        latestLingerIngredient = lingerIngredient;
-                        linger += 1;
-                    } else if (lingerIngredient.getOrder() > latestLingerIngredient.getOrder()) {
-                        latestLingerIngredient = lingerIngredient;
+                    if (linger < lingerIngredient.getCeiling()) {
                         linger += 1;
                     }
                 }
@@ -198,12 +181,8 @@ public class WitchsCauldronEntity extends BlockEntity {
                 }
                 else if (IngredientRegistry.isIngredientType(ingredient, IngredientUse.DURATION)) {
                     DurationIngredient durationIngredient = (DurationIngredient) IngredientRegistry.fromItem(ingredient);
-                    if (latestDurationIngredient == null) {
-                        latestDurationIngredient = durationIngredient;
-                        durationMultiplierForEffect += ingredient.equals(Items.REDSTONE)? 1:2;
-                    } else if (durationIngredient.getOrder() > latestDurationIngredient.getOrder()) {
-                        latestDurationIngredient = durationIngredient;
-                        durationMultiplierForEffect += ingredient.equals(Items.REDSTONE)? 1:2;
+                    if (durationMultiplierForEffect < durationIngredient.getCeiling()) {
+                        durationMultiplierForEffect += 1;
                     }
                 }
                 else if (IngredientRegistry.isIngredientType(ingredient, IngredientUse.EFFECT_MODIFIER)) {
@@ -223,15 +202,6 @@ public class WitchsCauldronEntity extends BlockEntity {
         }
 
         if (this.powered) {
-
-//            System.out.println(this.ingredients);
-//            System.out.println(effects);
-//            System.out.println(extent);
-//            System.out.println(linger);
-//            System.out.println(dispersalType);
-//            System.out.println(brewModifiers);
-//            System.out.println("---------------------");
-
             NbtCompound brewNbt = new NbtCompound();
 
             brewNbt.putString("dispersal", dispersalType.toString());
@@ -282,7 +252,9 @@ public class WitchsCauldronEntity extends BlockEntity {
             brewItem.setCustomName(Text.literal(name.toString()).setStyle(Style.EMPTY.withItalic(false)));
 
             // Allow for multiple brews to be obtained.
-            player.getMainHandStack().decrement(1);
+            if (!player.isCreative()) {
+                player.getMainHandStack().decrement(1);
+            }
             if (player.getMainHandStack().isEmpty()) {
                 player.setStackInHand(Hand.MAIN_HAND, brewItem);
             }

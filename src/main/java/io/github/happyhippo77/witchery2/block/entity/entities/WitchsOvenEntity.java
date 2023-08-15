@@ -46,8 +46,6 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
     private int maxFuelTime = 0;
     private double fumeChance = 0.3;
 
-    private static final Map<Item, Integer> fuels = AbstractFurnaceBlockEntity.createFuelTimeMap();
-
     public WitchsOvenEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WITCHS_OVEN_ENTITY, pos, state);
 

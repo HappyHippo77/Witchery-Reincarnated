@@ -70,11 +70,11 @@
   },
   "requirements": [
     [
-      "has_glowstone",
       "has_lava_bucket",
       "has_bucket",
       "has_iron_bars",
       "has_iron_block",
+      "has_glowstone",
       "has_the_recipe"
     ]
   ],

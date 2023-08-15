@@ -84,6 +84,10 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.FUME_FILTER, Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.CANDELABRA.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.CHALICE.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FILLED_CHALICE.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.PENTACLE.asItem(), Models.GENERATED);
 
         itemModelGenerator.register(ModItems.ANOINTING_PASTE, Models.GENERATED);
 
@@ -106,6 +110,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.WOOD_ASH, Models.GENERATED);
         itemModelGenerator.register(ModItems.QUICKLIME, Models.GENERATED);
         itemModelGenerator.register(ModItems.EARMUFFS, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.KOBOLDITE_DUST, Models.GENERATED);
+        itemModelGenerator.register(ModItems.KOBOLDITE_NUGGET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.KOBOLDITE_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.REDSTONE_SOUP, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.ROWAN_BERRIES, Models.GENERATED);
         itemModelGenerator.register(ModItems.ROWAN_DOOR_KEY, Models.GENERATED);

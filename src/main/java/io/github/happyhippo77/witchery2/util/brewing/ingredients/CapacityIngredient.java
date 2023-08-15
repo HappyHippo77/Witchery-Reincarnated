@@ -5,12 +5,12 @@ import net.minecraft.item.Item;
 public class CapacityIngredient extends AbstractIngredient {
 
     private final int slots;
-    private final int order;
+    private final int cieling;
 
-    public CapacityIngredient(Item item, int requiredPower, int slots, int order) {
+    public CapacityIngredient(Item item, int requiredPower, int slots, int cieling) {
         super(item, requiredPower);
         this.slots = slots;
-        this.order = order;
+        this.cieling = cieling;
     }
     @Override
     public IngredientUse getUse() {
@@ -21,7 +21,7 @@ public class CapacityIngredient extends AbstractIngredient {
         return slots;
     }
 
-    public int getOrder() {
-        return order;
+    public int getCieling() {
+        return cieling;
     }
 }

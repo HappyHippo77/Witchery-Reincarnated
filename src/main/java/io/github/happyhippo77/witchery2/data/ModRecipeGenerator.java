@@ -99,6 +99,66 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                         '-', ModItems.FUME_FILTER
                 )
         );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ALTAR, 3,
+                """
+                       BWE
+                       SRS
+                       SRS
+                       """,
+                Map.of(
+                        'B', ModItems.BREATH_OF_THE_GODDESS,
+                        'W', Items.POTION,
+                        'E', ModItems.EXHALE_OF_THE_HORNED_ONE,
+                        'S', Blocks.STONE_BRICKS,
+                        'R', ModBlocks.ROWAN_LOG
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.CANDELABRA, 1,
+                """
+                       |||
+                       -o-
+                        -\s
+                       """,
+                Map.of(
+                        '|', Items.TORCH,
+                        '-', Items.IRON_INGOT,
+                        'o', ModItems.ATTUNED_STONE
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.CHALICE, 1,
+                """
+                       'o'
+                       '-'
+                        -\s
+                       """,
+                Map.of(
+                        '\'', Items.GOLD_NUGGET,
+                        '-', Items.GOLD_INGOT,
+                        'o', ModItems.ATTUNED_STONE
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.FILLED_CHALICE, 1,
+                """
+                       o
+                       u
+                       """,
+                Map.of(
+                        'o', ModItems.REDSTONE_SOUP,
+                        'u', ModBlocks.CHALICE
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.PENTACLE, 1,
+                """
+                       '-'
+                       -o-
+                       '-'
+                       """,
+                Map.of(
+                        '\'', ModItems.KOBOLDITE_NUGGET,
+                        '-', ModItems.KOBOLDITE_INGOT,
+                        'o', Items.DIAMOND
+                )
+        );
         offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_STAIRS, 4,
                 """
                          #

@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chalice": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "witchery2:chalice"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_redstone_soup": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "witchery2:redstone_soup"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "witchery2:filled_chalice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_redstone_soup",
+      "has_chalice",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "witchery2:filled_chalice"
+    ]
+  }
+}
