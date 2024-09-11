@@ -9,23 +9,10 @@ import io.github.happyhippo77.witchery2.util.brewing.Modifiers;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class IngredientRegistry {
-    private static final List<AbstractIngredient> ingredients = new ArrayList<>();
-
-    private static Range capacityIndices;
-    private static Range powerIndices;
-    private static Range durationIndices;
-    private static Range effectModifierIndices;
-    private static Range brewModifierIndices;
-    private static Range extentIndices;
-    private static Range lingerIndices;
-    private static Range dispersalIndices;
-    private static Range effectIndices;
-    private static Range genericIndices;
+    private static final HashMap<Item, AbstractIngredient> ingredients = new HashMap<>();
 
     private static final List<CapacityIngredient> capacityIngredients = Arrays.asList(
             new CapacityIngredient(ModItems.MANDRAKE_ROOT, 0, 1, 1),
@@ -34,7 +21,7 @@ public class IngredientRegistry {
             // Diamond vapor, 150, 2, 6
             new CapacityIngredient(Items.DIAMOND, 150, 2, 8),
             // Nether star, 150, 4, 10
-            new CapacityIngredient(ModBlocks.PENTACLE.asItem(), 1000, 6, 16)
+            new CapacityIngredient(ModItems.PENTACLE.asItem(), 1000, 6, 16)
     );
     private static final List<PowerIngredient> powerIngredients = Arrays.asList(
             new PowerIngredient(Items.GLOWSTONE_DUST, 50, 2),
@@ -108,100 +95,44 @@ public class IngredientRegistry {
     );
 
     public static void registerIngredients() {
-        int index;
-        index = register(0, capacityIngredients);
-        capacityIndices = new Range(0, index - 1);
-
-        int lastIndex = index;
-        index = register(index, powerIngredients);
-        powerIndices = new Range(lastIndex, index - 1);
-
-        lastIndex = index;
-        index = register(index, durationIngredients);
-        durationIndices = new Range(lastIndex, index - 1);
-
-        lastIndex = index;
-        index = register(index, effectModifierIngredients);
-        effectModifierIndices = new Range(lastIndex, index - 1);
-
-        lastIndex = index;
-        index = register(index, brewModifierIngredients);
-        brewModifierIndices = new Range(lastIndex, index - 1);
-
-        lastIndex = index;
-        index = register(index, extentIngredients);
-        extentIndices = new Range(lastIndex, index - 1);
-
-        lastIndex = index;
-        index = register(index, lingerIngredients);
-        lingerIndices = new Range(lastIndex, index - 1);
-
-        lastIndex = index;
-        index = register(index, dispersalIngredients);
-        dispersalIndices = new Range(lastIndex, index - 1);
-
-        lastIndex = index;
-        index = register(index, effectIngredients);
-        effectIndices = new Range(lastIndex, index - 1);
-
-        lastIndex = index;
-        index = register(index, genericIngredients);
-        genericIndices = new Range(lastIndex, index - 1);
+        register(capacityIngredients);
+        register(powerIngredients);
+        register(durationIngredients);
+        register(effectModifierIngredients);
+        register(brewModifierIngredients);
+        register(extentIngredients);
+        register(lingerIngredients);
+        register(dispersalIngredients);
+        register(effectIngredients);
+        register(genericIngredients);
     }
 
-    private static int register(int firstIndex, List<? extends AbstractIngredient> list) {
-        int index = firstIndex;
+    private static void register(List<? extends AbstractIngredient> list) {
         for (AbstractIngredient ingredient : list) {
-            ingredients.add(index, ingredient);
-            index++;
+            ingredients.put(ingredient.getItem(), ingredient);
         }
-        return index;
     }
 
-    public List<AbstractIngredient> getIngredients() {
+    public HashMap<Item, AbstractIngredient> getIngredients() {
         return ingredients;
     }
 
     public static boolean isIngredient(Item item) {
-        boolean match = false;
-        for (AbstractIngredient ingredient : ingredients) {
-            if (ingredient.getItem().equals(item)) {
-                match = true;
-                break;
-            }
-        }
-        return match;
+        return ingredients.containsKey(item);
     }
     public static boolean isIngredientType(Item item, IngredientUse use) {
-        Range range = new Range(-2, -2);
-        switch (use) {
-            case CAPACITY -> range = capacityIndices;
-            case POWER -> range = powerIndices;
-            case DURATION -> range = durationIndices;
-            case EFFECT_MODIFIER -> range = effectModifierIndices;
-            case BREW_MODIFIER -> range = brewModifierIndices;
-            case EXTENT -> range = extentIndices;
-            case LINGER -> range = lingerIndices;
-            case DISPERSAL -> range = dispersalIndices;
-            case EFFECT -> range = effectIndices;
-            case GENERIC -> range = genericIndices;
+        if (!ingredients.containsKey(item)) {
+            return false;
         }
 
-        int index = -1;
-        for (AbstractIngredient ingredient : ingredients) {
-            if (ingredient.getItem().equals(item)) {
-                index = ingredients.indexOf(ingredient);
-            }
-        }
-        return range.contains(index);
+        return ingredients.get(item).getUse() == use;
     }
 
     public static AbstractIngredient fromItem(Item item) {
-        for (AbstractIngredient ingredient : ingredients) {
-            if (ingredient.getItem().equals(item)) {
-                return ingredient;
-            }
+        if (!ingredients.containsKey(item)) {
+            return null;
         }
-        return null;
+
+        return ingredients.get(item);
     }
 }

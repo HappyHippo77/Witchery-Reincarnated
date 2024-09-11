@@ -1,4 +1,4 @@
-// 1.19.4	2023-08-15T19:36:22.02137448	Witchery2/Model Definitions
+// 1.19.4	2024-09-09T00:25:50.980396388	Witchery2/Model Definitions
 334bf042852a4cf830045f801319d8f7c4066a21 assets/witchery2/blockstates/rowan_sign.json
 f69e5778c9ac3653a406e7c19ab280d96906b4d5 assets/witchery2/blockstates/stripped_rowan_wood.json
 f51a2ac7e120196ba5f54240959a4555d92a0da7 assets/witchery2/models/block/stripped_alder_log_horizontal.json
@@ -49,8 +49,8 @@ ac0dcbed2ec70caf65a606004154ece760aea996 assets/witchery2/models/block/hawthorn_
 6fad3b8922b955ae8f67a5dd444edadd582c258a assets/witchery2/blockstates/hawthorn_leaves.json
 b1f509944ce9c70a61ec947c8ac08210a1e1a09b assets/witchery2/blockstates/alder_button.json
 23605816de43e063b497784cb9bde7413a47db13 assets/witchery2/models/block/alder_stairs_outer.json
-aaf68e5b91a316f4fca07fefa1c31ca9b46fa40f assets/witchery2/blockstates/hawthorn_fence_gate.json
 8575c208069209eb823473dd03ec067fe8617d9d assets/witchery2/blockstates/hawthorn_sapling.json
+aaf68e5b91a316f4fca07fefa1c31ca9b46fa40f assets/witchery2/blockstates/hawthorn_fence_gate.json
 255acace28b0325748bcdea772ddc6df7481a184 assets/witchery2/models/item/stripped_rowan_wood.json
 1a3ca00a59fb5ffd999de10d63c6056b2bdfcdcf assets/witchery2/models/item/hawthorn_door.json
 5dfd8e2fbd8ef75c21fecf5953caa0ccfc82a4b9 assets/witchery2/models/block/hawthorn_planks.json
@@ -199,6 +199,7 @@ c6af6e45f35863d86b6070cd3e52191384813baf assets/witchery2/models/item/rowan_sign
 d0674bcb3df53568425fc8e9f8edfc06f62c5edf assets/witchery2/blockstates/rowan_fence_gate.json
 cf6b69e21344f8a85f536794ed0708ff00864952 assets/witchery2/models/item/hawthorn_button.json
 4b08b565b0b16df6582168c7d55d1d9552d785e5 assets/witchery2/blockstates/hawthorn_log.json
+ea655bb255b239f9fe9a7493d67f280210d3ae84 assets/witchery2/models/item/arthana.json
 9cf060948fae7f4843256a03e5fc28a638fcd756 assets/witchery2/blockstates/snowbell.json
 a949d412c39b489044441de2c74381c1dcbd5643 assets/witchery2/models/item/quicklime.json
 58aed6c3237109144c47d2a780ab70e21065724f assets/witchery2/blockstates/belladonna.json

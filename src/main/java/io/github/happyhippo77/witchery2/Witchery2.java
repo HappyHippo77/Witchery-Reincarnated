@@ -108,10 +108,12 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModBlocks.FUME_FUNNEL));
 			content.add(new ItemStack(ModBlocks.FILTERED_FUME_FUNNEL));
 			content.add(new ItemStack(ModBlocks.ALTAR));
+			content.add(new ItemStack(ModBlocks.INFINITY_EGG));
 			content.add(new ItemStack(ModBlocks.CANDELABRA));
 			content.add(new ItemStack(ModBlocks.CHALICE));
 			content.add(new ItemStack(ModBlocks.FILLED_CHALICE));
-			content.add(new ItemStack(ModBlocks.PENTACLE));
+			content.add(new ItemStack(ModItems.PENTACLE));
+			content.add(new ItemStack(ModItems.ARTHANA));
 
 			content.add(new ItemStack(ModBlocks.OAK_STOCKADE));
 			content.add(new ItemStack(ModBlocks.SPRUCE_STOCKADE));

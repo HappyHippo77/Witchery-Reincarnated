@@ -26,6 +26,8 @@ public class ModBlocks {
     public static final WoodType HAWTHORN_WOOD_TYPE = WoodTypeRegistry.register(new Identifier(Witchery2.MOD_ID, "hawthorn"), HAWTHORN_BLOCK_SET);
 
 
+    public static final PlacedItem PLACED_ITEM = new PlacedItem(FabricBlockSettings.of(Material.METAL).hardness(0).nonOpaque());
+
     public static final WitchsCauldron WITCHS_CAULDRON = new WitchsCauldron(FabricBlockSettings.of(Material.METAL).strength(2.0f, 2.0f).requiresTool().nonOpaque());
     public static final WitchsOven WITCHS_OVEN = new WitchsOven(FabricBlockSettings.of(Material.METAL).strength(3.5f, 2.0f).requiresTool().nonOpaque());
     public static final FumeFunnel FUME_FUNNEL = new FumeFunnel(false, FabricBlockSettings.of(Material.METAL).strength(3.5f, 2.0f).requiresTool().nonOpaque());
@@ -34,7 +36,7 @@ public class ModBlocks {
     public static final Candelabra CANDELABRA = new Candelabra(FabricBlockSettings.of(Material.METAL).luminance(15).hardness(2.0f).nonOpaque().requiresTool());
     public static final Chalice CHALICE = new Chalice(FabricBlockSettings.of(Material.METAL).hardness(3.0f).nonOpaque().requiresTool(), false);
     public static final Chalice FILLED_CHALICE = new Chalice(FabricBlockSettings.of(Material.METAL).hardness(3.0f).nonOpaque().requiresTool(), true);
-    public static final Pentacle PENTACLE = new Pentacle(FabricBlockSettings.of(Material.METAL).hardness(0).nonOpaque());
+    public static final InfinityEgg INFINITY_EGG = new InfinityEgg(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG));
 
     public static final MandrakeCrop MANDRAKE = new MandrakeCrop(FabricBlockSettings.copyOf(Blocks.WHEAT));
     public static final WaterArtichokeCrop WATER_ARTICHOKE = new WaterArtichokeCrop(FabricBlockSettings.copyOf(Blocks.WHEAT));
@@ -116,6 +118,8 @@ public class ModBlocks {
     public static final Stockade HAWTHORN_STOCKADE = new Stockade();
 
     public static void registerAllBlocks() {
+        Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "placed_item"), PLACED_ITEM);
+
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "witchs_cauldron"), WITCHS_CAULDRON);
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "witchs_oven"), WITCHS_OVEN);
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "fume_funnel"), FUME_FUNNEL);
@@ -124,7 +128,7 @@ public class ModBlocks {
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "candelabra"), CANDELABRA);
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "chalice"), CHALICE);
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "filled_chalice"), FILLED_CHALICE);
-        Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "pentacle"), PENTACLE);
+        Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "infinity_egg"), INFINITY_EGG);
 
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "mandrake"), MANDRAKE);
         Registry.register(Registries.BLOCK, new Identifier(Witchery2.MOD_ID, "water_artichoke"), WATER_ARTICHOKE);

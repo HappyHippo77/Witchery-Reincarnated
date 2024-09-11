@@ -2,26 +2,22 @@ package io.github.happyhippo77.witchery2.block.entity.entities;
 
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
+import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.screen.AltarScreenHandler;
-import io.github.happyhippo77.witchery2.util.PowerSource;
 import io.github.happyhippo77.witchery2.util.PowerSources;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtIntArray;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -33,8 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactory {
-    public BlockPos sourcePos = this.pos;
-    public AltarEntity sourceEntity = null;
+    private BlockPos sourcePos = this.pos;
+    private AltarEntity sourceEntity = null;
     private final PropertyDelegate propertyDelegate;
     public static final int delegateSize = 4;
     private int power = 0;
@@ -42,7 +38,8 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
     private int powerScale = 1;
     private int rechargeRate = 1;
     private int rangeScale = 1;
-    public Map<BlockPos, Block> artifacts = new HashMap<>();
+    public List<BlockPos> joinedAltars = new ArrayList<>();
+    private boolean artifactUpdates = false;
 
     public AltarEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ALTAR_ENTITY, pos, state);
@@ -73,9 +70,47 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
         };
     }
 
+    public AltarEntity getSourceEntity() {
+        return sourceEntity;
+    }
+
+    public void setSourceEntity(AltarEntity sourceEntity) {
+        this.sourceEntity = sourceEntity;
+        this.sourcePos = sourceEntity.getPos();
+        this.sourceEntity.joinedAltars.add(this.getPos());
+        markDirty();
+        sourceEntity.markDirty();
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
+        world.updateListeners(sourceEntity.getPos(), sourceEntity.getCachedState(), sourceEntity.getCachedState(), Block.NOTIFY_LISTENERS);
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public void decrementPower(int amount) {
+        if (this.power > amount) {
+            this.power -= amount;
+        }
+    }
+
+    public int getRangeScale() {
+        return rangeScale;
+    }
+
+    public void markForArtifactUpdates() {
+        artifactUpdates = true;
+    }
+
     public void updateArtifacts() {
+        Map<BlockPos, Block> artifacts = new HashMap<>();
+        for (BlockPos pos : this.joinedAltars) {
+            artifacts.put(pos.up(), world.getBlockState(pos.up()).getBlock());
+        }
+
         int tempRechargeRate = 1;
         int tempPowerScale = 1;
+        int tempRangeScale = 1;
         boolean headFound = false;
         boolean candleFound = false;
         boolean pentacleFound = false;
@@ -110,13 +145,12 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
                 candleFound = true;
             }
         }
-        for (Block block : artifacts.values()) {
-            if (!pentacleFound && block == ModBlocks.PENTACLE) {
-                System.out.println(tempRechargeRate);
-                tempRechargeRate *= 2;
-                System.out.println(tempRechargeRate);
-                System.out.println("---");
-                pentacleFound = true;
+        for (Map.Entry<BlockPos, Block> entry : artifacts.entrySet()) {
+            if (!pentacleFound && entry.getValue() == ModBlocks.PLACED_ITEM) {
+                if (((PlacedItemEntity)world.getBlockEntity(entry.getKey())).getItemStack().getItem() == ModItems.PENTACLE) {
+                    tempRechargeRate *= 2;
+                    pentacleFound = true;
+                }
             }
         }
         for (Block block : artifacts.values()) {
@@ -130,11 +164,31 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
             }
         }
 
-            // arthana
+        for (Map.Entry<BlockPos, Block> entry : artifacts.entrySet()) {
+            if (!arthanaFound && entry.getValue() == ModBlocks.PLACED_ITEM) {
+                if (((PlacedItemEntity)world.getBlockEntity(entry.getKey())).getItemStack().getItem() == ModItems.ARTHANA) {
+                    tempRangeScale = 2;
+                    arthanaFound = true;
+                }
+            }
+        }
 
-            // infinity egg
+        for (Block block : artifacts.values()) {
+            if (!eggFound && block == ModBlocks.INFINITY_EGG) {
+                tempRechargeRate *= 10;
+                tempPowerScale *= 10;
+                eggFound = true;
+            }
+        }
+
         sourceEntity.rechargeRate = tempRechargeRate;
         sourceEntity.powerScale = tempPowerScale;
+        sourceEntity.rangeScale = tempRangeScale;
+
+        sourceEntity.markDirty();
+        world.updateListeners(sourceEntity.getPos(), sourceEntity.getCachedState(), sourceEntity.getCachedState(), Block.NOTIFY_LISTENERS);
+
+        sourceEntity.artifactUpdates = false;
     }
 
     public void updateSources(World world, BlockPos pos) {
@@ -151,10 +205,12 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
 
         this.maxPower = powerSources.getPower();
         this.markDirty();
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
     }
 
     private int ticks = 0;
     public static void tick(World world, BlockPos pos, BlockState state, AltarEntity entity) {
+        // We need this to load from nbt, since we can't get the block entity before the world is loaded.
         if (entity.sourceEntity == null && entity.sourcePos != null) {
             entity.sourceEntity = (AltarEntity) world.getBlockEntity(entity.sourcePos);
             if (entity.sourceEntity == null) {
@@ -164,21 +220,20 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
 
         float maxPowerScaled = entity.maxPower * (float)entity.powerScale;
         if (entity.sourceEntity == entity) {
-            if(entity.power < maxPowerScaled) {
-                if(entity.ticks >= 20) {
-                    entity.ticks = 0;
+            if (entity.ticks >= 20) {
+                if (entity.artifactUpdates) {
+                    entity.updateArtifacts();
+                }
+                if (entity.power < maxPowerScaled) {
                     entity.power = (int) Math.min(entity.power + 10.0F * (float)entity.rechargeRate, maxPowerScaled);
-                    world.markDirty(pos);
+                    entity.markDirty();
                 }
-                else {
-                    entity.ticks++;
+                else if (entity.power > maxPowerScaled) {
+                    entity.power = (int) maxPowerScaled;
+                    entity.markDirty();
                 }
-            } else if(entity.power > maxPowerScaled && entity.ticks >= 20) {
                 entity.ticks = 0;
-                entity.power = (int) maxPowerScaled;
-                world.markDirty(pos);
-            }
-            else {
+            } else {
                 entity.ticks++;
             }
         }
@@ -198,23 +253,36 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putIntArray("sourcePos", Arrays.asList(sourcePos.getX(), sourcePos.getY(), sourcePos.getZ()));
+        BlockPos pos = Objects.requireNonNullElse(sourceEntity, this).getPos();
+        nbt.putIntArray("sourcePos", Arrays.asList(pos.getX(), pos.getY(), pos.getZ()));
         nbt.putInt("power", power);
         nbt.putInt("maxPower", maxPower);
         nbt.putInt("powerScale", powerScale);
         nbt.putInt("rechargeRate", rechargeRate);
         nbt.putInt("rangeScale", rangeScale);
+        NbtList joinedAltarNbt = new NbtList();
+        for (BlockPos p : joinedAltars) {
+            joinedAltarNbt.add(new NbtIntArray(Arrays.asList(p.getX(), p.getY(), p.getZ())));
+        }
+        nbt.put("joinedAltars", joinedAltarNbt);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
+
+        // We do this instead of setting the source entity because we cannot get the world before it is loaded.
         sourcePos = new BlockPos(nbt.getIntArray("sourcePos")[0], nbt.getIntArray("sourcePos")[1], nbt.getIntArray("sourcePos")[2]);
         power = nbt.getInt("power");
         maxPower = nbt.getInt("maxPower");
         powerScale = nbt.getInt("powerScale");
         rechargeRate = nbt.getInt("rechargeRate");
         rangeScale = nbt.getInt("rangeScale");
+        joinedAltars = new ArrayList<>();
+        for (NbtElement element : nbt.getList("joinedAltars", 11)) {
+            NbtIntArray intArray = (NbtIntArray) element;
+            joinedAltars.add(new BlockPos(intArray.get(0).intValue(), intArray.get(1).intValue(), intArray.get(2).intValue()));
+        }
     }
 
     @Nullable

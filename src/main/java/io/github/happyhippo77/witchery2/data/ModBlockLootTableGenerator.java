@@ -40,7 +40,7 @@ public class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.CANDELABRA, basicDrop(ModBlocks.CANDELABRA));
         addDrop(ModBlocks.CHALICE, basicDrop(ModBlocks.CHALICE));
         addDrop(ModBlocks.FILLED_CHALICE, basicDrop(ModBlocks.FILLED_CHALICE));
-        addDrop(ModBlocks.PENTACLE, basicDrop(ModBlocks.PENTACLE));
+        addDrop(ModBlocks.INFINITY_EGG, basicDrop(ModBlocks.INFINITY_EGG));
 
         addTreeDrops();
 

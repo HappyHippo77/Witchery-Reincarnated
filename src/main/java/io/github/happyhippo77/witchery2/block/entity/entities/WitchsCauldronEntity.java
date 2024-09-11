@@ -2,6 +2,7 @@ package io.github.happyhippo77.witchery2.block.entity.entities;
 
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
+import io.github.happyhippo77.witchery2.util.PoweredBlock;
 import io.github.happyhippo77.witchery2.util.brewing.*;
 import io.github.happyhippo77.witchery2.util.brewing.crafting.CauldronRecipeRegistry;
 import io.github.happyhippo77.witchery2.util.brewing.crafting.RecipeCheck;
@@ -42,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WitchsCauldronEntity extends BlockEntity {
+public class WitchsCauldronEntity extends BlockEntity implements PoweredBlock {
     // Store the current value of the level
     private CauldronLevel level;
 //    private int colorR = 52;
@@ -150,7 +151,7 @@ public class WitchsCauldronEntity extends BlockEntity {
         List<Effect> effects = new ArrayList<>();
 
         int powerForEffect = 1;
-        int durationMultiplierForEffect = 1;
+        int durationMultiplierForEffect = 0;
         List<EffectModifier> effectModifiers = new ArrayList<>();
 
         for (List<Item> ingredients : ingredientsForEffects){
@@ -182,7 +183,7 @@ public class WitchsCauldronEntity extends BlockEntity {
                 else if (IngredientRegistry.isIngredientType(ingredient, IngredientUse.DURATION)) {
                     DurationIngredient durationIngredient = (DurationIngredient) IngredientRegistry.fromItem(ingredient);
                     if (durationMultiplierForEffect < durationIngredient.getCeiling()) {
-                        durationMultiplierForEffect += 1;
+                        durationMultiplierForEffect += 2;
                     }
                 }
                 else if (IngredientRegistry.isIngredientType(ingredient, IngredientUse.EFFECT_MODIFIER)) {
@@ -191,7 +192,10 @@ public class WitchsCauldronEntity extends BlockEntity {
                 else if (IngredientRegistry.isIngredientType(ingredient, IngredientUse.EFFECT)) {
                     Effect effect = ((EffectIngredient)IngredientRegistry.fromItem(ingredient)).getEffect().copy();
                     effect.setPower(powerForEffect);
-                    effect.setDuration(3600 * durationMultiplierForEffect);
+                    if (durationMultiplierForEffect == 0) {
+                        durationMultiplierForEffect = 1;
+                    }
+                    effect.setDuration(effect.getDuration() * durationMultiplierForEffect);
                     effect.applyModifiers(effectModifiers);
                     effects.add(effect);
                     powerForEffect = 1;
@@ -321,6 +325,7 @@ public class WitchsCauldronEntity extends BlockEntity {
     public ArrayList<Item> getIngredients() {
         return ingredients;
     }
+
     public void addIngredient(Item ingredient) {
         ingredients.add(ingredient);
         markDirty();
@@ -344,6 +349,8 @@ public class WitchsCauldronEntity extends BlockEntity {
 
     public static Random r = new Random();
     public static void tick(World world, BlockPos pos, BlockState state, WitchsCauldronEntity entity) {
+        //System.out.println(entity.getPower(entity.searchForAltars(world, pos)));
+
         if (entity.level.isEmpty() || entity.ingredients.isEmpty()) {
             entity.color = entity.defaultColor;
         }

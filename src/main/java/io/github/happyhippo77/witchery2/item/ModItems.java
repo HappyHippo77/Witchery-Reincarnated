@@ -2,10 +2,10 @@ package io.github.happyhippo77.witchery2.item;
 
 import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
+import io.github.happyhippo77.witchery2.block.blocks.PlacedItem;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.item.items.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.SignBlock;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -13,6 +13,9 @@ import net.minecraft.util.Identifier;
 
 public class ModItems {
     public static final Item FUME_FILTER = new Item(new FabricItemSettings());
+
+    public static final Arthana ARTHANA = new Arthana(ToolMaterials.GOLD, 3, -2.4f, new FabricItemSettings().maxDamage(ToolMaterials.IRON.getDurability()));
+    public static final Pentacle PENTACLE = new Pentacle(new FabricItemSettings());
 
     public static final AnointingPaste ANOINTING_PASTE = new AnointingPaste(new FabricItemSettings());
     public static final AliasedBlockItem BELLADONNA_SEEDS = new AliasedBlockItem(ModBlocks.BELLADONNA, new FabricItemSettings());
@@ -62,6 +65,9 @@ public class ModItems {
 
     public static void registerAllItems() {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "fume_filter"), FUME_FILTER);
+
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "arthana"), ARTHANA);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "pentacle"), PENTACLE);
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "anointing_paste"), ANOINTING_PASTE);
 

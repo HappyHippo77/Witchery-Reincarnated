@@ -1,12 +1,36 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rowan_planks": {
+    "has_emerald": {
       "conditions": {
         "items": [
           {
             "items": [
-              "witchery2:rowan_planks"
+              "minecraft:emerald"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gold_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:gold_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gold_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:gold_nugget"
             ]
           }
         ]
@@ -27,21 +51,23 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "witchery2:rowan_fence_gate"
+        "recipe": "witchery2:arthana"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_rowan_planks",
+      "has_gold_nugget",
+      "has_gold_ingot",
       "has_stick",
+      "has_emerald",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "witchery2:rowan_fence_gate"
+      "witchery2:arthana"
     ]
   }
 }

@@ -1,4 +1,4 @@
-// 1.19.4	2023-08-15T19:36:22.016434177	Witchery2/Block Loot Tables
+// 1.19.4	2024-09-09T00:25:50.975326772	Witchery2/Block Loot Tables
 80f05f8e83e68f73c94ca271ad9825bc537474bc data/witchery2/loot_tables/blocks/wolfsbane.json
 da4125cdc60ea9e29f4e69ac1ca499ff9353ab66 data/witchery2/loot_tables/blocks/hawthorn_leaves.json
 92f4e56b9cc07129eaca30defc23da8cd32d3325 data/witchery2/loot_tables/blocks/hawthorn_planks.json
@@ -34,7 +34,6 @@ d1be65213eb5d848414164e4aba2a34c96908416 data/witchery2/loot_tables/blocks/ice_s
 0d995d58d6764b2af3d1afdb3e34259690cca72b data/witchery2/loot_tables/blocks/stripped_alder_log.json
 6eca24a84ca11be892c73b79d74a5de8787b6952 data/witchery2/loot_tables/blocks/potted_alder_sapling.json
 ecde53485d0eb2e4a756fc1639e70d4e77551b52 data/witchery2/loot_tables/blocks/witchs_oven.json
-7e597e106401b5ff4a0055d048279838b92cefda data/witchery2/loot_tables/blocks/pentacle.json
 d8eb913fa503442332badd270bb591d356f42f0a data/witchery2/loot_tables/blocks/ember_moss.json
 277e6e21ba0e8d846715cee9700dbe1bc33c2ddb data/witchery2/loot_tables/blocks/alder_fence.json
 b601e7e7d630a07e98eaf7fdfc0a237122a5de67 data/witchery2/loot_tables/blocks/spruce_stockade.json
@@ -53,6 +52,7 @@ ee4eec6e341ac03805407aa9995fa549a55e1290 data/witchery2/loot_tables/blocks/glint
 00510233e30046647f238b5046cb21c704ae736e data/witchery2/loot_tables/blocks/mangrove_stockade.json
 97b9432fdafdc24aefb2a954b9138c65c2b13f32 data/witchery2/loot_tables/blocks/alder_stairs.json
 27a6557001c30b2cb328e8f737d75546bb04eadf data/witchery2/loot_tables/blocks/alder_sapling.json
+45fb52054b27f214cedb81b2965ffbecddd4c67e data/witchery2/loot_tables/blocks/infinity_egg.json
 a517cc81704cd5cafed5dfa4c87be94a76010325 data/witchery2/loot_tables/blocks/dark_oak_stockade.json
 5de50806ce31fe9660035e680100273936f8c0d1 data/witchery2/loot_tables/blocks/candelabra.json
 c90ba69fead2ea012aefeac6ecae74d79d8d98d0 data/witchery2/loot_tables/blocks/hawthorn_stairs.json

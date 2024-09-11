@@ -26,6 +26,7 @@ public class Effect {
     private final String reversedName;
     private final ApplyBlockInterface blockEffects;
     private final ApplyEntityInterface entityEffects;
+    private int duration;
 
     // Do not modify these unless via modifiers
     private boolean hasParticles = true;
@@ -35,25 +36,26 @@ public class Effect {
 
 
     private int power = 1;
-    private int duration = 3600;
     private double powerScaling = 1;
     private double durationScaling = 1;
     private final boolean isCopy;
 
-    public Effect(String id, String name, String reversedName, ApplyBlockInterface blockEffects, ApplyEntityInterface entityEffects) {
+    public Effect(String id, String name, String reversedName, ApplyBlockInterface blockEffects, ApplyEntityInterface entityEffects, int duration) {
         this.id = id;
         this.name = name;
         this.reversedName = reversedName;
         this.blockEffects = blockEffects;
         this.entityEffects = entityEffects;
         this.isCopy = false;
+        this.duration = duration;
     }
-    private Effect(String id, String name, String reversedName, ApplyBlockInterface blockEffects, ApplyEntityInterface entityEffects, boolean hasParticles, boolean inverted, boolean applyBlock, boolean applyEntity) {
+    private Effect(String id, String name, String reversedName, ApplyBlockInterface blockEffects, ApplyEntityInterface entityEffects, int duration, boolean hasParticles, boolean inverted, boolean applyBlock, boolean applyEntity) {
         this.id = id;
         this.name = name;
         this.reversedName = reversedName;
         this.blockEffects = blockEffects;
         this.entityEffects = entityEffects;
+        this.duration = duration;
         this.hasParticles = hasParticles;
         this.inverted = inverted;
         this.applyBlock = applyBlock;
@@ -174,7 +176,7 @@ public class Effect {
     }
 
     public Effect copy() {
-        return new Effect(this.id, this.name, this.reversedName, this.blockEffects, this.entityEffects, this.hasParticles, this.inverted, this.applyBlock, this.applyEntity);
+        return new Effect(this.id, this.name, this.reversedName, this.blockEffects, this.entityEffects, this.duration, this.hasParticles, this.inverted, this.applyBlock, this.applyEntity);
     }
 
     public NbtCompound toNbt() {

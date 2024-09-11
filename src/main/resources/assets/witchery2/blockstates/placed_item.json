@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "witchery2:block/placed_item"
+    },
+    "facing=north": {
+      "model": "witchery2:block/placed_item"
+    },
+    "facing=south": {
+      "model": "witchery2:block/placed_item"
+    },
+    "facing=west": {
+      "model": "witchery2:block/placed_item"
+    }
+  }
+}

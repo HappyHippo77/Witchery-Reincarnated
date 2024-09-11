@@ -2,6 +2,8 @@
   "itemGroup.witchery2.main": "Witchery2",
 
 
+  "block.witchery2.placed_item": "Placed Item",
+
   "block.witchery2.witchs_cauldron": "Witch's Cauldron",
   "block.witchery2.witchs_oven": "Witch's Oven",
   "block.witchery2.fume_funnel": "Fume Funnel",
@@ -10,7 +12,7 @@
   "block.witchery2.candelabra": "Candelabra",
   "block.witchery2.chalice": "Chalice",
   "block.witchery2.filled_chalice": "Filled Chalice",
-  "block.witchery2.pentacle": "Pentacle",
+  "block.witchery2.infinity_egg": "Infinity Egg",
 
   "block.witchery2.mandrake": "Mandrake",
   "block.witchery2.water_artichoke": "Water Artichoke",
@@ -95,6 +97,9 @@
   "entity.witchery2.mandrake": "Mandrake",
 
   "item.witchery2.fume_filter": "Fume Filter",
+
+  "item.witchery2.pentacle": "Pentacle",
+  "item.witchery2.arthana": "Arthana",
 
   "item.witchery2.anointing_paste": "Anointing Paste",
   "item.witchery2.belladonna_seeds": "Belladonna Seeds",

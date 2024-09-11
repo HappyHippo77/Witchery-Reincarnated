@@ -18,7 +18,7 @@ public class ModBlockItems {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "candelabra"), new BlockItem(ModBlocks.CANDELABRA, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "chalice"), new BlockItem(ModBlocks.CHALICE, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "filled_chalice"), new BlockItem(ModBlocks.FILLED_CHALICE, new FabricItemSettings()));
-        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "pentacle"), new BlockItem(ModBlocks.PENTACLE, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "infinity_egg"), new BlockItem(ModBlocks.INFINITY_EGG, new FabricItemSettings()));
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "ember_moss"), new BlockItem(ModBlocks.EMBER_MOSS, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "glint_weed"), new BlockItem(ModBlocks.GLINT_WEED, new FabricItemSettings()));

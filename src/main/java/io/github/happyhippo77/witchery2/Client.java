@@ -3,12 +3,14 @@ package io.github.happyhippo77.witchery2;
 import dev.felnull.specialmodelloader.api.event.SpecialModelLoaderEvents;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
+import io.github.happyhippo77.witchery2.block.entity.entities.PlacedItemEntity;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.networking.ClientPackets;
 import io.github.happyhippo77.witchery2.particle.ModParticles;
 import io.github.happyhippo77.witchery2.particle.particles.BubbleParticle;
 import io.github.happyhippo77.witchery2.particle.particles.PowerParticle;
+import io.github.happyhippo77.witchery2.render.blockentity.renderers.PlacedItemEntityRenderer;
 import io.github.happyhippo77.witchery2.render.blockentity.renderers.WitchsCauldronEntityRenderer;
 import io.github.happyhippo77.witchery2.render.entity.models.MandrakeModel;
 import io.github.happyhippo77.witchery2.render.entity.renderers.MandrakeRenderer;
@@ -104,6 +106,7 @@ public class Client implements ClientModInitializer {
 
 
         BlockEntityRendererRegistry.register(ModBlockEntities.WITCHS_CAULDRON_ENTITY, WitchsCauldronEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntities.PLACED_ITEM_ENTITY, PlacedItemEntityRenderer::new);
 
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.BUBBLE_PARTICLE, BubbleParticle.Factory::new);

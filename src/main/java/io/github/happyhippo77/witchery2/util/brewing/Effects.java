@@ -34,10 +34,9 @@ public class Effects {
                     entity.inPowderSnow = true;
                 }
             else {
-                System.out.println(100 * ((effect.getDuration() * effect.getDurationScaling() / 3600)));
-                entity.setFireTicks((int) (100 * (((effect.getDuration() * effect.getDurationScaling()) / 3600))));
+                entity.setFireTicks((int) (effect.getDuration() * effect.getDurationScaling()));
             }
-        });
+        }, 60);
 
     public static final Effect SWIM_SPEED = new Effect("swim_speed", "Swim Speed", "Swim Speed",
             (effect, world, pos) -> {
@@ -47,7 +46,7 @@ public class Effects {
                 if (entity instanceof LivingEntity livingEntity) {
                     livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, (int) (effect.getDuration() * effect.getDurationScaling())));
                 }
-            });
+            }, 3600);
 
     public static final Map<String, Effect> effects = Map.of(
             SNOW.getId(), SNOW,

@@ -87,7 +87,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModBlocks.CANDELABRA.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.CHALICE.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FILLED_CHALICE.asItem(), Models.GENERATED);
-        itemModelGenerator.register(ModBlocks.PENTACLE.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModItems.PENTACLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ARTHANA, Models.HANDHELD);
 
         itemModelGenerator.register(ModItems.ANOINTING_PASTE, Models.GENERATED);
 

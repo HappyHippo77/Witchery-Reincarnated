@@ -34,8 +34,8 @@
   },
   "requirements": [
     [
-      "has_exhale_of_the_horned_one",
       "has_mangrove_log",
+      "has_exhale_of_the_horned_one",
       "has_the_recipe"
     ]
   ],

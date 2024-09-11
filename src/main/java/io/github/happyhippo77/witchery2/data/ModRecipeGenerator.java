@@ -147,7 +147,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                         'u', ModBlocks.CHALICE
                 )
         );
-        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.PENTACLE, 1,
+        offerCraftingRecipe(exporter, RecipeCategory.MISC, ModItems.PENTACLE, 1,
                 """
                        '-'
                        -o-
@@ -157,6 +157,19 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                         '\'', ModItems.KOBOLDITE_NUGGET,
                         '-', ModItems.KOBOLDITE_INGOT,
                         'o', Items.DIAMOND
+                )
+        );
+        offerCraftingRecipe(exporter, RecipeCategory.COMBAT, ModItems.ARTHANA, 1,
+                """
+                        -\s
+                       'o'
+                        |\s
+                       """,
+                Map.of(
+                        '-', Items.GOLD_INGOT,
+                        '\'', Items.GOLD_NUGGET,
+                        'o', Items.EMERALD,
+                        '|', Items.STICK
                 )
         );
         offerCraftingRecipe(exporter, RecipeCategory.MISC, ModBlocks.ROWAN_STAIRS, 4,

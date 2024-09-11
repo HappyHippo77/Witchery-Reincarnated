@@ -1,1 +1,13 @@
-Capacity ingredients work by having a maximum capacity level that the cauldron can be at for the ingredient to still be applied. Search original code for capacity ingredients in file WitcheryBrewRegistry.java
+TODO:
+    Make altars functional. Maintain a list of every altar core in each world, as well as a hash map of every powered block in the world with it's connected altar.
+    Add looting functionality to Arthana.
+    Make Kettle (add recipe for Redstone Soup)
+    Make Hobgoblins (Koboldite mineral items already implemented)
+    Add all brewing effects
+    Add distillers
+    Add all cauldron recipes.
+    Add particle effects for altars.
+    Stockade damage behavior is inaccurate. Damage is taken while walking, not while falling. Maybe keep the falling damage, but add walking damage too.
+    Double check Aldar door redstone behavior. Power is applied only to the block below and redstone next to the door.
+    Make attuned stone texture recolored modern diamond?
+    Altar behavior is techincally inaccurate. Placing another altar next to a joined altar should un-join it, but this doesn't happen.
