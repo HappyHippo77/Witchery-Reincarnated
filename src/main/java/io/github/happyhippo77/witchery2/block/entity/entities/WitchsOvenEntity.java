@@ -8,7 +8,6 @@ import io.github.happyhippo77.witchery2.screen.WitchsOvenScreenHandler;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -29,7 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
@@ -133,17 +131,13 @@ public class WitchsOvenEntity extends BlockEntity implements NamedScreenHandlerF
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, WitchsOvenEntity entity) {
-
         if (world.isClient()) {
             return;
         }
 
         if (entity.fuelTime > 0) {
-            world.updateListeners(pos, entity.getCachedState(), entity.getCachedState(), Block.NOTIFY_LISTENERS);
             entity.fuelTime--;
-        }
-        else {
-            world.updateListeners(pos, entity.getCachedState(), entity.getCachedState(), Block.NOTIFY_LISTENERS);
+            world.updateListeners(pos, state, state, 0);
         }
 
         if (hasRecipe(entity)) {

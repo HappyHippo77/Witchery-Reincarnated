@@ -1,7 +1,6 @@
 package io.github.happyhippo77.witchery2.util;
 
 import io.github.happyhippo77.witchery2.block.ModBlocks;
-import io.github.happyhippo77.witchery2.block.blocks.PlacedItem;
 import io.github.happyhippo77.witchery2.block.entity.entities.PlacedItemEntity;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
@@ -11,7 +10,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;

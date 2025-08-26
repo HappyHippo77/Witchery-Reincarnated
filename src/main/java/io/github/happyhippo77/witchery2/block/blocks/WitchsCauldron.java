@@ -7,8 +7,8 @@ import io.github.happyhippo77.witchery2.networking.ServerPackets;
 import io.github.happyhippo77.witchery2.particle.ModParticles;
 import io.github.happyhippo77.witchery2.sounds.ModSounds;
 import io.github.happyhippo77.witchery2.util.MathUtil;
+import io.github.happyhippo77.witchery2.util.PoweredBlockWithEntity;
 import io.github.happyhippo77.witchery2.util.brewing.crafting.CauldronRecipeRegistry;
-import io.github.happyhippo77.witchery2.util.brewing.ingredients.CapacityIngredient;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.EffectIngredient;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.IngredientRegistry;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.IngredientUse;
@@ -18,6 +18,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,7 +39,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WitchsCauldron extends BlockWithEntity implements BlockEntityProvider {
+public class WitchsCauldron extends PoweredBlockWithEntity implements BlockEntityProvider {
 
     public WitchsCauldron(Settings settings) {
         super(settings);

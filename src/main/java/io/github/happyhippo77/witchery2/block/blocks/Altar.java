@@ -1,8 +1,11 @@
 package io.github.happyhippo77.witchery2.block.blocks;
 
+import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.block.entity.entities.AltarEntity;
+import io.github.happyhippo77.witchery2.util.PoweredBlockEntity;
+import io.github.happyhippo77.witchery2.util.ServerWorldVariables;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -22,18 +25,16 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Altar extends BlockWithEntity implements BlockEntityProvider {
     public static final BooleanProperty JOINED = BooleanProperty.of("joined");
-    private List<BlockPos> joinedAltars = new ArrayList<>();
     public Altar(Settings settings) {
         super(settings);
     }
 
     private void updateArtifacts(AltarEntity entity, World world, BlockPos pos) {
-        if (entity.getSourceEntity() != null) {
-            entity.getSourceEntity().markForArtifactUpdates();
+        if (entity.getCoreEntity() != null) {
+            entity.getCoreEntity().markForArtifactUpdates();
         }
     }
 
@@ -46,10 +47,10 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
                 if (screenHandlerFactory != null) {
                     player.openHandledScreen(screenHandlerFactory);
                 }
+                AltarEntity e = ((AltarEntity)world.getBlockEntity(pos));
+                e.getCoreEntity().updateSources(world, e.getCoreEntity().getPos());
+                e.getCoreEntity().updateArtifacts();
             }
-            AltarEntity e = ((AltarEntity)world.getBlockEntity(pos));
-            e.getSourceEntity().updateSources(world, e.getSourceEntity().getPos());
-            e.getSourceEntity().updateArtifacts();
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
@@ -58,6 +59,9 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
+        if (world.isClient) {
+            return;
+        }
         if (sourcePos.equals(pos.up())) {
             updateArtifacts((AltarEntity) world.getBlockEntity(pos), world, pos);
         }
@@ -69,73 +73,83 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
         return checkType(type, ModBlockEntities.ALTAR_ENTITY, AltarEntity::tick);
     }
 
-    private void collectJoinedAltars(World world, BlockPos pos) {
-        this.joinedAltars.clear();
+    private void updateJoinedAltars(World world, BlockPos pos, boolean excludeSelf) {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
-        if(!world.isClient) {
-            ArrayList<BlockPos> visited = new ArrayList<>();
-            ArrayList<BlockPos> toVisit = new ArrayList<>();
-            toVisit.add(new BlockPos(x, y, z));
-            boolean valid = true;
+        ArrayList<BlockPos> visited = new ArrayList<>();
+        ArrayList<BlockPos> toVisit = new ArrayList<>();
+        toVisit.add(new BlockPos(x, y, z));
+        boolean valid = true;
 
-            BlockPos newCore;
-            while(!toVisit.isEmpty()) {
-                newCore = toVisit.get(0);
-                toVisit.remove(0);
-                int altarsFound = 0;
-                BlockPos[] blocksToCheck = new BlockPos[]{newCore.north(), newCore.south(), newCore.east(), newCore.west()};
+        BlockPos newCore;
+        while(!toVisit.isEmpty()) {
+            newCore = toVisit.get(0);
+            toVisit.remove(0);
+            int altarsFound = 0;
+            BlockPos[] blocksToCheck = new BlockPos[]{newCore.north(), newCore.south(), newCore.east(), newCore.west()};
 
-                for (BlockPos checkPos : blocksToCheck) {
-                    if (this.stateManager.getStates().contains(world.getBlockState(checkPos))) {
-                        if (!visited.contains(checkPos) && !toVisit.contains(checkPos)) {
-                            toVisit.add(checkPos);
-                        }
-
-                        ++altarsFound;
+            for (BlockPos checkPos : blocksToCheck) {
+                if (this.stateManager.getStates().contains(world.getBlockState(checkPos))) {
+                    if (!visited.contains(checkPos) && !toVisit.contains(checkPos)) {
+                        toVisit.add(checkPos);
                     }
+
+                    ++altarsFound;
                 }
-                if(altarsFound < 2 || altarsFound > 3) {
+            }
+            if (!(newCore.equals(pos) && excludeSelf)) {
+                if (altarsFound < 2 || altarsFound > 3) {
                     valid = false;
                 }
-
                 visited.add(newCore);
             }
+        }
+
+        if (!visited.isEmpty()) {
+            BlockPos coreAltarPos = visited.get(0);
 
             if (valid && visited.size() == 6) {
-                this.joinedAltars = visited;
+                for (BlockPos p : visited) {
+                    world.setBlockState(p, ModBlocks.ALTAR.getDefaultState().with(JOINED, true));
+
+                    AltarEntity altarEntity = (AltarEntity) world.getBlockEntity(p);
+
+                    altarEntity.setCoreEntity((AltarEntity) world.getBlockEntity(coreAltarPos));
+                    altarEntity.getCoreEntity().updateSources(world, pos);
+                    updateArtifacts(altarEntity, world, p);
+                }
+            } else {
+                for (BlockPos p : visited) {
+                    world.setBlockState(p, ModBlocks.ALTAR.getDefaultState().with(JOINED, false));
+
+                    AltarEntity altarEntity = (AltarEntity) world.getBlockEntity(p);
+
+                    altarEntity.setCoreEntity((AltarEntity) world.getBlockEntity(p));
+                    altarEntity.joinedAltars.clear();
+                    altarEntity.poweredBlockRescan();
+                }
             }
         }
 
-    }
-
-    private boolean updateJoins(World world) {
-        if (joinedAltars.size() == 6) {
-            for (BlockPos blockPos : joinedAltars) {
-                world.setBlockState(blockPos, ModBlocks.ALTAR.getDefaultState().with(JOINED, true));
+        if(excludeSelf) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if(blockEntity instanceof AltarEntity altarEntity) {
+                altarEntity.setCoreEntity(altarEntity);
             }
-            return true;
-        }
-        else {
-            for (BlockPos blockPos : joinedAltars) {
-                world.setBlockState(blockPos, ModBlocks.ALTAR.getDefaultState().with(JOINED, false));
-            }
-            return false;
         }
     }
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-        collectJoinedAltars(world, pos);
-        boolean joined = updateJoins(world);
-        if (joined) {
-            for (BlockPos p : joinedAltars) {
-                AltarEntity blockEntity = (AltarEntity) world.getBlockEntity(p);
-                blockEntity.setSourceEntity((AltarEntity) world.getBlockEntity(this.joinedAltars.get(0)));
-                blockEntity.getSourceEntity().updateSources(world, pos);
-                updateArtifacts(blockEntity, world, p);
+        updateJoinedAltars(world, pos, false);
+
+        if (world != null && !world.isClient) {
+            for (PoweredBlockEntity poweredBlock : ((ServerWorldVariables)world).getPoweredBlocks()) {
+                if (poweredBlock.altar == null) {
+                    poweredBlock.setAltarIfValid(world, pos);
+                }
             }
         }
     }
@@ -143,9 +157,7 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
-        collectJoinedAltars(world, pos);
-        joinedAltars.remove(pos);
-        updateJoins(world);
+        updateJoinedAltars(world, pos, true);
     }
 
     @Nullable

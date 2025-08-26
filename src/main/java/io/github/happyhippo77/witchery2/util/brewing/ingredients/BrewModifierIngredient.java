@@ -1,7 +1,6 @@
 package io.github.happyhippo77.witchery2.util.brewing.ingredients;
 
 import io.github.happyhippo77.witchery2.util.brewing.BrewModifier;
-import io.github.happyhippo77.witchery2.util.brewing.EffectModifier;
 import net.minecraft.item.Item;
 
 public class BrewModifierIngredient extends AbstractIngredient {

@@ -5,28 +5,17 @@ import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.util.brewing.DispersalType;
 import io.github.happyhippo77.witchery2.util.brewing.Effect;
 import io.github.happyhippo77.witchery2.util.brewing.Effects;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.EndGatewayBlockEntity;
 import net.minecraft.entity.*;
-import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 
 import java.util.List;
-import java.util.Objects;
 
 public class BrewEntity extends ThrownItemEntity {
     public BrewEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {

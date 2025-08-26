@@ -1,10 +1,13 @@
 package io.github.happyhippo77.witchery2.block.entity.entities;
 
+import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.screen.AltarScreenHandler;
 import io.github.happyhippo77.witchery2.util.PowerSources;
+import io.github.happyhippo77.witchery2.util.PoweredBlockEntity;
+import io.github.happyhippo77.witchery2.util.ServerWorldVariables;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -29,8 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactory {
-    private BlockPos sourcePos = this.pos;
-    private AltarEntity sourceEntity = null;
+    private BlockPos corePos = this.pos;
+    private AltarEntity coreEntity = null;
     private final PropertyDelegate propertyDelegate;
     public static final int delegateSize = 4;
     private int power = 0;
@@ -47,20 +50,20 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> sourceEntity.power;
-                    case 1 -> sourceEntity.maxPower;
-                    case 2 -> sourceEntity.rechargeRate;
-                    case 3 -> sourceEntity.powerScale;
+                    case 0 -> coreEntity.power;
+                    case 1 -> coreEntity.maxPower;
+                    case 2 -> coreEntity.rechargeRate;
+                    case 3 -> coreEntity.powerScale;
                     default -> 0;
                 };
             }
 
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> sourceEntity.power = value;
-                    case 1 -> sourceEntity.maxPower = value;
-                    case 2 -> sourceEntity.rechargeRate = value;
-                    case 3 -> sourceEntity.powerScale = value;
+                    case 0 -> coreEntity.power = value;
+                    case 1 -> coreEntity.maxPower = value;
+                    case 2 -> coreEntity.rechargeRate = value;
+                    case 3 -> coreEntity.powerScale = value;
                 }
             }
 
@@ -68,30 +71,70 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
                 return delegateSize;
             }
         };
+
+        if (world != null && !world.isClient) {
+            if (!((ServerWorldVariables)world).getAltars().contains(this)) {
+                ((ServerWorldVariables)world).addAltar(this);
+            }
+        }
     }
 
-    public AltarEntity getSourceEntity() {
-        return sourceEntity;
+    @Override
+    public void markRemoved() {
+        super.markRemoved();
+
+        if (world != null && !world.isClient) {
+            ((ServerWorldVariables)world).removeAltar(this);
+        }
+
+        poweredBlockRescan();
     }
 
-    public void setSourceEntity(AltarEntity sourceEntity) {
-        this.sourceEntity = sourceEntity;
-        this.sourcePos = sourceEntity.getPos();
-        this.sourceEntity.joinedAltars.add(this.getPos());
+    @Override
+    public void cancelRemoval() {
+        super.cancelRemoval();
+
+        if (world != null && !world.isClient) {
+            if (!((ServerWorldVariables)world).getAltars().contains(this)) {
+                ((ServerWorldVariables)world).addAltar(this);
+            }
+        }
+    }
+
+    public void poweredBlockRescan() {
+        if (world != null && !world.isClient) {
+            for (PoweredBlockEntity poweredBlock : ((ServerWorldVariables)world).getPoweredBlocks()) {
+                if (poweredBlock != null && poweredBlock.altar == this) {
+                    poweredBlock.searchForAltars();
+                }
+            }
+        }
+    }
+
+    public AltarEntity getCoreEntity() {
+        return coreEntity;
+    }
+
+    public void setCoreEntity(AltarEntity coreEntity) {
+        this.coreEntity = coreEntity;
+        this.corePos = coreEntity.getPos();
+        this.coreEntity.joinedAltars.add(this.getPos());
         markDirty();
-        sourceEntity.markDirty();
+        coreEntity.markDirty();
         world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
-        world.updateListeners(sourceEntity.getPos(), sourceEntity.getCachedState(), sourceEntity.getCachedState(), Block.NOTIFY_LISTENERS);
+        world.updateListeners(coreEntity.getPos(), coreEntity.getCachedState(), coreEntity.getCachedState(), Block.NOTIFY_LISTENERS);
     }
 
     public int getPower() {
         return power;
     }
 
-    public void decrementPower(int amount) {
+    public boolean checkAndDecrementPower(int amount) {
         if (this.power > amount) {
             this.power -= amount;
+            return true;
         }
+        return false;
     }
 
     public int getRangeScale() {
@@ -181,14 +224,14 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
             }
         }
 
-        sourceEntity.rechargeRate = tempRechargeRate;
-        sourceEntity.powerScale = tempPowerScale;
-        sourceEntity.rangeScale = tempRangeScale;
+        coreEntity.rechargeRate = tempRechargeRate;
+        coreEntity.powerScale = tempPowerScale;
+        coreEntity.rangeScale = tempRangeScale;
 
-        sourceEntity.markDirty();
-        world.updateListeners(sourceEntity.getPos(), sourceEntity.getCachedState(), sourceEntity.getCachedState(), Block.NOTIFY_LISTENERS);
+        coreEntity.markDirty();
+        world.updateListeners(coreEntity.getPos(), coreEntity.getCachedState(), coreEntity.getCachedState(), Block.NOTIFY_LISTENERS);
 
-        sourceEntity.artifactUpdates = false;
+        coreEntity.artifactUpdates = false;
     }
 
     public void updateSources(World world, BlockPos pos) {
@@ -208,18 +251,38 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
         world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
     }
 
+    public boolean withinRange(World world, BlockPos pos) {
+        if (world == this.getWorld()) {
+            int px = pos.getX();
+            int py = pos.getY();
+            int pz = pos.getZ();
+            int ax = this.getPos().getX();
+            int ay = this.getPos().getY();
+            int az = this.getPos().getZ();
+            double distance = Math.sqrt(Math.abs(Math.pow(px - ax, 2) + Math.pow(py - ay, 2) + Math.pow(pz - az, 2)));
+            int maxDistance = this.getRangeScale() == 1 ? 17 : 32;
+            return distance < maxDistance;
+        }
+        return false;
+    }
+
+
+
     private int ticks = 0;
     public static void tick(World world, BlockPos pos, BlockState state, AltarEntity entity) {
+        if (world.isClient) {
+            return;
+        }
         // We need this to load from nbt, since we can't get the block entity before the world is loaded.
-        if (entity.sourceEntity == null && entity.sourcePos != null) {
-            entity.sourceEntity = (AltarEntity) world.getBlockEntity(entity.sourcePos);
-            if (entity.sourceEntity == null) {
-                entity.sourcePos = null;
+        if (entity.coreEntity == null && entity.corePos != null) {
+            entity.coreEntity = (AltarEntity) world.getBlockEntity(entity.corePos);
+            if (entity.coreEntity == null) {
+                entity.corePos = null;
             }
         }
 
         float maxPowerScaled = entity.maxPower * (float)entity.powerScale;
-        if (entity.sourceEntity == entity) {
+        if (entity.coreEntity == entity) {
             if (entity.ticks >= 20) {
                 if (entity.artifactUpdates) {
                     entity.updateArtifacts();
@@ -253,8 +316,8 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        BlockPos pos = Objects.requireNonNullElse(sourceEntity, this).getPos();
-        nbt.putIntArray("sourcePos", Arrays.asList(pos.getX(), pos.getY(), pos.getZ()));
+        BlockPos pos = Objects.requireNonNullElse(coreEntity, this).getPos();
+        nbt.putIntArray("corePos", Arrays.asList(pos.getX(), pos.getY(), pos.getZ()));
         nbt.putInt("power", power);
         nbt.putInt("maxPower", maxPower);
         nbt.putInt("powerScale", powerScale);
@@ -271,8 +334,8 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        // We do this instead of setting the source entity because we cannot get the world before it is loaded.
-        sourcePos = new BlockPos(nbt.getIntArray("sourcePos")[0], nbt.getIntArray("sourcePos")[1], nbt.getIntArray("sourcePos")[2]);
+        // We do this instead of setting the core entity because we cannot get the world before it is loaded.
+        corePos = new BlockPos(nbt.getIntArray("corePos")[0], nbt.getIntArray("corePos")[1], nbt.getIntArray("corePos")[2]);
         power = nbt.getInt("power");
         maxPower = nbt.getInt("maxPower");
         powerScale = nbt.getInt("powerScale");

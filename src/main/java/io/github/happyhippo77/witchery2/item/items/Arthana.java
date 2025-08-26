@@ -1,8 +1,6 @@
 package io.github.happyhippo77.witchery2.item.items;
 
-import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.util.PlaceableItemInterface;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;

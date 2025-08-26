@@ -19,7 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 
 public class AlderDoor extends DoorBlock {
     public static final EnumProperty<DoorType> DOOR_TYPE = EnumProperty.of("door_type", DoorType.class);

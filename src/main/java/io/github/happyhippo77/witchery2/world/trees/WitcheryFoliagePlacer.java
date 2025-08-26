@@ -1,6 +1,5 @@
 package io.github.happyhippo77.witchery2.world.trees;
 
-import com.eliotlash.mclib.math.functions.classic.Mod;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.happyhippo77.witchery2.block.ModBlocks;

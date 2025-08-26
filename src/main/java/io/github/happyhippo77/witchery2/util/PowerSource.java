@@ -1,7 +1,5 @@
 package io.github.happyhippo77.witchery2.util;
 
-import net.minecraft.block.Block;
-
 public class PowerSource {
     private final int factor;
     public final int limit;

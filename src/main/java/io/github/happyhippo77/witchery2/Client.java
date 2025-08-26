@@ -3,7 +3,6 @@ package io.github.happyhippo77.witchery2;
 import dev.felnull.specialmodelloader.api.event.SpecialModelLoaderEvents;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
-import io.github.happyhippo77.witchery2.block.entity.entities.PlacedItemEntity;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.networking.ClientPackets;

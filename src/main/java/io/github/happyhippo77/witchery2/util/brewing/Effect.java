@@ -3,13 +3,10 @@ package io.github.happyhippo77.witchery2.util.brewing;
 import io.github.happyhippo77.witchery2.Witchery2;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtString;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 interface ApplyBlockInterface {

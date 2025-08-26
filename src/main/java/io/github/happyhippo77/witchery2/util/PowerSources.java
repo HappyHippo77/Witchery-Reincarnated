@@ -3,9 +3,6 @@ package io.github.happyhippo77.witchery2.util;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.BlockTags;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.HashMap;
 import java.util.Map;

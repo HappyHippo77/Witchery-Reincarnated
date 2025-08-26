@@ -1,7 +1,5 @@
 package io.github.happyhippo77.witchery2.util.brewing;
 
-import net.minecraft.item.ItemStack;
-
 public abstract class Modifier {
     private final String id;
 

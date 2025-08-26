@@ -2,7 +2,6 @@ package io.github.happyhippo77.witchery2.util.brewing.ingredients;
 
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.item.ModItems;
-import io.github.happyhippo77.witchery2.util.Range;
 import io.github.happyhippo77.witchery2.util.brewing.DispersalType;
 import io.github.happyhippo77.witchery2.util.brewing.Effects;
 import io.github.happyhippo77.witchery2.util.brewing.Modifiers;

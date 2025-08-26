@@ -2,7 +2,6 @@ package io.github.happyhippo77.witchery2.item;
 
 import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
-import io.github.happyhippo77.witchery2.block.blocks.PlacedItem;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.item.items.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;

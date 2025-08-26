@@ -3,7 +3,6 @@ package io.github.happyhippo77.witchery2.block.blocks;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.item.ModItems;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.DoorBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
