@@ -10,5 +10,5 @@ public enum IngredientUse {
     LINGER,
     DISPERSAL,
     EFFECT,
-    GENERIC;
+    GENERIC
 }

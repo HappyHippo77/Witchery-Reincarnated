@@ -68,7 +68,7 @@ public class AlderTrunkPlacer extends TrunkPlacer {
             } else if(Math.abs(f1) >= f) {
                 f2 = 0.0F;
             } else {
-                f2 = (float)Math.sqrt(Math.pow((double)Math.abs(f), 2.0D) - Math.pow((double)Math.abs(f1), 2.0D));
+                f2 = (float)Math.sqrt(Math.pow(Math.abs(f), 2.0D) - Math.pow(Math.abs(f1), 2.0D));
             }
 
             f2 *= 0.5F;
@@ -114,7 +114,7 @@ public class AlderTrunkPlacer extends TrunkPlacer {
                     int[] aint2 = new int[]{k1, j + this.leafDistanceLimit, l1};
                     if(this.checkBlockLine(aint1, aint2) == -1) {
                         int[] aint3 = new int[]{this.basePos[0], this.basePos[1], this.basePos[2]};
-                        double d3 = Math.sqrt(Math.pow((double)Math.abs(this.basePos[0] - aint1[0]), 2.0D) + Math.pow((double)Math.abs(this.basePos[2] - aint1[2]), 2.0D));
+                        double d3 = Math.sqrt(Math.pow(Math.abs(this.basePos[0] - aint1[0]), 2.0D) + Math.pow(Math.abs(this.basePos[2] - aint1[2]), 2.0D));
                         double d4 = d3 * this.branchSlope;
                         if((double)aint1[1] - d4 > (double)l) {
                             aint3[1] = l;

@@ -1,6 +1,5 @@
 package io.github.happyhippo77.witchery2.block.entity.entities;
 
-import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
@@ -71,12 +70,6 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
                 return delegateSize;
             }
         };
-
-        if (world != null && !world.isClient) {
-            if (!((ServerWorldVariables)world).getAltars().contains(this)) {
-                ((ServerWorldVariables)world).addAltar(this);
-            }
-        }
     }
 
     @Override
@@ -87,7 +80,7 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
             ((ServerWorldVariables)world).removeAltar(this);
         }
 
-        poweredBlockRescan();
+        PoweredBlockEntity.recheckAltars(world);
     }
 
     @Override
@@ -95,20 +88,12 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
         super.cancelRemoval();
 
         if (world != null && !world.isClient) {
-            if (!((ServerWorldVariables)world).getAltars().contains(this)) {
-                ((ServerWorldVariables)world).addAltar(this);
+            if (!((ServerWorldVariables) world).getAltars().contains(this)) {
+                ((ServerWorldVariables) world).addAltar(this);
             }
         }
-    }
 
-    public void poweredBlockRescan() {
-        if (world != null && !world.isClient) {
-            for (PoweredBlockEntity poweredBlock : ((ServerWorldVariables)world).getPoweredBlocks()) {
-                if (poweredBlock != null && poweredBlock.altar == this) {
-                    poweredBlock.searchForAltars();
-                }
-            }
-        }
+        PoweredBlockEntity.recheckAltars(world);
     }
 
     public AltarEntity getCoreEntity() {
@@ -123,6 +108,12 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
         coreEntity.markDirty();
         world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
         world.updateListeners(coreEntity.getPos(), coreEntity.getCachedState(), coreEntity.getCachedState(), Block.NOTIFY_LISTENERS);
+    }
+
+    public void setClientPower(World world, int power) {
+        if (world.isClient) {
+            this.power = power;
+        }
     }
 
     public int getPower() {
@@ -227,6 +218,8 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
         coreEntity.rechargeRate = tempRechargeRate;
         coreEntity.powerScale = tempPowerScale;
         coreEntity.rangeScale = tempRangeScale;
+
+        PoweredBlockEntity.recheckAltars(world);
 
         coreEntity.markDirty();
         world.updateListeners(coreEntity.getPos(), coreEntity.getCachedState(), coreEntity.getCachedState(), Block.NOTIFY_LISTENERS);

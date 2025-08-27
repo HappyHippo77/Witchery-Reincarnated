@@ -23,6 +23,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -52,7 +53,7 @@ public class WitchsCauldron extends PoweredBlockWithEntity implements BlockEntit
         super.randomDisplayTick(state, world, pos, random);
 
         WitchsCauldronEntity entity = (WitchsCauldronEntity) world.getBlockEntity(pos);
-        if (entity.isBoiling()) {
+        if (entity.clientRenderBubbles) {
             int i;
             double xPos;
             double zPos;
@@ -68,14 +69,14 @@ public class WitchsCauldron extends PoweredBlockWithEntity implements BlockEntit
                 Witchery2.bubbleParticleDataSetter.setData(entity.getColor());
                 world.addParticle(ModParticles.BUBBLE_PARTICLE, pos.getX() + xPos, pos.getY() + yPos, pos.getZ() + zPos, 0, 0, 0);
             }
-            if (!entity.getIngredients().isEmpty()) {
+            if (entity.clientPlayBlop) {
                 if (random.nextInt(5) == 0) {
                     world.playSoundAtBlockCenter(pos, ModSounds.RANDOM_BLOP, SoundCategory.BLOCKS, 0.8F + random.nextFloat() * 0.2F, 0.8F + random.nextFloat() * 0.2F, false);
                 }
             }
 
-            if (entity.isPowered()) {
-                for (i = 0; i < 1 + Math.min(entity.getRitualSeconds(), 5); ++i) {
+            if (entity.clientRenderMagic) {
+                for (i = 0; i < 1 + Math.min(entity.clientRitualSeconds, 5); ++i) {
                     xPos = 0.3D + random.nextDouble() * 0.4D;
                     zPos = 0.3D + random.nextDouble() * 0.4D;
 
@@ -92,7 +93,7 @@ public class WitchsCauldron extends PoweredBlockWithEntity implements BlockEntit
                                     MathUtil.clamp((int) (entity.getColor().getRed() + (255 * shiftR)), 0, 255),
                                     MathUtil.clamp((int) (entity.getColor().getGreen() + (255 * shiftG)), 0, 255),
                                     MathUtil.clamp((int) (entity.getColor().getBlue() + (255 * shiftB)), 0, 255)
-                            ), entity.isRitualInProgress(), entity.isRitualInProgress(), maxAge);
+                            ), entity.clientRenderRitual, entity.clientRenderRitual, maxAge);
                     world.addParticle(ModParticles.POWER_PARTICLE, pos.getX() + xPos, pos.getY() + yPos, pos.getZ() + zPos, random.nextDouble() * 0.08D - 0.04D, random.nextDouble() * 0.05D + 0.08D, random.nextDouble() * 0.08D - 0.04D);
                 }
             }

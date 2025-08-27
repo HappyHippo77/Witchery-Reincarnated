@@ -17,9 +17,9 @@ import java.util.function.BooleanSupplier;
 @Mixin(ServerWorld.class)
 public class ServerWorldMixin implements ServerWorldVariables {
     @Unique
-    private List<AltarEntity> altars = new ArrayList<>();
+    private final List<AltarEntity> altars = new ArrayList<>();
     @Unique
-    private List<PoweredBlockEntity> poweredBlocks = new ArrayList<>();
+    private final List<PoweredBlockEntity> poweredBlocks = new ArrayList<>();
 
     @Override
     public List<AltarEntity> getAltars() {

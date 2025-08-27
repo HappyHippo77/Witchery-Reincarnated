@@ -1,8 +1,8 @@
 package io.github.happyhippo77.witchery2.block.entity.entities;
 
-import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.item.ModItems;
+import io.github.happyhippo77.witchery2.networking.ServerPackets;
 import io.github.happyhippo77.witchery2.util.PoweredBlockEntity;
 import io.github.happyhippo77.witchery2.util.brewing.*;
 import io.github.happyhippo77.witchery2.util.brewing.crafting.CauldronRecipeRegistry;
@@ -10,7 +10,6 @@ import io.github.happyhippo77.witchery2.util.brewing.crafting.RecipeCheck;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -51,7 +50,12 @@ public class WitchsCauldronEntity extends PoweredBlockEntity {
     private int ritualTicks;
     private final ArrayList<Item> ingredients = new ArrayList<>();
     private boolean colorOverride = false;
-    private int altarCachedRangeScale = 0;
+
+    public boolean clientRenderBubbles = false;
+    public boolean clientPlayBlop = false;
+    public boolean clientRenderMagic = false;
+    public boolean clientRenderRitual = false;
+    public int clientRitualSeconds = 0;
 
     public WitchsCauldronEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WITCHS_CAULDRON_ENTITY, pos, state);
@@ -101,7 +105,7 @@ public class WitchsCauldronEntity extends PoweredBlockEntity {
     }
 
     public boolean isPowered() {
-        return !this.ingredients.isEmpty() && (this.requiredPower == 0 || (this.altar != null && this.altar.getPower() > this.requiredPower));
+        return !this.ingredients.isEmpty() && (this.requiredPower == 0 || (this.getAltar() != null && this.getAltar().getPower() >= this.requiredPower));
     }
 
     public void addIngredient(Item ingredient) {
@@ -343,14 +347,9 @@ public class WitchsCauldronEntity extends PoweredBlockEntity {
 
     int ticks = 0;
     public static void tick(World world, BlockPos pos, BlockState state, WitchsCauldronEntity entity) {
+        // Server code only after this point. Shared code above, client code inside the following if statement.
         if (world.isClient) {
             return;
-        }
-
-        if (entity.level.isEmpty() || entity.ingredients.isEmpty()) {
-            entity.color = entity.defaultColor;
-            entity.markDirty();
-            world.updateListeners(pos, state, state, 0);
         }
 
         // Calculate Ticks Heated
@@ -373,12 +372,14 @@ public class WitchsCauldronEntity extends PoweredBlockEntity {
 
         if (entity.isPowered()) {
             RecipeCheck check = CauldronRecipeRegistry.checkRecipe(recipe);
-            if (check.valid()) {
+            if (check.valid() && !entity.isRitualInProgress()) {
                 entity.ritualTicks = 1;
+                entity.markDirty();
             }
         }
         else {
             entity.ritualTicks = 0;
+            entity.markDirty();
         }
 
         if (entity.isRitualInProgress()) {
@@ -386,7 +387,15 @@ public class WitchsCauldronEntity extends PoweredBlockEntity {
                 entity.ritualTicks++;
                 entity.markDirty();
             }
+        }
 
+        if (entity.level.isEmpty() || entity.ingredients.isEmpty()) {
+            entity.color = entity.defaultColor;
+            entity.markDirty();
+            world.updateListeners(pos, state, state, 0);
+        }
+
+        if (entity.isRitualInProgress()) {
             if (entity.ritualTicks == 200) {
                 RecipeCheck check = CauldronRecipeRegistry.checkRecipe(recipe);
 
@@ -400,18 +409,21 @@ public class WitchsCauldronEntity extends PoweredBlockEntity {
                 world.updateListeners(pos, state, state, 0);
             }
         }
-        // TODO: Do we really need this?
-        else {
-            if (entity.ritualTicks > 0) {
-                entity.ritualTicks = 0;
-                entity.markDirty();
-            }
-        }
+
+        // Set client-side variables for rendering.
+        boolean renderBubbles = entity.isBoiling();
+        boolean playBlop = entity.isBoiling() && !entity.ingredients.isEmpty();
+        boolean renderMagic = entity.isPowered();
+        boolean renderRitual = entity.isRitualInProgress();
+        int ritualSeconds = entity.getRitualSeconds();
+        ServerPackets.sendCauldronClientUpdate(entity, renderBubbles, playBlop, renderMagic, renderRitual, ritualSeconds);
     }
 
     // Serialize the BlockEntity
     @Override
     public void writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
+
         NbtList nbtIngredients = new NbtList();
         for (Item ingredient : ingredients) {
             nbtIngredients.add(NbtString.of(Registries.ITEM.getId(ingredient).toString()));
@@ -425,8 +437,6 @@ public class WitchsCauldronEntity extends PoweredBlockEntity {
         tag.putInt("ticksHeated", ticksHeated);
         tag.putInt("ritualTicks", ritualTicks);
         tag.put("ingredients", nbtIngredients);
-
-        super.writeNbt(tag);
     }
 
     // Deserialize the BlockEntity

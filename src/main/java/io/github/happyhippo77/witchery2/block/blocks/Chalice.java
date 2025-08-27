@@ -50,9 +50,9 @@ public class Chalice extends Block {
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         super.randomDisplayTick(state, world, pos, random);
         if(filled) {
-            double d0 = (double)((float)pos.getX() + 0.45F);
-            double d1 = (double)((float)pos.getY() + 0.4F);
-            double d2 = (double)((float)pos.getZ() + 0.5F);
+            double d0 = (float)pos.getX() + 0.45F;
+            double d1 = (float)pos.getY() + 0.4F;
+            double d2 = (float)pos.getZ() + 0.5F;
             world.addParticle(new DustParticleEffect(new Vector3f(1, 0.2f, 0), 1), d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
     }

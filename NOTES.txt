@@ -1,11 +1,4 @@
 TODO:
-    Fix client-server relationships on WitchsCauldronEntity and AltarEntity.
-        Cauldrons always think that altar is null on client.
-        Additionally, the requiredPower value is always 0 on the client. This probably means the ingredient list empty too. We should change that.
-        Basically just fully reprogram the cauldron to do as few calculations as possibly on the client, and send that data over from the server.
-    Powered Blocks currently do not respect distance when selecting an altar, and will simply select the first they find in the list.
-    Powered Blocks wont nullify their altar if another altar exists when it's destroyed, and both altars are far away. Is there a mistaken distance calculation in only one part of the code?
-    Powered Blocks do not find an altar when the world is loaded. Save the altar they point to?
     Try to reduce amount of data stored in BlockEntity NBT.
         WitchsOvenEntity stores fumeChance, even though they can just check the relevant blocks when a material is smelted.
     Add looting functionality to Arthana.
@@ -17,5 +10,3 @@ TODO:
     Add particle effects for altars.
     Stockade damage behavior is inaccurate. Damage is taken while walking, not while falling.
         Maybe keep the falling damage, but add walking damage too.
-    Make attuned stone texture recolored modern diamond?
-    

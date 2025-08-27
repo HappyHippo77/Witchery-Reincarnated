@@ -1,5 +1,8 @@
 package io.github.happyhippo77.witchery2.networking;
 
+import io.github.happyhippo77.witchery2.block.entity.entities.AltarEntity;
+import io.github.happyhippo77.witchery2.block.entity.entities.WitchsCauldronEntity;
+import io.github.happyhippo77.witchery2.util.PoweredBlockEntity;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,5 +25,21 @@ public class ServerPackets {
         buf.writeFloat(zd);
 
         ServerPlayNetworking.send((ServerPlayerEntity) player, PacketIdentifiers.RENDER_PARTICLE, buf);
+    }
+
+    public static void sendCauldronClientUpdate(WitchsCauldronEntity cauldron, boolean renderBubbles, boolean playBlop, boolean renderMagic, boolean renderRitual, int ritualSeconds) {
+        PacketByteBuf buf = PacketByteBufs.create();
+
+        buf.writeBlockPos(cauldron.getPos());
+        buf.writeBoolean(renderBubbles);
+        buf.writeBoolean(playBlop);
+        buf.writeBoolean(renderMagic);
+        buf.writeBoolean(renderRitual);
+        buf.writeInt(ritualSeconds);
+
+        if (cauldron.getWorld() != null) {
+            for (PlayerEntity player : cauldron.getWorld().getPlayers())
+                ServerPlayNetworking.send((ServerPlayerEntity) player, PacketIdentifiers.CAULDRON_CLIENT_UPDATE, buf);
+        }
     }
 }

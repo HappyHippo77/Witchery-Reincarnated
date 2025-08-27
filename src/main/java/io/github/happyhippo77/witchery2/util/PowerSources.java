@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PowerSources {
-    private static Map<Block, PowerSource> sources = Map.<Block, PowerSource>ofEntries(
+    private static final Map<Block, PowerSource> sources = Map.<Block, PowerSource>ofEntries(
             Map.entry(Blocks.DIRT, new PowerSource(1, 80)),
             Map.entry(Blocks.PODZOL, new PowerSource(1, 80)),
             Map.entry(Blocks.FARMLAND, new PowerSource(1, 100)),
@@ -93,7 +93,7 @@ public class PowerSources {
             // Infinity egg, 6000, 1
     );
 
-    private Map<Block, PowerSource> currentSources;
+    private final Map<Block, PowerSource> currentSources;
 
     public PowerSources() {
         this.currentSources = new HashMap<>();

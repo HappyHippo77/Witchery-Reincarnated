@@ -127,7 +127,7 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
 
                     altarEntity.setCoreEntity((AltarEntity) world.getBlockEntity(p));
                     altarEntity.joinedAltars.clear();
-                    altarEntity.poweredBlockRescan();
+                    PoweredBlockEntity.recheckAltars(world);
                 }
             }
         }
@@ -145,13 +145,7 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
         super.onPlaced(world, pos, state, placer, itemStack);
         updateJoinedAltars(world, pos, false);
 
-        if (world != null && !world.isClient) {
-            for (PoweredBlockEntity poweredBlock : ((ServerWorldVariables)world).getPoweredBlocks()) {
-                if (poweredBlock.altar == null) {
-                    poweredBlock.setAltarIfValid(world, pos);
-                }
-            }
-        }
+        PoweredBlockEntity.recheckAltars(world);
     }
 
     @Override

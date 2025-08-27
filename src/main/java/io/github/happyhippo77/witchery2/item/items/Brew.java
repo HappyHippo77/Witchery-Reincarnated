@@ -46,7 +46,7 @@ public class Brew extends Item {
             else {
                 for (int i = 0; i < effectsNbt.size(); i++) {
                     Effect effect = Effects.getFromNbt((NbtCompound) effectsNbt.get(i));
-                    String tip = effect.getName() + " [" + String.format("%01d:%02d", (effect.getDuration() / 20) / 60, (int) (effect.getDuration() / 20) % 60) + "]";
+                    String tip = effect.getName() + " [" + String.format("%01d:%02d", (effect.getDuration() / 20) / 60, (effect.getDuration() / 20) % 60) + "]";
                     //String tip = effect.getName() + "[" + (int) Math.floor(effect.getDuration() / 20d / 60) + ":" + (int) (effect.getDurationScaling() / 20) % 60 + "]";
                     arr.add(Text.literal(tip).formatted(Formatting.GRAY));
                 }
