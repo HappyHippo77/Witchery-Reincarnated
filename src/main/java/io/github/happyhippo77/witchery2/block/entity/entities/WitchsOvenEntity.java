@@ -6,7 +6,6 @@ import io.github.happyhippo77.witchery2.item.ModItems;
 import io.github.happyhippo77.witchery2.recipe.WitchsOvenRecipe;
 import io.github.happyhippo77.witchery2.screen.WitchsOvenScreenHandler;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;

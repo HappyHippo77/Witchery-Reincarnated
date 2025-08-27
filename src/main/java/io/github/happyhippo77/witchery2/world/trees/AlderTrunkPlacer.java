@@ -225,8 +225,8 @@ public class AlderTrunkPlacer extends TrunkPlacer {
             ++aint[2];
             ++aint1[2];
             this.placeBlockLine(aint, aint1);
-            aint[0] += -1;
-            aint1[0] += -1;
+            aint[0] -= 1;
+            aint1[0] -= 1;
             this.placeBlockLine(aint, aint1);
         }
 

@@ -6,13 +6,9 @@ import io.github.happyhippo77.witchery2.util.ServerWorldVariables;
 import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 @Mixin(ServerWorld.class)
 public class ServerWorldMixin implements ServerWorldVariables {

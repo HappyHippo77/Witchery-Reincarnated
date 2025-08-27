@@ -27,11 +27,6 @@ public class WolfsbaneCrop extends CropBlock {
     }
 
     @Override
-    public int getMaxAge() {
-        return 7;
-    }
-
-    @Override
     public IntProperty getAgeProperty() {
         return AGE;
     }

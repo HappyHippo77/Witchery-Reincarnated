@@ -2,7 +2,6 @@ package io.github.happyhippo77.witchery2;
 
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
-import io.github.happyhippo77.witchery2.block.entity.entities.AltarEntity;
 import io.github.happyhippo77.witchery2.block.item.ModBlockItems;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.entity.entities.MandrakeEntity;
@@ -13,23 +12,18 @@ import io.github.happyhippo77.witchery2.screen.ModScreenHandlers;
 import io.github.happyhippo77.witchery2.sounds.ModSounds;
 import io.github.happyhippo77.witchery2.util.BubbleParticleDataSetter;
 import io.github.happyhippo77.witchery2.util.PowerParticleDataSetter;
-import io.github.happyhippo77.witchery2.util.PoweredBlockEntity;
 import io.github.happyhippo77.witchery2.util.brewing.ingredients.IngredientRegistry;
 import io.github.happyhippo77.witchery2.world.trees.ModPlacers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Witchery2 implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -45,9 +39,6 @@ public class Witchery2 implements ModInitializer {
 	public static final ItemGroup WITCHERY2_GROUP = FabricItemGroup.builder(new Identifier(MOD_ID, "main"))
 			.icon(() -> new ItemStack(ModBlocks.WITCHS_CAULDRON))
 			.build();
-
-//	public static List<AltarEntity> altars = new ArrayList<>();
-//	public static List<PoweredBlockEntity> poweredBlocks = new ArrayList<>();
 
 	@Override
 	public void onInitialize() {

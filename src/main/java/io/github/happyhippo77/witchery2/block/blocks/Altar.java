@@ -1,11 +1,9 @@
 package io.github.happyhippo77.witchery2.block.blocks;
 
-import io.github.happyhippo77.witchery2.Witchery2;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.block.entity.entities.AltarEntity;
 import io.github.happyhippo77.witchery2.util.PoweredBlockEntity;
-import io.github.happyhippo77.witchery2.util.ServerWorldVariables;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

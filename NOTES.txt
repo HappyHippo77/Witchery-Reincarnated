@@ -1,12 +1,10 @@
 TODO:
-    Try to reduce amount of data stored in BlockEntity NBT.
-        WitchsOvenEntity stores fumeChance, even though they can just check the relevant blocks when a material is smelted.
-    Add looting functionality to Arthana.
     Make Kettle (add recipe for Redstone Soup)
-    Make Hobgoblins (Koboldite mineral items already implemented)
-    Add all brewing effects
-    Add distillers
-    Add all cauldron recipes.
     Add particle effects for altars.
+    Make Hobgoblins (Koboldite mineral items already implemented)
+    Add looting functionality to Arthana.
+    Add distillers
+    Add all brewing effects
+    Add all cauldron recipes.
     Stockade damage behavior is inaccurate. Damage is taken while walking, not while falling.
         Maybe keep the falling damage, but add walking damage too.

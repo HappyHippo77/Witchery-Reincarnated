@@ -1,8 +1,6 @@
 package io.github.happyhippo77.witchery2.networking;
 
-import io.github.happyhippo77.witchery2.block.entity.entities.AltarEntity;
 import io.github.happyhippo77.witchery2.block.entity.entities.WitchsCauldronEntity;
-import io.github.happyhippo77.witchery2.util.PoweredBlockEntity;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;

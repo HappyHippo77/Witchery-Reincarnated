@@ -18,12 +18,10 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -120,10 +118,7 @@ public class WitchsCauldron extends PoweredBlockWithEntity implements BlockEntit
                             } else if (IngredientRegistry.fromItem(itemStack.getItem()).getUse() != IngredientUse.GENERIC) {
                                 accept = true;
                             } else {
-                                List<Item> recipe = new ArrayList<>();
-                                for (Item item : blockEntity.getIngredients()) {
-                                    recipe.add(item);
-                                }
+                                List<Item> recipe = new ArrayList<>(blockEntity.getIngredients());
                                 recipe.add(itemStack.getItem());
 
                                 if (CauldronRecipeRegistry.checkPrecursor(recipe)) {
