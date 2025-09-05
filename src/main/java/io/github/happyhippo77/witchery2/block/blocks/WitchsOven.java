@@ -33,6 +33,8 @@ public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
 
     public WitchsOven(Settings settings) {
         super(settings);
+
+        setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
     }
 
     @Nullable
@@ -157,6 +159,7 @@ public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         VoxelShape main = VoxelShapes.union(
                 VoxelShapes.cuboid(2 / 16f, 1 / 16f, 2 / 16f, 14 / 16f, 9 / 16f, 14 / 16f),
@@ -169,7 +172,7 @@ public class WitchsOven extends BlockWithEntity implements BlockEntityProvider {
             return VoxelShapes.union(
                     main,
                     VoxelShapes.cuboid(6 / 16f, 3 / 16f, 11 / 16f, 10 / 16f, 16 / 16f, 15 / 16f),
-                    VoxelShapes.cuboid(6 / 16f, 12 / 16f, 15 / 16f, 10 / 16f, 14 / 16f, 16 / 16f)
+                    VoxelShapes.cuboid(6 / 16f, 12 / 16f, 15 / 16f, 10 / 16f, 16 / 16f, 16 / 16f)
             );
         } else if (facing == Direction.EAST) {
             return VoxelShapes.union(

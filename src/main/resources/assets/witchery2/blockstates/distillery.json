@@ -1,0 +1,291 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "witchery2:block/distillery"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "witchery2:block/distillery",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "witchery2:block/distillery",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "witchery2:block/distillery",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "1|2|3|4"
+          },
+          {
+            "facing": "north"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_1"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "1|2|3|4"
+          },
+          {
+            "facing": "east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "1|2|3|4"
+          },
+          {
+            "facing": "south"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "1|2|3|4"
+          },
+          {
+            "facing": "west"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "2|3|4"
+          },
+          {
+            "facing": "north"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_2"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "2|3|4"
+          },
+          {
+            "facing": "east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "2|3|4"
+          },
+          {
+            "facing": "south"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "2|3|4"
+          },
+          {
+            "facing": "west"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "3|4"
+          },
+          {
+            "facing": "north"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_3"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "3|4"
+          },
+          {
+            "facing": "east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "3|4"
+          },
+          {
+            "facing": "south"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "3|4"
+          },
+          {
+            "facing": "west"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "4"
+          },
+          {
+            "facing": "north"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_4"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "4"
+          },
+          {
+            "facing": "east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_4",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "4"
+          },
+          {
+            "facing": "south"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_4",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "jars": "4"
+          },
+          {
+            "facing": "west"
+          }
+        ]
+      },
+      "apply": {
+        "model": "witchery2:block/distillery_jar_4",
+        "y": 270
+      }
+    }
+  ]
+}

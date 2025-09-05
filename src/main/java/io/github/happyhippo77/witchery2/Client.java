@@ -14,6 +14,7 @@ import io.github.happyhippo77.witchery2.render.blockentity.renderers.WitchsCauld
 import io.github.happyhippo77.witchery2.render.entity.models.MandrakeModel;
 import io.github.happyhippo77.witchery2.render.entity.renderers.MandrakeRenderer;
 import io.github.happyhippo77.witchery2.screen.AltarScreen;
+import io.github.happyhippo77.witchery2.screen.DistilleryScreen;
 import io.github.happyhippo77.witchery2.screen.ModScreenHandlers;
 import io.github.happyhippo77.witchery2.screen.WitchsOvenScreen;
 import net.fabricmc.api.ClientModInitializer;
@@ -114,6 +115,7 @@ public class Client implements ClientModInitializer {
 
         HandledScreens.register(ModScreenHandlers.WITCHS_OVEN_SCREEN_HANDLER, WitchsOvenScreen::new);
         HandledScreens.register(ModScreenHandlers.ALTAR_SCREEN_HANDLER, AltarScreen::new);
+        HandledScreens.register(ModScreenHandlers.DISTILLERY_SCREEN_HANDLER, DistilleryScreen::new);
 
 
         ClientPackets.initialize();

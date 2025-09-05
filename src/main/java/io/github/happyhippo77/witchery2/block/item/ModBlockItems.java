@@ -14,6 +14,7 @@ public class ModBlockItems {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "witchs_oven"), new BlockItem(ModBlocks.WITCHS_OVEN, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "fume_funnel"), new BlockItem(ModBlocks.FUME_FUNNEL, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "filtered_fume_funnel"), new BlockItem(ModBlocks.FILTERED_FUME_FUNNEL, new FabricItemSettings()));
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "distillery"), new BlockItem(ModBlocks.DISTILLERY, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "altar"), new BlockItem(ModBlocks.ALTAR, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "candelabra"), new BlockItem(ModBlocks.CANDELABRA, new FabricItemSettings()));
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "chalice"), new BlockItem(ModBlocks.CHALICE, new FabricItemSettings()));

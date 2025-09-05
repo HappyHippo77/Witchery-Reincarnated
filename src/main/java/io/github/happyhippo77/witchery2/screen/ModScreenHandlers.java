@@ -8,9 +8,11 @@ import net.minecraft.util.Identifier;
 public class ModScreenHandlers {
     public static ScreenHandlerType<WitchsOvenScreenHandler> WITCHS_OVEN_SCREEN_HANDLER;
     public static ScreenHandlerType<AltarScreenHandler> ALTAR_SCREEN_HANDLER;
+    public static ScreenHandlerType<DistilleryScreenHandler> DISTILLERY_SCREEN_HANDLER;
 
     public static void registerAllScreenHandlers() {
         WITCHS_OVEN_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(Witchery2.MOD_ID, "witchs_oven"), WitchsOvenScreenHandler::new);
         ALTAR_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(Witchery2.MOD_ID, "altar"), AltarScreenHandler::new);
+        DISTILLERY_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(Witchery2.MOD_ID, "distillery"), DistilleryScreenHandler::new);
     }
 }

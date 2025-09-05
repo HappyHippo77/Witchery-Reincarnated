@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class PoweredBlockEntity extends BlockEntity {
-    public BlockPos altarPosition = null;
+    public BlockPos altarPos = null;
 
     public PoweredBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -22,8 +22,8 @@ public abstract class PoweredBlockEntity extends BlockEntity {
     }
 
     public AltarEntity getAltar() {
-        if (world != null && !world.isClient && this.altarPosition != null) {
-            return (AltarEntity) world.getBlockEntity(this.altarPosition);
+        if (world != null && !world.isClient && this.altarPos != null) {
+            return (AltarEntity) world.getBlockEntity(this.altarPos);
         }
         return null;
     }
@@ -57,7 +57,7 @@ public abstract class PoweredBlockEntity extends BlockEntity {
             AltarEntity nearestAltar = null;
 
             for (AltarEntity altarEntity : ((ServerWorldVariables)world).getAltars()) {
-                if (altarEntity.getWorld() == world && !altarEntity.isRemoved() && altarEntity.getCoreEntity() == altarEntity && !altarEntity.joinedAltars.isEmpty()) {
+                if (altarEntity.getWorld() == world && !altarEntity.isRemoved() && altarEntity.isCore()) {
                     if (nearestAltar == null) {
                         nearestAltar = altarEntity;
                     } else {
@@ -81,15 +81,20 @@ public abstract class PoweredBlockEntity extends BlockEntity {
 
             if (nearestAltar != null) {
                 if (nearestAltar.withinRange(world, pos)) {
-                    this.altarPosition = nearestAltar.getPos();
+                    this.altarPos = nearestAltar.getPos();
                 } else {
-                    this.altarPosition = null;
+                    this.altarPos = null;
                 }
             } else {
-                this.altarPosition = null;
+                this.altarPos = null;
             }
 
-            markDirty();
+            // TODO
+            // This line causes worlds to often become broken and unable to be loaded. The cause is really confusing though.
+            // Removing this might cause powered blocks to occasionally loose track of their altars across reloads.
+            // Bug test extensively. If this line is needed, figure out what's causing it to run at load-time, and why that's a problem.
+            //markDirty();
+
             world.updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), 0);
         }
     }
@@ -102,6 +107,14 @@ public abstract class PoweredBlockEntity extends BlockEntity {
         }
     }
 
+    public boolean consumePower(float amount) {
+        if (this.getAltar() == null) {
+            return false;
+        } else {
+            return this.getAltar().drainPower(amount);
+        }
+    }
+
     @Override
     public void readNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
@@ -109,8 +122,7 @@ public abstract class PoweredBlockEntity extends BlockEntity {
         boolean hasAltar = nbt.getBoolean("hasAltar");
         if (hasAltar) {
             int[] pos = nbt.getIntArray("altarPos");
-            this.altarPosition = new BlockPos(pos[0], pos[1], pos[2]);
-            markDirty();
+            this.altarPos = new BlockPos(pos[0], pos[1], pos[2]);
         }
     }
 
@@ -118,9 +130,9 @@ public abstract class PoweredBlockEntity extends BlockEntity {
     protected void writeNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        nbt.putBoolean("hasAltar", this.altarPosition != null);
-        if (this.altarPosition != null) {
-            nbt.putIntArray("altarPos", new int[]{this.altarPosition.getX(), this.altarPosition.getY(), this.altarPosition.getZ()});
+        nbt.putBoolean("hasAltar", this.altarPos != null);
+        if (this.altarPos != null) {
+            nbt.putIntArray("altarPos", new int[]{this.altarPos.getX(), this.altarPos.getY(), this.altarPos.getZ()});
         }
     }
 }

@@ -8,6 +8,7 @@
   "block.witchery2.witchs_oven": "Witch's Oven",
   "block.witchery2.fume_funnel": "Fume Funnel",
   "block.witchery2.filtered_fume_funnel": "Filtered Fume Funnel",
+  "block.witchery2.distillery": "Distillery",
   "block.witchery2.altar": "Altar",
   "block.witchery2.candelabra": "Candelabra",
   "block.witchery2.chalice": "Chalice",
@@ -129,6 +130,14 @@
   "item.witchery2.quicklime": "Quicklime",
   "item.witchery2.earmuffs": "Earmuffs",
 
+  "item.witchery2.gypsum": "Gypsum",
+  "item.witchery2.oil_of_vitriol": "Oil of Vitriol",
+  "item.witchery2.tear_of_the_goddess": "Tear of the Goddess",
+  "item.witchery2.diamond_vapor": "Diamond Vapor",
+  "item.witchery2.refined_evil": "Refined Evil",
+  "item.witchery2.ender_dew": "Ender Dew",
+  "item.witchery2.demonic_blood": "Demonic Blood",
+
   "item.witchery2.koboldite_dust": "Koboldite Dust",
   "item.witchery2.koboldite_nugget": "Koboldite Nugget",
   "item.witchery2.koboldite_ingot": "Koboldite Ingot",
@@ -141,6 +150,7 @@
   "item.witchery2.rowan_door_key": "Rowan Door Key",
 
   "item.witchery2.attuned_stone": "Attuned Stone",
+  "item.witchery2.demon_heart": "Demon Heart",
 
   "item.witchery2.mandrake_spawn_egg": "Mandrake Spawn Egg",
 

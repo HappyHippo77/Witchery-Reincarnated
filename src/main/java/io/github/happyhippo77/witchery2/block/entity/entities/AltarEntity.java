@@ -31,11 +31,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactory {
-    private BlockPos corePos = this.pos;
-    private AltarEntity coreEntity = null;
+    private BlockPos corePos = null;
     private final PropertyDelegate propertyDelegate;
     public static final int delegateSize = 4;
-    private int power = 0;
+    private float power = 0;
     private int maxPower = 0;
     private int powerScale = 1;
     private int rechargeRate = 1;
@@ -48,21 +47,26 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
 
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
-                return switch (index) {
-                    case 0 -> coreEntity.power;
-                    case 1 -> coreEntity.maxPower;
-                    case 2 -> coreEntity.rechargeRate;
-                    case 3 -> coreEntity.powerScale;
-                    default -> 0;
-                };
+                if (getCoreEntity() != null) {
+                    return switch (index) {
+                        case 0 -> (int) Math.floor(getCoreEntity().power);
+                        case 1 -> getCoreEntity().maxPower;
+                        case 2 -> getCoreEntity().rechargeRate;
+                        case 3 -> getCoreEntity().powerScale;
+                        default -> 0;
+                    };
+                }
+                return 0;
             }
 
             public void set(int index, int value) {
-                switch (index) {
-                    case 0 -> coreEntity.power = value;
-                    case 1 -> coreEntity.maxPower = value;
-                    case 2 -> coreEntity.rechargeRate = value;
-                    case 3 -> coreEntity.powerScale = value;
+                if (getCoreEntity() != null) {
+                    switch (index) {
+                        case 0 -> getCoreEntity().power = value;
+                        case 1 -> getCoreEntity().maxPower = value;
+                        case 2 -> getCoreEntity().rechargeRate = value;
+                        case 3 -> getCoreEntity().powerScale = value;
+                    }
                 }
             }
 
@@ -97,31 +101,41 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
     }
 
     public AltarEntity getCoreEntity() {
-        return coreEntity;
+        if (corePos != null && world != null && world.getBlockEntity(corePos) instanceof AltarEntity) {
+            return (AltarEntity) world.getBlockEntity(corePos);
+        }
+        // If we have no core, then we're an isolate, and we can return ourselves.
+        return this;
     }
 
-    public void setCoreEntity(AltarEntity coreEntity) {
-        this.coreEntity = coreEntity;
-        this.corePos = coreEntity.getPos();
-        this.coreEntity.joinedAltars.add(this.getPos());
-        markDirty();
-        coreEntity.markDirty();
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
-        world.updateListeners(coreEntity.getPos(), coreEntity.getCachedState(), coreEntity.getCachedState(), Block.NOTIFY_LISTENERS);
+    public boolean isCore() {
+        return this.corePos == null && !this.joinedAltars.isEmpty();
     }
 
-    public void setClientPower(World world, int power) {
-        if (world.isClient) {
-            this.power = power;
+    public boolean hasCore() {
+        return this.corePos != null;
+    }
+
+    public void setCorePos(BlockPos blockPos) {
+        if (world != null) {
+            if (blockPos == null || blockPos.equals(this.pos)) {
+                this.corePos = null;
+            } else if (world.getBlockEntity(blockPos) instanceof AltarEntity) {
+                this.corePos = blockPos;
+                this.getCoreEntity().joinedAltars.add(this.getPos());
+                world.updateListeners(getCoreEntity().getPos(), getCoreEntity().getCachedState(), getCoreEntity().getCachedState(), Block.NOTIFY_LISTENERS);
+            }
+            markDirty();
+            world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
         }
     }
 
-    public int getPower() {
+    public float getPower() {
         return power;
     }
 
-    public boolean checkAndDecrementPower(int amount) {
-        if (this.power > amount) {
+    public boolean drainPower(float amount) {
+        if (this.power >= amount) {
             this.power -= amount;
             return true;
         }
@@ -141,6 +155,8 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
         for (BlockPos pos : this.joinedAltars) {
             artifacts.put(pos.up(), world.getBlockState(pos.up()).getBlock());
         }
+        // Add ourselves to the list
+        artifacts.put(this.pos.up(), world.getBlockState(this.pos.up()).getBlock());
 
         int tempRechargeRate = 1;
         int tempPowerScale = 1;
@@ -215,16 +231,16 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
             }
         }
 
-        coreEntity.rechargeRate = tempRechargeRate;
-        coreEntity.powerScale = tempPowerScale;
-        coreEntity.rangeScale = tempRangeScale;
+        getCoreEntity().rechargeRate = tempRechargeRate;
+        getCoreEntity().powerScale = tempPowerScale;
+        getCoreEntity().rangeScale = tempRangeScale;
 
         PoweredBlockEntity.recheckAltars(world);
 
-        coreEntity.markDirty();
-        world.updateListeners(coreEntity.getPos(), coreEntity.getCachedState(), coreEntity.getCachedState(), Block.NOTIFY_LISTENERS);
+        getCoreEntity().markDirty();
+        world.updateListeners(getCoreEntity().getPos(), getCoreEntity().getCachedState(), getCoreEntity().getCachedState(), Block.NOTIFY_LISTENERS);
 
-        coreEntity.artifactUpdates = false;
+        getCoreEntity().artifactUpdates = false;
     }
 
     public void updateSources(World world, BlockPos pos) {
@@ -266,16 +282,9 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
         if (world.isClient) {
             return;
         }
-        // We need this to load from nbt, since we can't get the block entity before the world is loaded.
-        if (entity.coreEntity == null && entity.corePos != null) {
-            entity.coreEntity = (AltarEntity) world.getBlockEntity(entity.corePos);
-            if (entity.coreEntity == null) {
-                entity.corePos = null;
-            }
-        }
 
         float maxPowerScaled = entity.maxPower * (float)entity.powerScale;
-        if (entity.coreEntity == entity) {
+        if (entity.isCore()) {
             if (entity.ticks >= 20) {
                 if (entity.artifactUpdates) {
                     entity.updateArtifacts();
@@ -308,36 +317,44 @@ public class AltarEntity extends BlockEntity implements NamedScreenHandlerFactor
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        BlockPos pos = Objects.requireNonNullElse(coreEntity, this).getPos();
-        nbt.putIntArray("corePos", Arrays.asList(pos.getX(), pos.getY(), pos.getZ()));
-        nbt.putInt("power", power);
-        nbt.putInt("maxPower", maxPower);
-        nbt.putInt("powerScale", powerScale);
-        nbt.putInt("rechargeRate", rechargeRate);
-        nbt.putInt("rangeScale", rangeScale);
-        NbtList joinedAltarNbt = new NbtList();
-        for (BlockPos p : joinedAltars) {
-            joinedAltarNbt.add(new NbtIntArray(Arrays.asList(p.getX(), p.getY(), p.getZ())));
+        nbt.putBoolean("isCore", isCore());
+
+        if (isCore()) {
+            NbtList joinedAltarNbt = new NbtList();
+            for (BlockPos p : joinedAltars) {
+                joinedAltarNbt.add(new NbtIntArray(Arrays.asList(p.getX(), p.getY(), p.getZ())));
+            }
+            nbt.put("joinedAltars", joinedAltarNbt);
+            nbt.putFloat("power", power);
+            nbt.putInt("maxPower", maxPower);
+            nbt.putInt("powerScale", powerScale);
+            nbt.putInt("rechargeRate", rechargeRate);
+            nbt.putInt("rangeScale", rangeScale);
+        } else {
+            nbt.putBoolean("hasCore", hasCore());
+            if (hasCore()) {
+                nbt.putIntArray("corePos", Arrays.asList(corePos.getX(), corePos.getY(), corePos.getZ()));
+            }
         }
-        nbt.put("joinedAltars", joinedAltarNbt);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-
-        // We do this instead of setting the core entity because we cannot get the world before it is loaded.
-        corePos = new BlockPos(nbt.getIntArray("corePos")[0], nbt.getIntArray("corePos")[1], nbt.getIntArray("corePos")[2]);
-        power = nbt.getInt("power");
-        maxPower = nbt.getInt("maxPower");
-        powerScale = nbt.getInt("powerScale");
-        rechargeRate = nbt.getInt("rechargeRate");
-        rangeScale = nbt.getInt("rangeScale");
-        joinedAltars = new ArrayList<>();
-        for (NbtElement element : nbt.getList("joinedAltars", 11)) {
-            NbtIntArray intArray = (NbtIntArray) element;
-            joinedAltars.add(new BlockPos(intArray.get(0).intValue(), intArray.get(1).intValue(), intArray.get(2).intValue()));
+        if (nbt.getBoolean("isCore")) {
+            joinedAltars = new ArrayList<>();
+            for (NbtElement element : nbt.getList("joinedAltars", 11)) {
+                NbtIntArray intArray = (NbtIntArray) element;
+                joinedAltars.add(new BlockPos(intArray.get(0).intValue(), intArray.get(1).intValue(), intArray.get(2).intValue()));
+            }
+            power = nbt.getFloat("power");
+            maxPower = nbt.getInt("maxPower");
+            powerScale = nbt.getInt("powerScale");
+            rechargeRate = nbt.getInt("rechargeRate");
+            rangeScale = nbt.getInt("rangeScale");
+        } else {
+            if (nbt.getBoolean("hasCore")) {
+                corePos = new BlockPos(nbt.getIntArray("corePos")[0], nbt.getIntArray("corePos")[1], nbt.getIntArray("corePos")[2]);
+            }
         }
     }
 

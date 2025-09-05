@@ -30,10 +30,8 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
         super(settings);
     }
 
-    private void updateArtifacts(AltarEntity entity, World world, BlockPos pos) {
-        if (entity.getCoreEntity() != null) {
-            entity.getCoreEntity().markForArtifactUpdates();
-        }
+    private void updateArtifacts(AltarEntity entity) {
+        entity.getCoreEntity().markForArtifactUpdates();
     }
 
     @Override
@@ -46,8 +44,10 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
                     player.openHandledScreen(screenHandlerFactory);
                 }
                 AltarEntity e = ((AltarEntity)world.getBlockEntity(pos));
-                e.getCoreEntity().updateSources(world, e.getCoreEntity().getPos());
-                e.getCoreEntity().updateArtifacts();
+                if (e.getCoreEntity() != null) {
+                    e.getCoreEntity().updateSources(world, e.getCoreEntity().getPos());
+                    e.getCoreEntity().updateArtifacts();
+                }
             }
             return ActionResult.SUCCESS;
         }
@@ -61,7 +61,7 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
             return;
         }
         if (sourcePos.equals(pos.up())) {
-            updateArtifacts((AltarEntity) world.getBlockEntity(pos), world, pos);
+            updateArtifacts((AltarEntity) world.getBlockEntity(pos));
         }
     }
 
@@ -113,9 +113,9 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
 
                     AltarEntity altarEntity = (AltarEntity) world.getBlockEntity(p);
 
-                    altarEntity.setCoreEntity((AltarEntity) world.getBlockEntity(coreAltarPos));
+                    altarEntity.setCorePos(coreAltarPos);
                     altarEntity.getCoreEntity().updateSources(world, pos);
-                    updateArtifacts(altarEntity, world, p);
+                    updateArtifacts(altarEntity);
                 }
             } else {
                 for (BlockPos p : visited) {
@@ -123,7 +123,7 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
 
                     AltarEntity altarEntity = (AltarEntity) world.getBlockEntity(p);
 
-                    altarEntity.setCoreEntity((AltarEntity) world.getBlockEntity(p));
+                    altarEntity.setCorePos(null);
                     altarEntity.joinedAltars.clear();
                     PoweredBlockEntity.recheckAltars(world);
                 }
@@ -133,7 +133,7 @@ public class Altar extends BlockWithEntity implements BlockEntityProvider {
         if(excludeSelf) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if(blockEntity instanceof AltarEntity altarEntity) {
-                altarEntity.setCoreEntity(altarEntity);
+                altarEntity.setCorePos(altarEntity.getPos());
             }
         }
     }

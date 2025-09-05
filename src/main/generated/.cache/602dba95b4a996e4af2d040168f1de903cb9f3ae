@@ -1,4 +1,4 @@
-// 1.19.4	2024-09-09T00:25:50.977675497	Witchery2/Recipes
+// 1.19.4	2025-09-03T20:36:13.271164616	Witchery2/Recipes
 94423c5b8518afbe92a591b38811567ca1a1dacc data/witchery2/recipes/hawthorn_button.json
 666eb305ca1a9c201361c3210f1a8c1f8617a963 data/witchery2/recipes/alder_stockade.json
 db1f1b52c9dd9b530f2304d0d5b182eb2ecb90b6 data/witchery2/recipes/spruce_stockade.json
@@ -35,8 +35,8 @@ a6ad35aa13ac0fbf92ce8ee06fa01edd3da6b95b data/witchery2/advancements/recipes/mis
 bdb32146591d6302606634d4104e174eabb7a7c4 data/witchery2/recipes/altar.json
 7ffeadea053e5e9ab3cd13d08c923a5635f3bb75 data/witchery2/recipes/fume_filter.json
 37a591bfcb7d1681b1c69abee85017388abf3554 data/witchery2/advancements/recipes/misc/alder_stairs.json
-474ae88c6622a43b8d281900308626053be1207f data/witchery2/recipes/rowan_button.json
 6f0f64fc2b1d7d95ee87551e8862d12982da18dd data/witchery2/recipes/rowan_trapdoor.json
+474ae88c6622a43b8d281900308626053be1207f data/witchery2/recipes/rowan_button.json
 20601aa64d1f88d8aeb9dcc262abfc4a643de305 data/witchery2/recipes/fume_funnel.json
 65bb1b6a94d78af0ace68b7dcfb00b591170ca93 data/witchery2/advancements/recipes/building_blocks/rowan_wood.json
 203eec0d2d1ec0b786a5d66a3ec049d3ae54d04e data/witchery2/advancements/recipes/building_blocks/acacia_stockade.json

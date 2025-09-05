@@ -3,6 +3,7 @@ package io.github.happyhippo77.witchery2;
 import io.github.happyhippo77.witchery2.block.ModBlocks;
 import io.github.happyhippo77.witchery2.block.entity.ModBlockEntities;
 import io.github.happyhippo77.witchery2.block.item.ModBlockItems;
+import io.github.happyhippo77.witchery2.customrecipe.ModCustomRecipes;
 import io.github.happyhippo77.witchery2.entity.ModEntities;
 import io.github.happyhippo77.witchery2.entity.entities.MandrakeEntity;
 import io.github.happyhippo77.witchery2.item.ModItems;
@@ -106,6 +107,7 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModBlocks.WITCHS_OVEN));
 			content.add(new ItemStack(ModBlocks.FUME_FUNNEL));
 			content.add(new ItemStack(ModBlocks.FILTERED_FUME_FUNNEL));
+            content.add(new ItemStack(ModBlocks.DISTILLERY));
 			content.add(new ItemStack(ModBlocks.ALTAR));
 			content.add(new ItemStack(ModBlocks.INFINITY_EGG));
 			content.add(new ItemStack(ModBlocks.CANDELABRA));
@@ -143,6 +145,7 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModItems.MUTANDIS));
 			content.add(new ItemStack(ModItems.WOOD_ASH));
 			content.add(new ItemStack(ModItems.QUICKLIME));
+            content.add(new ItemStack(ModItems.GYPSUM));
 			content.add(new ItemStack(ModItems.SOFT_CLAY_JAR));
 			content.add(new ItemStack(ModItems.CLAY_JAR));
 			content.add(new ItemStack(ModItems.FOUL_FUME));
@@ -152,6 +155,12 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModItems.WHIFF_OF_MAGIC));
 			content.add(new ItemStack(ModItems.ODOUR_OF_PURITY));
 			content.add(new ItemStack(ModItems.REEK_OF_MISFORTUNE));
+            content.add(new ItemStack(ModItems.OIL_OF_VITRIOL));
+            content.add(new ItemStack(ModItems.TEAR_OF_THE_GODDESS));
+            content.add(new ItemStack(ModItems.DIAMOND_VAPOR));
+            content.add(new ItemStack(ModItems.REFINED_EVIL));
+            content.add(new ItemStack(ModItems.ENDER_DEW));
+            content.add(new ItemStack(ModItems.DEMONIC_BLOOD));
 
 			content.add(new ItemStack(ModItems.KOBOLDITE_DUST));
 			content.add(new ItemStack(ModItems.KOBOLDITE_NUGGET));
@@ -160,6 +169,7 @@ public class Witchery2 implements ModInitializer {
 			content.add(new ItemStack(ModItems.REDSTONE_SOUP));
 			content.add(new ItemStack(ModItems.ROWAN_DOOR_KEY));
 			content.add(new ItemStack(ModItems.ATTUNED_STONE));
+            content.add(new ItemStack(ModItems.DEMON_HEART));
 
 			content.add(new ItemStack(ModItems.EARMUFFS));
 		});
@@ -177,7 +187,8 @@ public class Witchery2 implements ModInitializer {
 
 		ModScreenHandlers.registerAllScreenHandlers();
 
-		ModRecipes.registerRecipes();
+        ModRecipes.registerRecipes();
+        ModCustomRecipes.registerRecipes();
 
 		IngredientRegistry.registerIngredients();
 

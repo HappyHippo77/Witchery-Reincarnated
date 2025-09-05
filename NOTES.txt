@@ -1,10 +1,30 @@
 TODO:
-    Make Kettle (add recipe for Redstone Soup)
+    There's Z fighting on the back of the Witch's Oven model. Check if that's accurate.
+    Clicking a filled cauldron with ingredients with a bucket gives a bottled potion. Is this accurate behavior?
+    Quicklime and Gypsum should clear the contents of a cauldron. Currently, they don't.
+    CustomRecipeManager.matchRecipe() runs every server tick for every distillery loaded.
+        Maybe change how it works to be more efficient.
+    Infinity Egg is nowhere near as powerful in my recreation as in the original mod. Fix that.
+    Witchs Ovens need a dramatic overhaul of their crafting and inventory system. Reference Distillery for much of this.
+        The integrated system for recipes is quite clunky, as it's not designed to handle multiple outputs. Replace it with a custom system.
+        Autofill (shift click) should take into consideration fuel items, jars, burnables, etc.
+        The jar slot should also only be able to hold jars, nothing else.
+        You shouldn't be able to place any items into the output slots manually, only crafting should place items there.
+    Experiment with adding serializers to custom recipe formats so json files can be used.
+    Make Kettle.
+        Redstone Soup item already implemented. Functionality still missing.
+    Implement Spirit World.
+        Add Brew of Flowing Spirit and Brew of Hollow Tears.
+            Add recipe for above to distillery.
     Add particle effects for altars.
+    Implement ability to place demon hearts. Possibly implement as a blockitem?
+        They can only be placed while holding shift.
+    Add ability to eat demon hearts.
+        This adds a bunch of potion effects to the player.
     Make Hobgoblins (Koboldite mineral items already implemented)
     Add looting functionality to Arthana.
-    Add distillers
+    Witchs Cauldrons don't currently drain any altar power for any reason. Implement this.
     Add all brewing effects
     Add all cauldron recipes.
-    Stockade damage behavior is inaccurate. Damage is taken while walking, not while falling.
+    Stockade damage behavior is inaccurate. Damage should be taken while walking, not while falling.
         Maybe keep the falling damage, but add walking damage too.

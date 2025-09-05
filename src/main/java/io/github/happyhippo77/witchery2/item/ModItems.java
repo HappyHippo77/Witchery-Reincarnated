@@ -44,6 +44,14 @@ public class ModItems {
     public static final Item QUICKLIME = new Item(new FabricItemSettings());
     public static final Earmuffs EARMUFFS = new Earmuffs(new FabricItemSettings());
 
+    public static final Item GYPSUM = new Item(new FabricItemSettings());
+    public static final Item OIL_OF_VITRIOL = new Item(new FabricItemSettings());
+    public static final Item TEAR_OF_THE_GODDESS = new Item(new FabricItemSettings());
+    public static final Item DIAMOND_VAPOR = new Item(new FabricItemSettings());
+    public static final Item REFINED_EVIL = new Item(new FabricItemSettings());
+    public static final Item ENDER_DEW = new Item(new FabricItemSettings());
+    public static final Item DEMONIC_BLOOD = new Item(new FabricItemSettings());
+
     public static final Item KOBOLDITE_DUST = new Item(new FabricItemSettings());
     public static final Item KOBOLDITE_NUGGET = new Item(new FabricItemSettings());
     public static final Item KOBOLDITE_INGOT = new Item(new FabricItemSettings());
@@ -59,6 +67,7 @@ public class ModItems {
     public static final SignItem HAWTHORN_SIGN = new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.HAWTHORN_SIGN, ModBlocks.HAWTHORN_WALL_SIGN);
 
     public static final Item ATTUNED_STONE = new Item(new FabricItemSettings());
+    public static final Item DEMON_HEART = new Item(new FabricItemSettings());
 
     public static final SpawnEggItem MANDRAKE_SPAWN_EGG = new SpawnEggItem(ModEntities.MANDRAKE, 0x7A54300, 0x4C070, new FabricItemSettings());
 
@@ -97,6 +106,14 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "quicklime"), QUICKLIME);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "earmuffs"), EARMUFFS);
 
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "gypsum"), GYPSUM);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "oil_of_vitriol"), OIL_OF_VITRIOL);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "tear_of_the_goddess"), TEAR_OF_THE_GODDESS);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "diamond_vapor"), DIAMOND_VAPOR);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "refined_evil"), REFINED_EVIL);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "ender_dew"), ENDER_DEW);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "demonic_blood"), DEMONIC_BLOOD);
+
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "koboldite_dust"), KOBOLDITE_DUST);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "koboldite_nugget"), KOBOLDITE_NUGGET);
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "koboldite_ingot"), KOBOLDITE_INGOT);
@@ -113,6 +130,7 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "hawthorn_sign"), HAWTHORN_SIGN);
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "attuned_stone"), ATTUNED_STONE);
+        Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "demon_heart"), DEMON_HEART);
 
         Registry.register(Registries.ITEM, new Identifier(Witchery2.MOD_ID, "mandrake_spawn_egg"), MANDRAKE_SPAWN_EGG);
     }

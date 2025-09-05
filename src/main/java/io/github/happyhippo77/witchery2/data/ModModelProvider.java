@@ -104,6 +104,14 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.QUICKLIME, Models.GENERATED);
         itemModelGenerator.register(ModItems.EARMUFFS, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.GYPSUM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.OIL_OF_VITRIOL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.TEAR_OF_THE_GODDESS, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DIAMOND_VAPOR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.REFINED_EVIL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ENDER_DEW, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DEMONIC_BLOOD, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.KOBOLDITE_DUST, Models.GENERATED);
         itemModelGenerator.register(ModItems.KOBOLDITE_NUGGET, Models.GENERATED);
         itemModelGenerator.register(ModItems.KOBOLDITE_INGOT, Models.GENERATED);
@@ -113,6 +121,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ROWAN_DOOR_KEY, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.ATTUNED_STONE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DEMON_HEART, Models.GENERATED);
     }
 
     private void registerStairs(BlockStateModelGenerator blockStateModelGenerator, Block block, Identifier texture) {
